@@ -11,6 +11,7 @@ Reviewed the existing Vercel preview in a desktop browser on 2 October 2026. The
 
 - Put a concise service statement, scope, price and work link in the first screen.
 - Show original portfolio studies immediately after the hero. Restore all 20 original images and the four saved original recordings. Remove the generated substitute concepts and artwork.
+- Shorten the portfolio introduction so original designs appear in the first screen.
 - Shorten navigation to Work, How it works and Pricing. Move client sign-in to the footer and mobile menu.
 - Remove the repeated manifesto, standalone States sales section and practice statement. Keep one short process explanation, a portal introduction, the main price, four useful FAQ answers and a final brief link.
 - Replace the nested homepage application with a real screenshot and direct links to the functioning focused portal preview. All focused spaces and the complete preview remain available.
