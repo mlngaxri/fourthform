@@ -1,8 +1,10 @@
+.ff-mark{display:inline-block;position:relative;width:22px;height:22px;flex-shrink:0;background:linear-gradient(currentColor,currentColor) left top/7px 2px no-repeat,linear-gradient(currentColor,currentColor) left top/2px 7px no-repeat,linear-gradient(currentColor,currentColor) right top/7px 2px no-repeat,linear-gradient(currentColor,currentColor) right top/2px 7px no-repeat,linear-gradient(currentColor,currentColor) left bottom/7px 2px no-repeat,linear-gradient(currentColor,currentColor) left bottom/2px 7px no-repeat,linear-gradient(currentColor,currentColor) right bottom/7px 2px no-repeat,linear-gradient(currentColor,currentColor) right bottom/2px 7px no-repeat}
+.mk-wordmark{display:inline-flex;align-items:center;gap:10px}.mk-wordmark .ff-mark{width:19px;height:19px}
 /* A short, native-scroll presentation. Keep the detailed product in /preview. */
 .mk-simple .mk-hero-wrap,.mk-simple.mk-motion .mk-hero-wrap{height:auto}
 .mk-simple .mk-hero{position:relative;min-height:0;height:auto;padding:160px 0 100px;background:var(--mk-paper)}
 .mk-simple .mk-hero-grid{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px}
-.mk-simple .mk-hero .mk-display{font-size:clamp(54px,6.1vw,88px);line-height:1.03;letter-spacing:-.052em}
+.mk-simple .mk-hero .mk-display{font-size:clamp(54px,5.3vw,76px);line-height:1.03;letter-spacing:-.052em}
 .mk-simple .mk-hero .mk-body{font-size:16px;line-height:1.75;margin-top:28px;max-width:40ch}
 .mk-simple .mk-hero-eyebrow{max-width:none;font-size:10px;margin-bottom:24px}
 .mk-simple .mk-hero-stage{height:auto;gap:18px}
