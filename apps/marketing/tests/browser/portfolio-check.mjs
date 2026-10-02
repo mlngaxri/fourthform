@@ -75,9 +75,9 @@ await check('Portfolio, dialog and reference brief reflow at small widths',async
  await page.goto(base+'/preview/start?reference=oyla');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
 });
 await check('The homepage features the portfolio and lets visitors compare visual directions',async page=>{
- await page.goto(base);await page.locator('.mk-hero-design-image').evaluate(image=>image.decode());assert.equal(await page.locator('.work-featured .portfolio-card').count(),4);
+ await page.goto(base);await page.locator('.orbit-card img').first().evaluate(image=>image.decode());assert.equal(await page.locator('.work-featured .portfolio-card').count(),4);
  for(const card of await page.locator('.work-featured .portfolio-card').all()){const size=await card.evaluate(element=>({card:element.getBoundingClientRect().width,image:element.querySelector('img').getBoundingClientRect().width}));assert.ok(size.image>=size.card*.95);}
- assert.equal(await page.locator('.mk-hero-design-link').getAttribute('href'),'/work?project=monolith-hero');
+ assert.equal(await page.locator('.orbit-card').first().getAttribute('href'),'/work?project=monolith-hero');
  await page.locator('.work-collection-link').click();await page.locator('.portfolio-card').nth(19).waitFor();
 });
 await check('Portal navigation separates project, website and account tools and preserves the shared view',async page=>{

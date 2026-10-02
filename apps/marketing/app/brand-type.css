@@ -1,4 +1,4 @@
-/* Awwwards collection: Cabinet Grotesk for identity, Geist for reading and controls. */
+/* Awwwards collection: Clash Display for identity, Geist for reading and controls. */
 :root{--mk-serif:var(--font-display)}
 .mk-display,.work-intro h1,.work-end h2,.work-dialog-copy h2,.original-design-intro h1{font-family:var(--font-display);font-weight:500;letter-spacing:-.035em}
 .mk-display em,.work-intro h1 em,.work-end h2 em{font-family:inherit;font-style:normal;font-weight:500;letter-spacing:inherit}

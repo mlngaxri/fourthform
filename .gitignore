@@ -9,6 +9,10 @@ test-results/
 playwright-report/
 supabase/.temp/
 
-# Cabinet Grotesk is downloaded from the foundry for our own sites at build time.
+# Clash Display is downloaded from the foundry for our own sites at build time.
+apps/*/public/fonts/clash-display.woff2
+apps/marketing/public/portal-preview/fonts/clash-display.woff2
+
+# Ignore previous locally cached brand font files as well.
 apps/*/public/fonts/cabinet-grotesk.woff2
 apps/marketing/public/portal-preview/fonts/cabinet-grotesk.woff2

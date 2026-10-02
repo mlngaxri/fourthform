@@ -26,8 +26,8 @@ export default async function Projects() {
       </Link>
       <span className="overline">
         {session.user.app_metadata?.role === "operator"
-          ? "Fourthform / Agency"
-          : "Your account / Fourthform"}
+          ? "Agency workspace"
+          : "Your account"}
       </span>
       <h1>
         {session.user.app_metadata?.role === "operator"

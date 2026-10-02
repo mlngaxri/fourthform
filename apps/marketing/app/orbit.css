@@ -1,0 +1,61 @@
+/* Reference direction: a quiet dark canvas, original designs in depth, one clear message. */
+.mk-orbit-site .mk-nav{background:#0b0c0eea;color:#f3f1eb;border-color:#ffffff1c;backdrop-filter:blur(16px)}
+.mk-orbit-site .mk-nav-links a{color:#c0c0c4}
+.mk-orbit-site .mk-nav>.mk-button{background:#f3f1eb;border-color:#f3f1eb;color:#0b0c0e}
+.mk-orbit-site .mk-menu-toggle{border-color:#ffffff38}
+.mk-orbit-site .mk-mobile-menu{background:#0b0c0e;border-color:#ffffff30;color:#f3f1eb}
+.mk-orbit-site .mk-mobile-menu a{border-color:#ffffff25}
+.mk-orbit-site .mk-hero-wrap{background:#0b0c0e;color:#f3f1eb;border-bottom:0;position:relative}
+.mk-simple .mk-orbit-hero{height:max(820px,100svh);max-height:1080px;min-height:0;padding:68px 0 0;background:#0b0c0e;position:relative;isolation:isolate;overflow:hidden}
+.mk-orbit{position:absolute;inset:92px 0 82px;pointer-events:none}
+.orbit-card{position:absolute;display:block;width:clamp(190px,18vw,280px);border:1px solid #ffffff1c;border-radius:5px;overflow:hidden;background:#141517;box-shadow:0 18px 38px #0008;pointer-events:auto;will-change:transform;backface-visibility:hidden}
+.orbit-card>img{display:block;width:100%;height:auto;aspect-ratio:1.5;object-fit:cover;object-position:top;transition:opacity .2s}
+.orbit-card-label{position:absolute;inset:auto 0 0;display:flex;justify-content:space-between;gap:12px;padding:11px 13px;background:#0b0c0ef2;font-size:10px;line-height:1.4;color:#f3f1eb;opacity:0;transition:opacity .2s}
+.orbit-card:hover .orbit-card-label,.orbit-card:focus-visible .orbit-card-label{opacity:1}
+.orbit-card:focus-visible{outline-color:#bcb0ff!important;outline-offset:6px!important}
+.mk-simple .mk-orbit-copy{position:absolute;top:49%;left:50%;transform:translate(-50%,-50%);text-align:center;width:min(660px,52vw);z-index:8;pointer-events:none}
+.mk-simple .mk-orbit-copy :is(a,button){pointer-events:auto}
+.mk-simple .mk-orbit-copy .mk-hero-eyebrow{color:#c0c0c4;max-width:none;font-size:10px;letter-spacing:.14em;margin:0 0 25px}
+.mk-simple .mk-orbit-copy .mk-display{font-size:clamp(68px,7.5vw,112px);font-weight:600;line-height:1.01;letter-spacing:-.045em;max-width:none}
+.mk-orbit-copy .mk-display>span{display:block;color:#bcb0ff}
+.mk-simple .mk-orbit-copy .mk-body{color:#bdbdc3;font-size:14px;line-height:1.75;max-width:41ch;margin:24px auto 0;text-wrap:pretty}
+.mk-simple .mk-orbit-copy .mk-hero-actions{justify-content:center;margin-top:26px;gap:24px}
+.mk-orbit-copy .mk-button-dark{background:#f3f1eb;border-color:#f3f1eb;color:#0b0c0e!important;padding-inline:22px}
+.mk-orbit-copy .mk-text-link{border-color:#ffffff38;color:#f3f1eb}
+.mk-simple .mk-orbit-copy .mk-included{color:#a3a3ae;font-size:11px;margin:19px 0 0}
+.mk-orbit-foot{position:absolute;inset:auto max(28px,calc((100vw - 1280px)/2)) 0;height:76px;z-index:9;display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid #ffffff24;font-size:10px;color:#a3a3ae;letter-spacing:.015em}
+.mk-orbit-foot-note{color:#bdbdc3}
+.mk-orbit-controls{display:flex;align-items:center;gap:4px}
+.mk-orbit-controls button{border:0;background:transparent;color:#c0c0c4;min-width:60px;min-height:44px;font:inherit;font-size:10px;cursor:pointer;border-radius:4px}
+.mk-orbit-controls .mk-orbit-pause{font-size:10px;min-width:98px;letter-spacing:0}
+.mk-orbit-controls button:hover{background:#ffffff12;color:#f3f1eb}
+.mk-orbit-site .mk-display{line-height:1.04}
+.mk-orbit-site .work-featured{border-top:1px solid #ffffff18}
+@media(min-width:1800px){.mk-orbit{inset-inline:calc((100% - 1800px)/2)}}
+@media(max-width:1050px) and (min-width:900px){.mk-simple .mk-orbit-copy{width:56vw}.mk-simple .mk-orbit-copy .mk-display{font-size:7.8vw}.orbit-card{width:195px}.mk-simple .mk-orbit-copy .mk-hero-eyebrow{font-size:9px;letter-spacing:.1em}}
+@media(max-width:899px){
+ .mk-simple .mk-orbit-hero{height:800px;max-height:none;padding-top:62px}
+ .mk-simple .mk-orbit-copy{top:47%;width:calc(100% - 40px);max-width:610px}
+ .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(49px,10vw,80px)}
+ .mk-simple .mk-orbit-copy .mk-hero-eyebrow{font-size:9px;letter-spacing:.08em;margin-bottom:20px}
+ .mk-simple .mk-orbit-copy .mk-body{font-size:14px;max-width:37ch;margin-top:22px}
+ .mk-orbit{inset:74px 0 78px}
+ .orbit-card{width:clamp(135px,23vw,210px);z-index:1!important}
+ .orbit-card:nth-child(1){left:17%!important;top:9%!important;transform:translate(-50%,-50%) rotate(-12deg)!important}
+ .orbit-card:nth-child(2){left:84%!important;top:11%!important;transform:translate(-50%,-50%) rotate(13deg)!important}
+ .orbit-card:nth-child(3){left:15%!important;top:85%!important;transform:translate(-50%,-50%) rotate(11deg)!important}
+ .orbit-card:nth-child(4){left:84%!important;top:87%!important;transform:translate(-50%,-50%) rotate(-13deg)!important}
+ .orbit-card:nth-child(n+5){display:none}
+ .mk-orbit-controls{display:none}
+ .mk-orbit-foot{inset-inline:20px;height:68px;font-size:9px}
+}
+@media(max-width:400px){
+ .mk-simple .mk-orbit-hero{height:780px}
+ .mk-simple .mk-orbit-copy{width:calc(100% - 30px);top:47%}
+ .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(44px,12.8vw,52px)}
+ .mk-simple .mk-orbit-copy .mk-body{font-size:13px;max-width:33ch}
+ .mk-simple .mk-orbit-copy .mk-hero-actions{gap:18px;margin-top:22px}
+ .mk-simple .mk-orbit-copy .mk-included{font-size:10px}
+ .mk-orbit-foot-note{display:none}
+}
+@media(prefers-reduced-motion:reduce){.orbit-card{will-change:auto}.orbit-card-label,.orbit-card>img{transition:none}}
