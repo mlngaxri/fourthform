@@ -61,3 +61,9 @@
 @media(prefers-reduced-motion:reduce){.orbit-card{will-change:auto}.orbit-card-label,.orbit-card>img{transition:none}}
 
 .mk-orbit-site:after{display:none}
+
+/* Keep the navigation in a single row through the tablet breakpoint. */
+.mk-orbit-site .mk-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:24px}
+.mk-orbit-site .mk-nav>.mk-button{grid-column:auto;flex-shrink:0}
+.mk-orbit-site .mk-nav>.mk-nav-links>a{display:inline-flex;align-items:center;white-space:nowrap}
+@media(max-width:760px){.mk-orbit-site .mk-nav{gap:10px}}
