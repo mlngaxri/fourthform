@@ -1,12 +1,11 @@
 import selection from "./selection.json";
-import {findConcept} from "./concepts";
 
 export const DESIGN_FILTERS = ["All work", "Immersive", "Editorial", "Product", "Expressive"] as const;
 export type DesignGroup = Exclude<typeof DESIGN_FILTERS[number], "All work">;
 export type PortfolioProject = {
   id: string; title: string; sourceCategory: string; width: number; height: number; thumbnailWidth: number; source: string;
   group: DesignGroup; sector: string; line: string; description: string; techniques: string[];
-  image: string; thumbnail: string; 
+  image: string; thumbnail: string; video?: string; 
 };
 
 const notes: Record<string, {group: DesignGroup; sector: string; line: string; description: string; techniques: string[]}> = {
@@ -34,8 +33,8 @@ const notes: Record<string, {group: DesignGroup; sector: string; line: string; d
 
 export const projects: PortfolioProject[] = selection.map(project => {
   const note = notes[project.id];
-  const concept=findConcept(project.id)!;
-  return {...project, ...note, line:concept.headline, description:`${concept.body} ${concept.intro}`, image:`/work/${project.id}.webp`, thumbnail:`/work/${project.id}-small.webp`};
+  const videoIds=["monolith-hero","keel","nature-ritual","playful-idea"];
+  return {...project, ...note, image:`/work/${project.id}.webp`, thumbnail:`/work/${project.id}-small.webp`, video:videoIds.includes(project.id)?`/work/${project.id}.mp4`:undefined};
 });
 export const featuredProjects = ["monolith-hero", "oyla", "playful-idea", "nature-ritual"].map(id => projects.find(project=>project.id===id)!);
 export const heroProjects = ["monolith-hero", "oyla", "keel"].map(id => projects.find(project=>project.id===id)!);

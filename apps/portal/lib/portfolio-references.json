@@ -1,7 +1,7 @@
 [
   {
     "id": "monolith-hero",
-    "title": "Stratum",
+    "title": "Monolith Hero",
     "url": "https://fourthform-marketing.vercel.app/work/monolith-hero"
   },
   {
@@ -16,17 +16,17 @@
   },
   {
     "id": "playful-idea",
-    "title": "Softwork",
+    "title": "Playful Idea",
     "url": "https://fourthform-marketing.vercel.app/work/playful-idea"
   },
   {
     "id": "nature-ritual",
-    "title": "Mossary",
+    "title": "Nature Ritual",
     "url": "https://fourthform-marketing.vercel.app/work/nature-ritual"
   },
   {
     "id": "performance-eyewear",
-    "title": "Orven",
+    "title": "Performance Eyewear",
     "url": "https://fourthform-marketing.vercel.app/work/performance-eyewear"
   },
   {
@@ -36,7 +36,7 @@
   },
   {
     "id": "prisma-landing",
-    "title": "Prisma",
+    "title": "Prisma Creative Studio",
     "url": "https://fourthform-marketing.vercel.app/work/prisma-landing"
   },
   {
@@ -51,22 +51,22 @@
   },
   {
     "id": "human-machine",
-    "title": "NeuralKinetics",
+    "title": "Human Machine",
     "url": "https://fourthform-marketing.vercel.app/work/human-machine"
   },
   {
     "id": "veyra-electric",
-    "title": "Veyra",
+    "title": "Veyra Electric",
     "url": "https://fourthform-marketing.vercel.app/work/veyra-electric"
   },
   {
     "id": "vintage-care",
-    "title": "ArtCar",
+    "title": "Vintage Care",
     "url": "https://fourthform-marketing.vercel.app/work/vintage-care"
   },
   {
     "id": "nature-portfolio",
-    "title": "Ethan Vale",
+    "title": "Nature Portfolio",
     "url": "https://fourthform-marketing.vercel.app/work/nature-portfolio"
   },
   {
@@ -76,12 +76,12 @@
   },
   {
     "id": "vectrus-energy",
-    "title": "Vectrus",
+    "title": "Vectrus Energy",
     "url": "https://fourthform-marketing.vercel.app/work/vectrus-energy"
   },
   {
     "id": "golden-portal",
-    "title": "Golden Archive",
+    "title": "Golden Portal",
     "url": "https://fourthform-marketing.vercel.app/work/golden-portal"
   },
   {
@@ -91,12 +91,12 @@
   },
   {
     "id": "peakline-redshift",
-    "title": "Apogee",
+    "title": "Peakline Redshift",
     "url": "https://fourthform-marketing.vercel.app/work/peakline-redshift"
   },
   {
     "id": "orla-fashion",
-    "title": "Orla",
+    "title": "Orla Fashion",
     "url": "https://fourthform-marketing.vercel.app/work/orla-fashion"
   }
 ]

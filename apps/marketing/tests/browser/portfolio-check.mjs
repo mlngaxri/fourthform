@@ -17,7 +17,7 @@ await check('The collection has 20 unique local previews with source and referen
   const id=await card.getAttribute('data-project');await card.locator('button').click();
   await page.locator('.work-dialog[open]').waitFor();assert.equal(await page.locator('.work-source').getAttribute('href'),`/work/${id}`);
   assert.equal(await page.locator('.work-reference').getAttribute('href'),`/preview/start?reference=${id}`);
-  await page.frameLocator('.work-dialog-media iframe').locator('h1').waitFor();
+  await page.locator('.work-dialog-media img').evaluate(image=>image.decode());
   assert.ok((await page.locator('#work-dialog-description').textContent()).length>80);
   await page.getByRole('button',{name:'Close design preview'}).click();
  }
@@ -32,21 +32,19 @@ await check('Design filters update the collection, pressed state and announced c
  await page.getByRole('button',{name:/^All work/}).click();assert.equal(await page.locator('.portfolio-card').count(),20);
 });
 await check('Keyboard exploration closes cleanly and restores focus to its card',async page=>{
- await page.goto(base+'/work');const trigger=page.getByRole('button',{name:'Explore Stratum',exact:true});await trigger.click();
- assert.equal(await page.locator('#work-dialog-title').textContent(),'Stratum');await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#work-dialog-title').textContent(),'OYLA');
- await page.keyboard.press('ArrowLeft');assert.equal(await page.locator('#work-dialog-title').textContent(),'Stratum');
+ await page.goto(base+'/work');const trigger=page.getByRole('button',{name:'Explore Monolith Hero',exact:true});await trigger.click();
+ assert.equal(await page.locator('#work-dialog-title').textContent(),'Monolith Hero');await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#work-dialog-title').textContent(),'OYLA');
+ await page.keyboard.press('ArrowLeft');assert.equal(await page.locator('#work-dialog-title').textContent(),'Monolith Hero');
  await page.keyboard.press('Escape');await page.locator('.work-dialog[open]').waitFor({state:'hidden'});assert.equal(await trigger.evaluate(element=>element===document.activeElement),true);assert.ok(!new URL(page.url()).searchParams.has('project'));assert.equal(await page.evaluate(()=>document.documentElement.style.overflow),'');
 });
 await check('Direct design links open the right preview and unknown designs remain safe',async page=>{
  await page.goto(base+'/work?project=oyla');await page.locator('.work-dialog[open]').waitFor();assert.equal(await page.locator('#work-dialog-title').textContent(),'OYLA');await page.getByRole('button',{name:'Close design preview'}).click();
  await page.goto(base+'/work?project=unknown');assert.equal(await page.locator('.work-dialog[open]').count(),0);assert.equal(await page.locator('.portfolio-card').count(),20);
 });
-await check('Live concepts open inside the gallery and offer a still overview',async page=>{
- await page.goto(base+'/work');await page.getByRole('button',{name:'Explore Stratum',exact:true}).click();
- const frame=page.frameLocator('.work-dialog-media iframe');await frame.locator('h1').waitFor();assert.equal(await frame.locator('h1').textContent(),'Architecture for the way you live.');
- await page.getByRole('button',{name:'Show the design overview',exact:true}).click();await page.locator('.work-dialog-media img').evaluate(image=>image.decode());
- await page.getByRole('button',{name:'Explore the interactive concept',exact:true}).click();await frame.locator('h1').waitFor();
- await frame.getByRole('link',{name:'Use this direction'}).click();await page.waitForURL('**/preview/start?reference=monolith-hero');assert.ok(await page.locator('.obp-header').isVisible(),'The live concept handoff must leave its embedded frame');
+await check('Original motion previews open by request and can return to their image',async page=>{
+ await page.goto(base+'/work');await page.getByRole('button',{name:'Explore Monolith Hero',exact:true}).click();await page.locator('.work-dialog-media img').evaluate(image=>image.decode());
+ await page.getByRole('button',{name:'Play original animation',exact:true}).click();await page.locator('.work-dialog-media video').waitFor();await page.waitForFunction(()=>document.querySelector('.work-dialog-media video').currentTime>0);
+ await page.getByRole('button',{name:'Show original image',exact:true}).click();assert.ok(await page.locator('.work-dialog-media img').isVisible());
 });
 await check('A chosen design survives the example brief and seeds Initial Direction',async page=>{
  await page.goto(base+'/work?project=oyla');await page.locator('.work-reference').click();await page.locator('.obp-design-reference').waitFor();
@@ -69,7 +67,7 @@ await check('Portfolio, dialog and reference brief reflow at small widths',async
  for(const width of [320,390,768,1024]){
   await page.setViewportSize({width,height:844});await page.goto(base+'/work');await page.locator('.portfolio-card').first().locator('button').click();
   assert.ok(await page.getByRole('button',{name:'Close design preview'}).isVisible());
-  if(width<=760){assert.ok(await page.locator('.work-dialog-media iframe').isVisible());await page.getByRole('button',{name:'About this design',exact:true}).click();}const reference=await page.locator('.work-reference').boundingBox();assert.ok(reference&&reference.y>=0&&reference.y+reference.height<=844,'The reference action stays in view');
+  if(width<=760){assert.ok(await page.locator('.work-dialog-media img').isVisible());await page.getByRole('button',{name:'About this design',exact:true}).click();}const reference=await page.locator('.work-reference').boundingBox();assert.ok(reference&&reference.y>=0&&reference.y+reference.height<=844,'The reference action stays in view');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));assert.ok(await page.locator('.work-dialog').evaluate(element=>element.scrollWidth<=element.clientWidth+1));
   if(width===390)await shot(page,'phone-dialog');await page.keyboard.press('Escape');
  }
@@ -78,8 +76,8 @@ await check('Portfolio, dialog and reference brief reflow at small widths',async
 });
 await check('The homepage features the portfolio and lets visitors compare visual directions',async page=>{
  await page.goto(base);await page.locator('.mk-hero-design-image').evaluate(image=>image.decode());assert.equal(await page.locator('.work-featured .portfolio-card').count(),4);
- for(const card of await page.locator('.work-featured .portfolio-card').all()){const size=await card.evaluate(element=>({card:element.getBoundingClientRect().width,image:element.querySelector('img').getBoundingClientRect().width}));assert.ok(size.image>=size.card*.95,'Featured designs must fill their cards');}
- await page.getByRole('button',{name:'OYLA',exact:true}).click();assert.match(await page.locator('.mk-hero-design-image').getAttribute('alt'),/OYLA/);assert.equal(await page.locator('.mk-hero-design-link').getAttribute('href'),'/work?project=oyla');
+ for(const card of await page.locator('.work-featured .portfolio-card').all()){const size=await card.evaluate(element=>({card:element.getBoundingClientRect().width,image:element.querySelector('img').getBoundingClientRect().width}));assert.ok(size.image>=size.card*.95);}
+ assert.equal(await page.locator('.mk-hero-design-link').getAttribute('href'),'/work?project=monolith-hero');
  await page.locator('.work-collection-link').click();await page.locator('.portfolio-card').nth(19).waitFor();
 });
 await check('Portal navigation separates project, website and account tools and preserves the shared view',async page=>{
@@ -102,5 +100,5 @@ await check('Overview and review instructions follow submitted, completed and ex
 await check('Reduced motion and no JavaScript retain the complete readable collection',async page=>{
  await page.goto(base+'/work');assert.equal(await page.locator('.work-intro-star').evaluate(element=>getComputedStyle(element).animationName),'none');assert.ok(!(await page.locator('body').innerText()).includes('\u2014'));
 },{reducedMotion:'reduce'});
-const staticContext=await browser.newContext({javaScriptEnabled:false});const staticPage=await staticContext.newPage();await staticPage.goto(base+'/work');assert.equal(await staticPage.locator('.portfolio-card').count(),20);assert.ok(await staticPage.getByRole('link',{name:'Start a site',exact:true}).isVisible());await staticContext.close();
+const staticContext=await browser.newContext({javaScriptEnabled:false});const staticPage=await staticContext.newPage();await staticPage.goto(base+'/work');assert.equal(await staticPage.locator('.portfolio-card').count(),20);assert.ok(await staticPage.getByRole('link',{name:'Try a website brief',exact:true}).isVisible());await staticContext.close();
 await writeFile('docs/preview-evidence/portfolio-results.json',JSON.stringify({results,uncaughtErrors:errors},null,2));console.log(JSON.stringify({results,uncaughtErrors:errors},null,2));await browser.close();if(results.some(result=>result.result==='fail')||errors.length)process.exitCode=1;

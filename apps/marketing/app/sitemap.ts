@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import {websiteConcepts} from "../lib/portfolio/concepts";
+import {projects} from "../lib/portfolio/projects";
 export default function sitemap(): MetadataRoute.Sitemap {
- return ["/", "/work", ...websiteConcepts.map(({id})=>`/work/${id}`)].map(path=>({url:`https://fourthform-marketing.vercel.app${path}`}));
+ return ["/", "/work", ...projects.map(({id})=>`/work/${id}`)].map(path=>({url:`https://fourthform-marketing.vercel.app${path}`}));
 }

@@ -1,9 +1,9 @@
-# Fourthform studio collection
+# Original portfolio collection
 
-Twenty responsive live concept websites express the range of the Fourthform studio. Each has a clear business offer, a coherent headline, three relevant areas to explore and an example enquiry interaction. Original visual assets are used as art, with the old interface copy removed from those crops.
+The 20 studies use the original images acquired for the portfolio collection. `lib/portfolio/original-assets.json` records their dimensions and SHA-256 checksums. Local thumbnails are resized copies. Four locally saved original recordings are available for motion previews.
 
-The concepts are fictional businesses and design studies, not claimed client commissions. There are no fabricated testimonials, statistics, performance results or awards. Website copy lives in `lib/portfolio/concepts.json`. Four visual families support each business: immersive landscapes, editorial portraits, product compositions and expressive shapes.
+The collection, preview dialog and `/work/[id]` routes show these originals. They do not substitute new business names, invented service copy, redesigned layouts, enquiry forms or fabricated results. The existing canonical reference URLs still feed the customer brief. The portal uses the same design titles.
 
-Every concept has a direct `/work/[id]` URL, an embedded live gallery preview and a reference-to-brief action. Enquiry forms validate locally and show a response without storing or sending personal details. The static gallery posters are rendered from the new live concepts.
+Motion uses native video with inline playback, viewport observation, a pause control and reduced-motion handling. An autoplay rejection or unavailable recording leaves the original image visible. No remote video service is required for the four saved recordings.
 
-The four-corner frame is the Fourthform signature. It appears in the wordmark, gallery, hero frame, portal navigation and four preview spaces. Motion complements the content and respects reduced-motion settings.
+The source catalogue was read to acquire public preview media. This update changes Fourthform's showcase. It does not change the source portfolio website.

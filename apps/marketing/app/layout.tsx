@@ -7,8 +7,8 @@ import "./globals.css";
 import "./product.css";
 import "./marketing.css";
 import "./work.css";
-import "./concepts.css";
 import "./refinements.css";
+import "./declutter.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fourthform-marketing.vercel.app/"),
