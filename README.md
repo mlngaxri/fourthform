@@ -4,7 +4,7 @@ Fourthform’s marketing site and connected client portal, released together wit
 
 | Application | Source | Intended destination |
 | --- | --- | --- |
-| Marketing, 20 studio concepts and four independent product previews | `apps/marketing` | https://fourthform-marketing.vercel.app |
+| Marketing, 20 original design studies and four independent product previews | `apps/marketing` | https://fourthform-marketing.vercel.app |
 | Accounts, private project boards, review, CMS, SEO inspection, reporting, enquiries, billing and launch | `apps/portal` | https://fourthform-client-portal.vercel.app |
 
 ## Run locally

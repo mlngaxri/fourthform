@@ -41,16 +41,8 @@ jobs:
           done
           cat preview-server.log
           exit 1
-      - run: node tests/browser/release-check.mjs
-      - run: node tests/browser/concepts-and-spaces.mjs
-      - run: npm run test:browser
-      - run: node tests/browser/details-check.mjs
-      - run: node tests/browser/review-check.mjs
-      - run: node tests/browser/integration-check.mjs
-      - run: node tests/browser/audit-check.mjs
-      - run: node tests/browser/content-check.mjs
-      - run: node tests/browser/portfolio-check.mjs
-      - run: node tests/browser/visual-tour.mjs
+      - name: Exercise every marketing and preview browser suite
+        run: node tests/browser/run-all.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
