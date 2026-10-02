@@ -340,6 +340,12 @@ test("persistent sites, permission boundaries, publishing, rollback, enquiries a
     "storage probes leave no invented visitors or enquiries",
     async () => {
       await db.query("select probe_site_storage($1)", [id]);
+      const healthy = (await db.query<any>("select probe_site_services($1) result", [id])).rows[0].result;
+      assert.deepEqual(healthy, { forms: true, analytics: true });
+      await db.exec("create function reject_probe_enquiry() returns trigger language plpgsql as $$begin if new.page_id='probe' then raise exception 'Fixture unavailable inbox'; end if; return new; end$$; create trigger unavailable_probe_inbox before insert on form_submissions for each row execute function reject_probe_enquiry();");
+      const unavailable = (await db.query<any>("select probe_site_services($1) result", [id])).rows[0].result;
+      assert.deepEqual(unavailable, { forms: false, analytics: true });
+      await db.exec("drop trigger unavailable_probe_inbox on form_submissions; drop function reject_probe_enquiry();");
       assert.equal(
         (await db.query<any>("select count(*)::int n from form_submissions"))
           .rows[0].n,

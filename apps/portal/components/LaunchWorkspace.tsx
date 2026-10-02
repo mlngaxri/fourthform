@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import type { Project } from "../lib/model";
-import { api } from "../lib/client";
+import { api, ApiError } from "../lib/client";
+import type { LaunchDiagnostic } from "../lib/launch-checks";
 import { useUnsavedGuard } from "./useUnsavedGuard";
 import Dialog from "./Dialog";
 type Check = {
@@ -27,6 +28,7 @@ export default function LaunchWorkspace({
     [clock, setClock] = useState(Date.now()),
     [operation, setOperation] = useState(""),
     [checks, setChecks] = useState<Check[]>([]),
+    [diagnostics, setDiagnostics] = useState<LaunchDiagnostic[]>([]),
     [dirty, setDirty] = useState(false),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
@@ -121,6 +123,8 @@ export default function LaunchWorkspace({
               setDomain(e.target.value);
               setDirty(true);
               setChecks([]);
+              setDiagnostics([]);
+              setNotice("");
             }}
           >
             {options.map(option => (
@@ -157,11 +161,16 @@ export default function LaunchWorkspace({
             ["seo", "Search metadata"],
           ].map(([kind, label]) => {
             const check = checks.find((c) => c.kind === kind);
+            const diagnostic = diagnostics.find(c => c.kind === kind);
             return (
               <li key={kind}>
                 <strong>{label}</strong>
                 <span>
-                  {check
+                  {busy && operation === "checks"
+                    ? "Checking…"
+                    : diagnostic && diagnostic.status !== "pass"
+                    ? `${diagnostic.status === "fail" ? "Needs attention" : "Waiting"} · ${diagnostic.detail}`
+                    : check
                     ? `${fresh(check) ? "Verified" : "Expired or changed. Check again"} · ${new Date(check.verified_at).toLocaleString()}`
                     : "Waiting for verification"}
                 </span>
@@ -175,11 +184,17 @@ export default function LaunchWorkspace({
             setBusy(true);
             setOperation("checks");
             setError("");
+            setNotice("");
+            setChecks([]);
+            setDiagnostics([]);
             try {
               const r = await api(`/api/projects/${project.id}/checks`, {});
               setChecks(r.checks);
+              setDiagnostics(r.diagnostics || []);
+              setSiteRevision(r.revision || siteRevision);
               setNotice("Launch checks passed for the saved website version.");
             } catch (e) {
+              if (e instanceof ApiError && Array.isArray(e.response?.diagnostics)) setDiagnostics(e.response.diagnostics as LaunchDiagnostic[]);
               setError((e as Error).message);
             } finally {
               setBusy(false);

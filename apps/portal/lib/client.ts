@@ -2,6 +2,7 @@ export class ApiError extends Error {
   constructor(
     message: string,
     public status: number,
+    public response?: Record<string, unknown>,
   ) {
     super(message);
   }
@@ -29,6 +30,6 @@ export async function api<T = any>(path: string, data?: unknown): Promise<T> {
     );
   });
   if (!r.ok)
-    throw new ApiError(result.error || "Request failed. Try again.", r.status);
+    throw new ApiError(result.error || "Request failed. Try again.", r.status, result);
   return result;
 }

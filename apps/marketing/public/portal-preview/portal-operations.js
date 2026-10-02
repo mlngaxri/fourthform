@@ -161,7 +161,7 @@
   const contextNotes = {
     pages: [
       "Content, considered.",
-      "Small updates stay true to your design. Save when you’re happy, then open the full website to see it in context.",
+      "Small updates stay true to your design. Save a draft, review the changes, then publish to update the example website.",
       "A bigger change?",
       "Collect a Direction in Review. You can be precise without having to redesign the page.",
     ],
@@ -700,8 +700,10 @@
       case "draft-cms":
         retainCmsDraft();if(!save("Draft saved on this device. Publishing is separate."))break;render("pages");break;
       case "review-cms": {
-        const changes=model.cmsFields.filter(field=>(state.cmsPages[state.page]?.[field]||pageDefaults[state.page]?.[field]||'')!==(cmsDraft()[field]||''));
-        dialog("Publish this example page?",esc(state.page)+" · Changed fields: "+(changes.length?changes.map(esc).join(', '):"No content changes")+". This updates only the example website on this device. Saving alone does not publish.",button("Publish example", "save-cms",true));break;
+        const draft=cmsDraft(),published={...pageDefaults[state.page],...state.cmsPages[state.page]};
+        const labels={heading:"Main heading",description:"Introduction",cta:"Button label",image:"Feature image",imageAlt:"Image description"};
+        const changes=Object.keys(draft).filter(field=>(published[field]??'')!==(draft[field]??''));
+        dialog("Publish this example page?",esc(state.page)+" · Changed fields: "+(changes.length?changes.map(field=>esc(labels[field]||field)).join(', '):"No content changes")+". This updates only the example website on this device. Saving alone does not publish.",button("Publish example", "save-cms",true));break;
       }
       case "save-cms":
         const invalid=model.validateCms(cmsDraft());if(invalid){notify(invalid);break;}

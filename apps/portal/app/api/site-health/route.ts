@@ -15,21 +15,22 @@ export async function GET(req: Request) {
     if (
       error ||
       !d ||
-      d.revision !== probe.revision ||
-      validateContent(d.manifest, d.content).length
+      d.revision !== probe.revision
     )
       throw new Error();
     const { data, error: storageError } = await service.rpc(
-      "probe_site_storage",
+      "probe_site_services",
       { pid: probe.projectId },
     );
-    if (storageError || data !== true) throw new Error();
+    if (storageError || !data) throw new Error();
     const body = JSON.stringify({
       projectId: probe.projectId,
       revision: probe.revision,
       nonce: probe.nonce,
-      storage: true,
-      seo: true,
+      storage: data.forms === true && data.analytics === true,
+      forms: data.forms === true,
+      analytics: data.analytics === true,
+      seo: validateContent(d.manifest, d.content).length === 0,
     });
     return new Response(body, {
       headers: {

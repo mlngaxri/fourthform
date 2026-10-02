@@ -65,7 +65,7 @@ All 81 findings have been reviewed. “Implemented” records a source change, n
 | UX-059: Make schedule lists and conflicts understandable | Implemented, verify in release CI | Schedule summaries, changed-field names and overlap diagnostics; narrow content wraps. |
 | UX-060: Show the complete launch URL before confirmation | Implemented, verify in release CI | Launch choices show full URLs and the exact content revision. |
 | UX-061: Keep check freshness and version state honest | Implemented, verify in release CI | Five required checks must match destination/revision and freshness window. |
-| UX-062: Show launch activity and failures by action | Partial refinement | Distinct busy labels and safe atomic verification; independent per-check diagnostics are a remaining refinement. |
+| UX-062: Show launch activity and failures by action | Implemented, verify in release CI | Each check has its own result and next action. Independent inbox/traffic probes leave no sample data; failed rechecks clear older launch receipts. |
 | UX-063: Make DNS instructions safe to copy and relate to a domain | Implemented, verify in release CI | DNS provider, exact names/values, record purposes and copy controls. |
 | UX-064: Explain analytics measures and the reporting period | Implemented, verify in release CI | Visitor days and action clicks replace ambiguous people/booking claims. |
 | UX-065: Provide an accessible, readable chart alternative | Implemented, verify in release CI | Connected reports have a daily table; preview data is labelled illustrative. |

@@ -8,7 +8,7 @@ Marketing distinguishes an example brief from real onboarding, includes a clear 
 
 Connected accounts preserve package/reference context, distinguish new briefs from existing drafts and provide email-confirmation recovery. Payment return states are checked against server records; busy guards stop duplicate UI actions. Pages, Search and Settings retain recoverable edits. Publishing shows changed content, and managed website approval pins the reviewed revision under the database lock. States are edited as drafts and activated with an explicit versioned receipt.
 
-The agency setup now has structured pages, fields, theme controls and a validated advanced import. Customer image fields support meaningful descriptions, decorative images and editable focal points. Reports explain daily visitor estimates and action clicks; the Inbox has filters, search and per-message action feedback. Domains and launch disclose their exact destination, DNS purpose and verification freshness.
+The agency setup now has structured pages, fields, theme controls and a validated advanced import. Customer image fields support meaningful descriptions, decorative images and editable focal points. Reports explain daily visitor estimates and action clicks; the Inbox has filters, search and per-message action feedback. Domains and launch disclose their exact destination, DNS purpose and verification freshness. Inbox and traffic storage are checked independently; failures name the connection that needs attention and clear older launch receipts.
 
 ## Validation and limitations
 
