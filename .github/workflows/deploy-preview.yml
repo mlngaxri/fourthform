@@ -1,0 +1,53 @@
+name: Deploy Fourthform marketing preview
+
+on:
+  push:
+    branches:
+      - 'release/**'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: fourthform-marketing-preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: apps/marketing
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_ORG_ID: team_CGpuPPobiY1sG5d7RhVa7Qsh
+      VERCEL_PROJECT_ID: prj_xXlnslAC5AIPsR7JibEda1NgjbEL
+      NEXT_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: apps/marketing/package-lock.json
+      - name: Require Vercel deployment credential
+        run: |
+          if [ -z "$VERCEL_TOKEN" ]; then
+            echo 'VERCEL_TOKEN is not configured in this repository.' >&2
+            exit 1
+          fi
+      - run: npm ci
+      - name: Install pinned Vercel CLI
+        run: npm install --global vercel@54.15.1
+      - name: Pull preview configuration
+        run: vercel pull --yes --environment=preview --token="$VERCEL_TOKEN"
+      - name: Build preview
+        run: vercel build --token="$VERCEL_TOKEN"
+      - name: Deploy exact preview build
+        id: deploy
+        run: |
+          url=$(vercel deploy --prebuilt --token="$VERCEL_TOKEN")
+          echo "url=$url" >> "$GITHUB_OUTPUT"
+          echo "### Fourthform marketing preview" >> "$GITHUB_STEP_SUMMARY"
+          echo "$url" >> "$GITHUB_STEP_SUMMARY"
