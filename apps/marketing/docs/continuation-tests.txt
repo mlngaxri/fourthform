@@ -1,0 +1,15 @@
+✔ marketing has one focusable skip target and six native FAQ disclosures (0.83738ms)
+✔ marketing retains onboarding and same-origin embedded preview routes (0.311599ms)
+ℹ tests 2
+ℹ suites 0
+ℹ pass 2
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 345.34915
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> fourthform-marketing@0.1.0 typecheck
+> tsc --noEmit
+

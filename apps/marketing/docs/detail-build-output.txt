@@ -1,0 +1,40 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> fourthform-marketing@0.1.0 build
+> next build
+
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of /workspace/scratch/f2d43a2fc1a3/package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * /workspace/scratch/f2d43a2fc1a3/repos/marketingwebsite/package-lock.json
+
+   ▲ Next.js 15.5.25
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 1934ms
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/7) ...
+   Generating static pages (1/7) 
+   Generating static pages (3/7) 
+   Generating static pages (5/7) 
+ ✓ Generating static pages (7/7)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    6.76 kB         113 kB
+├ ○ /_not-found                            126 B         103 kB
+├ ○ /icon.svg                                0 B            0 B
+├ ○ /preview                               163 B         106 kB
+└ ○ /preview/start                       3.88 kB         110 kB
++ First Load JS shared by all             103 kB
+  ├ chunks/5c00b031-6c78a6b1efcaaa8e.js  54.2 kB
+  ├ chunks/73-9c9229552cdcc7b3.js        46.3 kB
+  └ other shared chunks (total)          2.06 kB
+
+
+○  (Static)  prerendered as static content
+

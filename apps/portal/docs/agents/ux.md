@@ -1,0 +1,32 @@
+# Builder 1 — UX handoff
+
+## Ownership
+Product UX, visual system, responsive behavior, accessibility, navigation, interaction states and polish.
+
+## Current baseline
+Latest known portal work includes complete interactive preview flows plus subsequent control, feedback and mobile polish. Read recent commits before choosing work.
+
+## Handoff log
+
+### 2026-10-01 — Draft recovery accessibility audit
+- Reviewed the recovery flow in `public/portal-reliability.js`.
+- Identified a concrete keyboard/screen-reader improvement: expose the recovery choices as an announced region and move initial startup recovery focus to the primary choice without stealing focus for cross-tab updates.
+- Implementation writes to the runtime JavaScript were blocked by the connected GitHub write safety layer during this run, so no product behavior was changed and no S0/S1 claim is made.
+- Commit `774d85542167782b69fbf627bc4b2e1961e7623f` only recorded an interim handoff marker and is not a product change.
+- Next: retry the bounded recovery accessibility patch, add a static regression assertion, then let Builder 5 grade deployment evidence.
+
+### 2026-10-02 — Route-error keyboard recovery regression coverage
+- Added a focused source regression to `tests/static-build.test.mjs` for the connected route-error boundary introduced by `4fb682e878113d76ac8e146604c1d291dbc5aa32`.
+- The regression requires a programmatically focusable error heading, focus-on-mount, and the visible retry action so future refactors cannot silently remove the keyboard/screen-reader recovery context.
+- Source/test commit: `e2b1102ab03d5daad5d1c62fc01e4665a2ff9be4`.
+- Evidence: **S0 pending CI**. No workflow run existed for the exact commit when checked, so S1 is not claimed.
+- Blocker: the repository already had a separate TypeScript failure in the persisted-State database regression before this UX-only change; Builder 4/5 owns that operational/release blocker.
+- Next: use the new UX audit as the prioritized backlog and take the highest-value connected-app UX item that remains after red build issues are cleared; do not spend a UX run on deployment plumbing.
+
+### 2026-10-02 — Repair route-error accessibility regression test
+- Current `main` validation reached `npm test` after typecheck passed, then failed only the route-error accessibility regression because its retry-button regex assumed `Try again` immediately followed the opening tag; the component intentionally formats the label on its own line.
+- Updated the assertion to tolerate JSX whitespace while still requiring `Try again` to be the button label. No production UX behavior changed.
+- Source/test commit: `5cfd967d4f09a78ca66f48f6788e469fd5425c85`.
+- Evidence: **S0 pending fresh CI**. The preceding `b1f379876302b31a4875d73779e110cc11bcdaab` workflow proved typecheck passes and isolated this test as the `npm test` blocker, but S1 is not claimed until validation runs against the repair commit.
+- Blockers: none for this source repair. Build, connected browser, deployment and live evidence remain downstream of CI and Builder 5.
+- Next: after CI clears, return to the highest-value connected-app accessibility/responsive defect from the UX audit rather than changing the already-correct route-error component.

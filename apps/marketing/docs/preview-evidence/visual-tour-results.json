@@ -1,0 +1,20 @@
+{
+  "result": "pass",
+  "animatedMarketing": true,
+  "marketingImageLoaded": true,
+  "mobilePanels": [
+    "overview",
+    "direction",
+    "build",
+    "review",
+    "pages",
+    "analytics",
+    "seo",
+    "domains",
+    "connections",
+    "states",
+    "billing",
+    "launch"
+  ],
+  "uncaughtErrors": []
+}

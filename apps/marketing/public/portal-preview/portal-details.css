@@ -1,0 +1,60 @@
+/* Small interface refinements, shared with the marketing preview. */
+:root{--detail-focus:#5447d9}
+button,input,textarea,select,a{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--detail-focus);outline-offset:3px}
+button:disabled{cursor:not-allowed;opacity:.48}
+button:not(:disabled):active{filter:brightness(.96)}
+textarea{resize:vertical;min-height:72px;line-height:1.6}
+input,textarea,select{accent-color:var(--detail-focus)}
+.ops-wrap,.comm-initial,.context,.left{scrollbar-gutter:stable;overscroll-behavior:contain}
+.ops-table td{font-variant-numeric:tabular-nums;vertical-align:top}
+.ops-metric strong,.ops-plan-price,.resize-control{font-variant-numeric:tabular-nums}
+.ops-table th{text-align:left}
+.ops-search-result h3,.ops-search-result p,.ops-line p,.comm-object p{overflow-wrap:anywhere}
+.detail-counter{display:block;margin-top:6px;font-size:11px;font-weight:400;color:var(--muted);line-height:1.5}
+.detail-counter.warning{color:#946027}
+.detail-hint{font-size:11px;line-height:1.5;color:var(--muted);margin:8px 0 0}
+.toast{max-width:calc(100vw - 32px);width:max-content;white-space:normal;text-align:center;line-height:1.5;padding:10px 16px;font-size:12px}
+.ops-label:focus-within{color:var(--ink)}
+.plate-track{scroll-padding-inline:20px}
+@media(max-width:640px){
+ .toast{bottom:calc(76px + env(safe-area-inset-bottom))}
+ .mobile-dock{bottom:calc(10px + env(safe-area-inset-bottom));min-height:48px}
+ .ops-tabs button,.ops-actions button,.comm-actions button{min-height:40px}
+ .ops-label input,.ops-label textarea,.ops-label select{font-size:16px}
+ .ops-wrap{padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+ .left,.context{padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+ .modal-backdrop{padding:12px}
+ .modal{max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain}
+ .ops-actions{flex-wrap:wrap}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important}.toast{transition:none}}
+.ops-lead{max-width:65ch}.ops-label textarea{line-height:1.6}.ops-box{scroll-margin-top:20px}.ops-table tr:last-child td{border-bottom:0}.ops-table td:last-child{text-align:right;white-space:nowrap}.ops-search-result p{line-height:1.65}.detail-hint,.detail-counter{user-select:text}.toast{box-shadow:0 8px 28px #17171520}.comm-drawing-preview{overflow:hidden}.ops-tabs button[aria-pressed=true]{font-weight:500}
+
+/* Dialog actions stay reachable on short desktop and landscape screens. */
+.modal{max-height:calc(100dvh - 40px);overflow-y:auto;overscroll-behavior:contain}
+@media(max-width:640px){.modal{max-height:calc(100dvh - 24px)}}
+
+/* Content can wrap within narrow cards without clipping controls. */
+.ops-grid>*,.ops-label,.ops-line>div,.ops-inline>div{min-width:0}
+.ops-label input,.ops-label textarea,.ops-label select{min-width:0}
+.ops-connection-mark{flex-shrink:0}
+@media(max-width:480px){
+ .ops-line{flex-wrap:wrap;align-items:flex-start}
+ .ops-line>:first-child{flex:1 1 140px;min-width:0}
+ .ops-line>.top-button{flex:0 0 auto}
+ .ops-table{table-layout:fixed}
+ .ops-table td,.ops-table th{overflow-wrap:anywhere}
+ .ops-table td:last-child{white-space:normal}
+}
+
+.review-guide{flex:none;padding:15px 26px;border-bottom:1px solid var(--line);background:var(--surface)}
+.review-guide b{display:block;font-size:12px;font-weight:500;line-height:1.5}
+.review-guide p{font-size:11px;line-height:1.6;color:var(--muted);margin:4px 0 0;max-width:74ch}
+@media(max-width:640px){.review-guide{padding:11px 14px}.review-guide p{font-size:11px}}
+
+/* Embedded previews leave the surrounding marketing controls in charge. */
+html[data-preview-embed=true] .left,html[data-preview-embed=true] .top,html[data-preview-embed=true] .mobile-dock{display:none!important}html[data-preview-embed=true] .shell{height:100dvh!important;grid-template-columns:minmax(0,1fr) 270px!important;grid-template-rows:minmax(0,1fr)!important}html[data-preview-embed=true] .center{grid-column:1!important;grid-row:1!important}html[data-preview-embed=true] .context{grid-column:2!important;grid-row:1!important}html[data-preview-embed=true] .review-guide{padding:10px 18px}html[data-preview-embed=true] .stage{padding:14px}html[data-preview-embed=true] .center{min-width:0}.preview-return{display:block;font-size:11px;line-height:1.6;padding-bottom:18px}.preview-tasks{border-bottom:1px solid var(--line);padding:12px 0;margin-bottom:18px;font-size:11px}.preview-tasks button{display:block;text-align:left;border:0;background:transparent;font:inherit;padding:12px 0;min-height:44px}.ops-state-card p{overflow-wrap:anywhere}.ops-mini-copy h2{overflow-wrap:anywhere}.ops-label input:focus,.ops-label textarea:focus{outline-color:var(--detail-focus)}
+@media(max-width:640px){.top{height:auto!important;min-height:104px;display:grid!important;grid-template-columns:36px minmax(0,1fr)!important;gap:6px 10px;padding:10px 12px!important}.top .brand{display:none}.top .project{min-width:0;max-width:none;width:100%}.top .project-menu-btn{flex-wrap:wrap;max-width:100%;gap:6px}.top .project-menu-btn strong{max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.top .top-actions{grid-column:1/-1;display:flex;gap:7px;width:100%;justify-content:flex-end}.top-actions .saved{margin-right:auto;font-size:10px;max-width:100px;overflow-wrap:anywhere}.top-actions .top-button{padding:9px 10px;min-height:40px;font-size:11px}.shell{grid-template-rows:auto minmax(0,1fr)!important}html[data-preview-embed=true] .shell{grid-template-columns:minmax(0,1fr)!important}html[data-preview-embed=true] .context{display:none!important}html[data-preview-embed=true] .canvasbar{flex-wrap:wrap;gap:8px}html[data-preview-embed=true] .stage{padding:8px}html[data-preview-embed=true] .ops-wrap{padding:18px 12px 30px}.ops-actions button,.comm-actions button{min-height:44px}}
+
+.kicker{color:#6b6962}

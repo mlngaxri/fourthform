@@ -1,0 +1,602 @@
+[
+  {
+    "id": "monolith-hero",
+    "brand": "Stratum",
+    "headline": "Architecture for the way you live.",
+    "body": "We design considered homes and small public spaces, bringing light, materials and everyday life into balance.",
+    "action": "Discuss your project",
+    "eyebrow": "Residential architecture",
+    "intro": "A home begins with how you want to live. We listen first, then shape spaces around your routines, your site and the things you value.",
+    "offers": [
+      {
+        "title": "New homes",
+        "body": "Homes shaped by their setting, from the first sketch to the final detail."
+      },
+      {
+        "title": "Thoughtful additions",
+        "body": "Make room for what comes next while respecting what is already there."
+      },
+      {
+        "title": "Shared spaces",
+        "body": "Small commercial and community spaces with a clear purpose and a welcoming presence."
+      }
+    ],
+    "endTitle": "Tell us about your site",
+    "endBody": "Share your location, the kind of space you have in mind and where you are in the process.",
+    "layout": "landscape",
+    "background": "#071b2a",
+    "ink": "#eff3f0",
+    "accent": "#a9c4c7",
+    "art": "/work/art/monolith-hero.webp"
+  },
+  {
+    "id": "oyla",
+    "brand": "OYLA",
+    "headline": "Jewellery for your everyday rituals.",
+    "body": "Sculptural rings, earrings and pendants. Considered pieces to wear on their own or make part of your own collection.",
+    "action": "Explore the collection",
+    "eyebrow": "Contemporary jewellery",
+    "intro": "A small detail can change the way you feel. OYLA explores clean shapes, soft curves and the quiet character of jewellery worn often.",
+    "offers": [
+      {
+        "title": "Rings",
+        "body": "Subtle shapes with a sculptural presence, made to sit comfortably together."
+      },
+      {
+        "title": "Earrings",
+        "body": "From a quiet everyday pair to a more expressive finishing touch."
+      },
+      {
+        "title": "Pendants",
+        "body": "Simple forms that bring a little intention to getting dressed."
+      }
+    ],
+    "endTitle": "Find your piece",
+    "endBody": "Explore the sample collection and ask about a shape, finish or fit.",
+    "layout": "editorial",
+    "background": "#f7f5f1",
+    "ink": "#44231e",
+    "accent": "#9e3639",
+    "art": "/work/art/oyla.webp"
+  },
+  {
+    "id": "keel",
+    "brand": "Keel",
+    "headline": "A clearer direction for your brand.",
+    "body": "Strategy, identity and digital design for businesses ready to show the world who they are.",
+    "action": "Start a conversation",
+    "eyebrow": "Brand and digital studio",
+    "intro": "Your next chapter needs a point of view. We bring strategy and design together so your identity feels clear wherever people meet it.",
+    "offers": [
+      {
+        "title": "Find the direction",
+        "body": "Define your audience, your offer and the story that holds them together."
+      },
+      {
+        "title": "Build the identity",
+        "body": "Create a visual language with room to grow, from type and colour to imagery."
+      },
+      {
+        "title": "Bring it online",
+        "body": "Translate the identity into a website that helps people understand and act."
+      }
+    ],
+    "endTitle": "What comes next?",
+    "endBody": "Tell us what you are building and what you want your brand to become.",
+    "layout": "landscape",
+    "background": "#09295e",
+    "ink": "#e4efff",
+    "accent": "#a9c7f7",
+    "art": "/work/art/keel.webp"
+  },
+  {
+    "id": "playful-idea",
+    "brand": "Softwork",
+    "headline": "Serious ideas. A playful point of view.",
+    "body": "A creative studio making identities, campaigns and websites with a personality people can recognise.",
+    "action": "Make something together",
+    "eyebrow": "Independent creative studio",
+    "intro": "Good work has something to say. We help you find the idea, give it a distinctive form and carry it through every part of your brand.",
+    "offers": [
+      {
+        "title": "Brand identities",
+        "body": "A recognisable voice and visual system, shaped around the people you want to reach."
+      },
+      {
+        "title": "Campaigns",
+        "body": "A focused idea that works across the places your audience spends time."
+      },
+      {
+        "title": "Websites",
+        "body": "Clear, expressive digital experiences that make the next step feel natural."
+      }
+    ],
+    "endTitle": "Bring us your idea",
+    "endBody": "A loose thought, a new business or a brand ready for change. We can start there.",
+    "layout": "expressive",
+    "background": "#efedf5",
+    "ink": "#382541",
+    "accent": "#8e69ae",
+    "art": "/work/art/playful-idea.webp"
+  },
+  {
+    "id": "nature-ritual",
+    "brand": "Mossary",
+    "headline": "A little nature in your daily pause.",
+    "body": "Botanical drinks with bright citrus and gentle herbal notes. A fresh ritual, served your way.",
+    "action": "Discover the rituals",
+    "eyebrow": "Botanical drinks",
+    "intro": "A ritual does not need to be complicated. A familiar flavour, a glass over ice, a few moments to slow down. Our collection is imagined for those everyday pauses.",
+    "offers": [
+      {
+        "title": "A fresh beginning",
+        "body": "Bright citrus flavours for a moment at the start of the day."
+      },
+      {
+        "title": "An afternoon pause",
+        "body": "Gentle herbal notes, served over ice when you want to slow the pace."
+      },
+      {
+        "title": "A moment to share",
+        "body": "A considered non-alcoholic choice for getting together around the table."
+      }
+    ],
+    "endTitle": "Find your everyday pause",
+    "endBody": "Explore the sample flavours and choose the kind of moment you want to make.",
+    "layout": "landscape",
+    "background": "#10251b",
+    "ink": "#f1f2e7",
+    "accent": "#bad19b",
+    "art": "/work/art/nature-ritual.webp"
+  },
+  {
+    "id": "performance-eyewear",
+    "brand": "Orven",
+    "headline": "Keep your focus on what is ahead.",
+    "body": "Performance eyewear for running, riding and the everyday miles in between. A close fit, a clear view and a confident look.",
+    "action": "Explore the range",
+    "eyebrow": "Performance eyewear",
+    "intro": "The right pair should feel like part of your routine. Orven brings an athletic profile and considered details to eyewear you can reach for every day.",
+    "offers": [
+      {
+        "title": "On the run",
+        "body": "Light profiles and a close fit for moving at your own pace."
+      },
+      {
+        "title": "On the bike",
+        "body": "Wraparound shapes that keep the view open as the road changes."
+      },
+      {
+        "title": "Beyond the session",
+        "body": "A distinctive look for the everyday miles in between."
+      }
+    ],
+    "endTitle": "Choose your perspective",
+    "endBody": "Compare the sample shapes and ask about fit, lens options or availability.",
+    "layout": "editorial",
+    "background": "#d9e4ea",
+    "ink": "#11202a",
+    "accent": "#456986",
+    "art": "/work/art/performance-eyewear.webp"
+  },
+  {
+    "id": "velorah-hero",
+    "brand": "Velorah",
+    "headline": "Give your story a world of its own.",
+    "body": "An independent creative studio shaping brands through strategy, art direction and thoughtful digital experiences.",
+    "action": "Share your story",
+    "eyebrow": "Creative direction",
+    "intro": "A strong visual world starts with something true. We work with ambitious people to find the character of a brand and express it with care.",
+    "offers": [
+      {
+        "title": "Discover the story",
+        "body": "A clear understanding of the business, its audience and the feeling it should create."
+      },
+      {
+        "title": "Shape the world",
+        "body": "Art direction, identity and imagery that belong together."
+      },
+      {
+        "title": "Make it real",
+        "body": "Digital experiences and launch materials that carry the story into everyday use."
+      }
+    ],
+    "endTitle": "A new world starts with a conversation",
+    "endBody": "Tell us what you are making and what you want people to feel when they find it.",
+    "layout": "landscape",
+    "background": "#072b39",
+    "ink": "#f6f0d5",
+    "accent": "#d7c879",
+    "art": "/work/art/velorah-hero.webp"
+  },
+  {
+    "id": "prisma-landing",
+    "brand": "Prisma",
+    "headline": "A different perspective on your brand.",
+    "body": "Identity, art direction and digital design for businesses with something worth saying.",
+    "action": "Explore our approach",
+    "eyebrow": "Independent design studio",
+    "intro": "We help ideas become visible. From the first conversation to the website, every choice works towards a clear, distinctive expression of the business.",
+    "offers": [
+      {
+        "title": "Identity",
+        "body": "Type, colour and visual systems with a clear point of view."
+      },
+      {
+        "title": "Art direction",
+        "body": "Imagery and composition that make a brand feel like itself."
+      },
+      {
+        "title": "Digital design",
+        "body": "Websites that balance character with an easy path through the content."
+      }
+    ],
+    "endTitle": "What do you want to put into the world?",
+    "endBody": "Tell us about the business, the ambition and the part you want help bringing into focus.",
+    "layout": "editorial",
+    "background": "#191b19",
+    "ink": "#f0eee5",
+    "accent": "#c4ac81",
+    "art": "/work/art/prisma-landing.webp"
+  },
+  {
+    "id": "custom-spaces",
+    "brand": "Custom Spaces",
+    "headline": "Rooms for the way life happens.",
+    "body": "Residential architecture and interiors, shaped around your site, your routines and the details that make a place your own.",
+    "action": "Talk about your space",
+    "eyebrow": "Architecture and interiors",
+    "intro": "We design spaces from the inside out. Natural light, useful circulation and materials you want to live with create the foundation for a considered home.",
+    "offers": [
+      {
+        "title": "New homes",
+        "body": "A considered response to your setting and the life you want to build there."
+      },
+      {
+        "title": "Renovations",
+        "body": "A new chapter for familiar spaces, planned around what matters most."
+      },
+      {
+        "title": "Interiors",
+        "body": "Materials, finishes and details that bring warmth and coherence to every room."
+      }
+    ],
+    "endTitle": "Start with the way you live",
+    "endBody": "Tell us about your space, what is working and what you would like to change.",
+    "layout": "editorial",
+    "background": "#eeeae2",
+    "ink": "#302e28",
+    "accent": "#827766",
+    "art": "/work/art/custom-spaces.webp"
+  },
+  {
+    "id": "obsidian",
+    "brand": "Obsidian",
+    "headline": "Art that changes the space around it.",
+    "body": "Sculptural objects and digital installations exploring texture, movement and the meeting of physical and virtual worlds.",
+    "action": "Explore the practice",
+    "eyebrow": "Sculpture and digital art",
+    "intro": "A form can hold a room or open a new perspective. Obsidian brings material studies and digital exploration into a single artistic practice.",
+    "offers": [
+      {
+        "title": "Objects",
+        "body": "Sculptural studies in form, surface and the way light changes a material."
+      },
+      {
+        "title": "Installations",
+        "body": "Site-specific compositions that respond to architecture and movement."
+      },
+      {
+        "title": "Digital works",
+        "body": "Moving images and virtual forms that extend the practice beyond the physical object."
+      }
+    ],
+    "endTitle": "A place for a new work",
+    "endBody": "For exhibitions, commissions and collaborations, tell us about your space and idea.",
+    "layout": "expressive",
+    "background": "#eeede8",
+    "ink": "#282824",
+    "accent": "#b79965",
+    "art": "/work/art/obsidian.webp"
+  },
+  {
+    "id": "human-machine",
+    "brand": "NeuralKinetics",
+    "headline": "Technology that works alongside people.",
+    "body": "Robotics research and prototyping focused on intuitive interaction between people and machines.",
+    "action": "Explore the research",
+    "eyebrow": "Human-centred robotics",
+    "intro": "Useful technology begins with understanding the person using it. We explore movement, sensing and interaction through practical research and working prototypes.",
+    "offers": [
+      {
+        "title": "Interaction research",
+        "body": "Study how people understand, approach and work with intelligent systems."
+      },
+      {
+        "title": "Working prototypes",
+        "body": "Test ideas through physical models, software and controlled demonstrations."
+      },
+      {
+        "title": "Collaborative development",
+        "body": "Bring research and product teams together around a focused technical question."
+      }
+    ],
+    "endTitle": "Bring a question worth exploring",
+    "endBody": "Tell us about your research challenge, product idea or potential collaboration.",
+    "layout": "product",
+    "background": "#edf0ef",
+    "ink": "#20332f",
+    "accent": "#779ca1",
+    "art": "/work/art/human-machine.webp"
+  },
+  {
+    "id": "veyra-electric",
+    "brand": "Veyra",
+    "headline": "An electric car for everyday possibility.",
+    "body": "A vehicle design concept exploring a quieter drive, considered space and a simpler way to move through the day.",
+    "action": "Explore the concept",
+    "eyebrow": "Electric vehicle design",
+    "intro": "Everyday driving has its own rhythm. Veyra explores how an electric vehicle can make the familiar journey feel calm, comfortable and considered.",
+    "offers": [
+      {
+        "title": "A calmer cabin",
+        "body": "A considered interior that keeps the controls clear and the space comfortable."
+      },
+      {
+        "title": "Room for the day",
+        "body": "Flexible storage ideas for the things everyday life asks you to carry."
+      },
+      {
+        "title": "A clear connection",
+        "body": "An interface concept that makes essential information easy to find."
+      }
+    ],
+    "endTitle": "Take a closer look",
+    "endBody": "Explore the vehicle study and share what matters most in your everyday drive. No production specifications or availability are claimed.",
+    "layout": "product",
+    "background": "#6c899f",
+    "ink": "#f4f6f8",
+    "accent": "#d7f178",
+    "art": "/work/art/veyra-electric.webp"
+  },
+  {
+    "id": "vintage-care",
+    "brand": "ArtCar",
+    "headline": "Care for a car with a story.",
+    "body": "Detailing and preservation for classic vehicles. Thoughtful care for the finishes, materials and details that make your car its own.",
+    "action": "Discuss your car",
+    "eyebrow": "Classic vehicle detailing",
+    "intro": "A classic deserves careful attention. We start by understanding the condition of the car, then recommend a considered approach to cleaning, detailing and ongoing care.",
+    "offers": [
+      {
+        "title": "Exterior detailing",
+        "body": "A careful assessment and cleaning approach suited to the condition of the finish."
+      },
+      {
+        "title": "Interior care",
+        "body": "Attention to the seats, trim and surfaces that give a cabin its character."
+      },
+      {
+        "title": "Ongoing preservation",
+        "body": "Practical advice for keeping the vehicle looking considered between appointments."
+      }
+    ],
+    "endTitle": "Tell us about your classic",
+    "endBody": "Share the model, its condition and the care you have in mind. We will plan the next step around the vehicle.",
+    "layout": "expressive",
+    "background": "#e9edf0",
+    "ink": "#67364d",
+    "accent": "#bb6d8b",
+    "art": "/work/art/vintage-care.webp"
+  },
+  {
+    "id": "nature-portfolio",
+    "brand": "Ethan Vale",
+    "headline": "Stories from the living world.",
+    "body": "Wildlife and landscape photography exploring the small details, unexpected encounters and quiet scale of the natural world.",
+    "action": "Explore the work",
+    "eyebrow": "Wildlife and landscape photography",
+    "intro": "The best frame starts with paying attention. This collection brings together field observations and visual stories about the places and species we share the world with.",
+    "offers": [
+      {
+        "title": "Wildlife",
+        "body": "Close observations of animals in their own environments."
+      },
+      {
+        "title": "Landscapes",
+        "body": "Light, weather and the quiet character of a place."
+      },
+      {
+        "title": "Assignments",
+        "body": "Photography for editorial stories, conservation projects and thoughtful publications."
+      }
+    ],
+    "endTitle": "A story worth looking closer at",
+    "endBody": "For commissions, editorial use or print enquiries, tell us what you have in mind.",
+    "layout": "expressive",
+    "background": "#0d1510",
+    "ink": "#e6eddf",
+    "accent": "#9daf7d",
+    "art": "/work/art/nature-portfolio.webp"
+  },
+  {
+    "id": "anchor-ai",
+    "brand": "Anchor AI",
+    "headline": "A clearer view of insurance operations.",
+    "body": "A platform concept that brings intake, document review and case progress into one shared workspace for insurance teams.",
+    "action": "Explore the workflow",
+    "eyebrow": "Insurance operations software",
+    "intro": "A case should be easy to follow. Anchor AI explores a connected workflow where documents, decisions and next steps stay in context. Human review remains part of the process.",
+    "offers": [
+      {
+        "title": "Organised intake",
+        "body": "Keep the information and documents for each case together from the start."
+      },
+      {
+        "title": "Supported review",
+        "body": "Surface relevant details for a person to assess and confirm."
+      },
+      {
+        "title": "Visible progress",
+        "body": "Make ownership, outstanding work and the next decision easy to see."
+      }
+    ],
+    "endTitle": "See how the workflow fits together",
+    "endBody": "Explore a sample case and discuss the operational needs of your team. This is a design concept with example data.",
+    "layout": "product",
+    "background": "#080d18",
+    "ink": "#e4edff",
+    "accent": "#608eff",
+    "art": "/work/art/anchor-ai.webp"
+  },
+  {
+    "id": "vectrus-energy",
+    "brand": "Vectrus",
+    "headline": "Plan a more considered energy future.",
+    "body": "Energy planning and advisory for organisations exploring cleaner systems, practical transitions and long-term resource decisions.",
+    "action": "Discuss your plans",
+    "eyebrow": "Energy planning and advisory",
+    "intro": "A transition begins with a clear view of the present. We help teams understand their needs, compare options and plan the next practical step.",
+    "offers": [
+      {
+        "title": "Understand the system",
+        "body": "Map current energy use, operational needs and the questions that matter."
+      },
+      {
+        "title": "Compare the options",
+        "body": "Explore potential approaches with their constraints and trade-offs in view."
+      },
+      {
+        "title": "Plan the transition",
+        "body": "Turn a chosen direction into a staged plan for the organisation."
+      }
+    ],
+    "endTitle": "Start with your energy question",
+    "endBody": "Tell us about your organisation, its current needs and the decision you are working towards.",
+    "layout": "editorial",
+    "background": "#e4eaee",
+    "ink": "#2d434b",
+    "accent": "#7a999c",
+    "art": "/work/art/vectrus-energy.webp"
+  },
+  {
+    "id": "golden-portal",
+    "brand": "Golden Archive",
+    "headline": "A place for ideas that deserve another look.",
+    "body": "An independent digital archive of art, design and visual culture. Discover connections across objects, images and the stories behind them.",
+    "action": "Explore the archive",
+    "eyebrow": "Art and design archive",
+    "intro": "Some ideas become more interesting with time. Golden Archive brings a considered collection into one place, with context that helps you look a little closer.",
+    "offers": [
+      {
+        "title": "Objects",
+        "body": "Forms and materials that reveal how people think and make."
+      },
+      {
+        "title": "Images",
+        "body": "Visual stories with a point of view worth returning to."
+      },
+      {
+        "title": "Connections",
+        "body": "Themes that link different disciplines, eras and ways of seeing."
+      }
+    ],
+    "endTitle": "What will you discover?",
+    "endBody": "Browse the sample collection or suggest a theme you would like to see explored.",
+    "layout": "landscape",
+    "background": "#744b26",
+    "ink": "#fbefd9",
+    "accent": "#e8c878",
+    "art": "/work/art/golden-portal.webp"
+  },
+  {
+    "id": "digital-epoch-hero",
+    "brand": "Digital Epoch",
+    "headline": "Make your next digital step a clear one.",
+    "body": "Product design and development for teams turning a useful idea into a thoughtful digital experience.",
+    "action": "Discuss your product",
+    "eyebrow": "Digital product studio",
+    "intro": "A useful product needs a clear purpose and a considered path to delivery. We help teams define what matters, test the experience and build with that direction in view.",
+    "offers": [
+      {
+        "title": "Define the product",
+        "body": "Bring the problem, the audience and the core experience into focus."
+      },
+      {
+        "title": "Design the experience",
+        "body": "Make important tasks easy to understand through thoughtful interaction and layout."
+      },
+      {
+        "title": "Build and refine",
+        "body": "Develop the experience, review it with users and improve what matters."
+      }
+    ],
+    "endTitle": "What are you building?",
+    "endBody": "Share your idea, your audience and the stage you have reached. We can work out the next step together.",
+    "layout": "product",
+    "background": "#edf0f7",
+    "ink": "#20355d",
+    "accent": "#597fc5",
+    "art": "/work/art/digital-epoch-hero.webp"
+  },
+  {
+    "id": "peakline-redshift",
+    "brand": "Apogee",
+    "headline": "Bring your data into a clearer view.",
+    "body": "A data workspace concept for teams organising sources, following key measures and keeping decisions in context.",
+    "action": "Explore the workspace",
+    "eyebrow": "Data platform",
+    "intro": "Data is more useful when people can understand it. Apogee explores a shared view of the measures a team follows and the questions those measures help answer.",
+    "offers": [
+      {
+        "title": "Connect the context",
+        "body": "Organise sources and document what the data represents."
+      },
+      {
+        "title": "Follow the measures",
+        "body": "Keep the most useful trends and comparisons in a clear workspace."
+      },
+      {
+        "title": "Share the decision",
+        "body": "Bring notes, questions and the evidence for a decision together."
+      }
+    ],
+    "endTitle": "A clearer conversation about data",
+    "endBody": "Explore the sample workspace and tell us which questions your team needs to answer. No live integrations or performance claims are implied.",
+    "layout": "product",
+    "background": "#3e2923",
+    "ink": "#f4e6d5",
+    "accent": "#ef7359",
+    "art": "/work/art/peakline-redshift.webp"
+  },
+  {
+    "id": "orla-fashion",
+    "brand": "Orla",
+    "headline": "Wear it your own way.",
+    "body": "Considered everyday pieces with expressive shapes and room for your own point of view.",
+    "action": "Explore the collection",
+    "eyebrow": "Contemporary fashion",
+    "intro": "Getting dressed can be a small act of self-expression. Orla explores relaxed shapes and considered details that work together without asking you to follow a formula.",
+    "offers": [
+      {
+        "title": "Everyday pieces",
+        "body": "Easy foundations with shape and character of their own."
+      },
+      {
+        "title": "A different detail",
+        "body": "Unexpected lines, textures and finishes that invite a closer look."
+      },
+      {
+        "title": "Your own combination",
+        "body": "Pieces to mix, repeat and make part of the way you dress."
+      }
+    ],
+    "endTitle": "Find a shape that feels like you",
+    "endBody": "Browse the sample collection and ask about a piece, fit or styling idea.",
+    "layout": "editorial",
+    "background": "#f5f5ec",
+    "ink": "#273738",
+    "accent": "#8faca5",
+    "art": "/work/art/orla-fashion.webp"
+  }
+]

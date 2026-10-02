@@ -1,0 +1,197 @@
+"use client";
+import { z } from "zod";
+import { useEffect, useState } from "react";
+import { api } from "../lib/client";
+import TimezonePicker from "./TimezonePicker";
+import { useLocalDraft, DraftRecovery } from "./useLocalDraft";
+import { useUnsavedGuard } from "./useUnsavedGuard";
+type Settings = {
+  revision: number;
+  timezone: string;
+  notify_forms: boolean;
+  notify_project: boolean;
+  connections: { booking?: string; social?: string };
+};
+export default function SettingsWorkspace({
+  projectId,
+  connections = false,
+}: {
+  projectId: string;
+  connections?: boolean;
+}) {
+  const [settings, setSettings] = useState<Settings | null>(null),
+    [email, setEmail] = useState(""),
+    [dirty, setDirty] = useState(false),
+    [busy, setBusy] = useState(false),
+    [error, setError] = useState(""),
+    [notice, setNotice] = useState(""),
+    [emailReady, setEmailReady] = useState(false);
+  const draft = useLocalDraft(`fourthform:settings:${projectId}:${connections ? "connections" : "preferences"}`, settings, dirty, String(settings?.revision || 0));
+  useUnsavedGuard(dirty);
+  async function load() {
+    const r = await api(`/api/projects/${projectId}/settings`);
+    setError("");
+    setEmailReady(r.emailAvailable === true);
+    setSettings(r.settings);
+    setEmail(r.email);
+    setDirty(false);
+  }
+  useEffect(() => {
+    void load().catch((e) => setError(e.message));
+  }, [projectId]);
+  async function save() {
+    if (!settings) return;
+    setBusy(true);
+    setError("");
+    try {
+      const r = connections
+        ? await api(`/api/projects/${projectId}/connections`, {
+            expected: settings.revision,
+            booking: settings.connections.booking || "",
+            social: settings.connections.social || "",
+          })
+        : await api(`/api/projects/${projectId}/settings`, {
+            expected: settings.revision,
+            timezone: settings.timezone,
+            notifyForms: settings.notify_forms,
+            notifyProject: settings.notify_project,
+          });
+      setSettings(r.settings);
+      setDirty(false);
+      draft.clear();
+      setNotice("Saved to your account.");
+    } catch (e) {
+      setError((e as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <section className="direction-workspace">
+      <header className="workspace-heading">
+        <div>
+          <span className="overline">
+            {connections ? "Website / Connections" : "Project / Settings"}
+          </span>
+          <h1>
+            {connections
+              ? "Keep the next step connected."
+              : "Make this workspace yours."}
+          </h1>
+        </div>
+      </header>
+      {error && <p role="alert">{error}</p>}
+      {notice && <p role="status">{notice}</p>}
+      {!settings && !error && <p role="status">Loading your saved {connections ? "connections" : "settings"}…</p>}
+      {settings && <DraftRecovery draft={draft} revision={String(settings.revision)} onRestore={data => { const parsed=z.object({timezone:z.string().max(100),notify_forms:z.boolean(),notify_project:z.boolean(),connections:z.object({booking:z.string().optional(),social:z.string().optional()})}).safeParse(data);if(!parsed.success){setError("The device copy is invalid. Your saved settings remain available.");return false;}try{new Intl.DateTimeFormat("en",{timeZone:parsed.data.timezone});}catch{setError("Choose a valid timezone before restoring this copy.");return false;}setSettings({ ...parsed.data, revision: settings.revision }); setDirty(true); setNotice(""); }} />}
+      {!settings && error && <button disabled={busy} onClick={() => void load().catch(e => setError(e.message))}>Retry loading settings</button>}
+      {settings && (
+        <fieldset className="connected-card" disabled={busy || !!draft.recovery}>
+          {connections ? (
+            <>
+              {["booking", "social"].map((key) => (
+                <label key={key}>
+                  {key === "booking" ? "Booking page" : "Social profile"}
+                  <input
+                    type="url"
+                    placeholder="https://"
+                    value={
+                      settings.connections[key as "booking" | "social"] || ""
+                    }
+                    onChange={(e) => {
+                      setSettings({
+                        ...settings,
+                        connections: {
+                          ...settings.connections,
+                          [key]: e.target.value,
+                        },
+                      });
+                      setDirty(true);
+                      setNotice("");
+                    }}
+                  />
+                  {settings.connections[key as "booking" | "social"] && (
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href={settings.connections[key as "booking" | "social"]}
+                    >
+                      Open connection ↗
+                    </a>
+                  )}
+                </label>
+              ))}
+              <p>
+                Saved connections appear on your live website. Your contact form
+                saves real enquiries to the Inbox. Analytics are collected by
+                Fourthform.
+              </p>
+            </>
+          ) : (
+            <>
+              <TimezonePicker value={settings.timezone} onChange={timezone => { setSettings({ ...settings, timezone }); setDirty(true); setNotice(""); }} />
+              <label className="check-label">
+                <input
+                  type="checkbox"
+                  checked={settings.notify_forms}
+                  onChange={(e) => {
+                    setSettings({
+                      ...settings,
+                      notify_forms: e.target.checked,
+                    });
+                    setDirty(true);
+                    setNotice("");
+                  }}
+                />
+                Email me about website enquiries
+              </label>
+              <label className="check-label">
+                <input
+                  type="checkbox"
+                  checked={settings.notify_project}
+                  onChange={(e) => {
+                    setSettings({
+                      ...settings,
+                      notify_project: e.target.checked,
+                    });
+                    setDirty(true);
+                    setNotice("");
+                  }}
+                />
+                Email me about project updates
+              </label>
+              <p role="status">{emailReady ? "Email notifications are available." : "Email delivery is awaiting setup. Your preferences are saved and enquiries remain in the Inbox."}</p>
+              <p>
+                Notifications go to your account address: {email}. Email
+                delivery depends on the agency’s configured sending service.
+                Messages stay available in the Inbox.
+              </p>
+              <a href="/account/password">Change your password ↗</a>
+            </>
+          )}
+          <div className="connected-actions">
+            <button
+              className="primary"
+              disabled={!dirty || busy}
+              onClick={() => void save()}
+            >
+              Save {connections ? "connections" : "settings"}
+            </button>
+            <button
+              disabled={busy}
+              onClick={() => {
+                if (
+                  !dirty ||
+                  window.confirm("Discard unsaved changes and reload?")
+                )
+                  void load().catch((e) => setError(e.message));
+              }}
+            >
+              Reload saved settings
+            </button>
+          </div>
+        </fieldset>
+      )}
+    </section>
+  );
+}

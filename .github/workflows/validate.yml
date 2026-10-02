@@ -1,0 +1,103 @@
+name: Validate Fourthform release
+on:
+  push:
+    branches: [main, 'release/**']
+  pull_request:
+permissions:
+  contents: read
+concurrency:
+  group: fourthform-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  preview:
+    defaults:
+      run:
+        working-directory: apps/marketing
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      NEXT_TELEMETRY_DISABLED: '1'
+      PREVIEW_URL: http://127.0.0.1:3000
+      PORTAL_URL: http://127.0.0.1:3000/portal-preview/index.html
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: apps/marketing/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run test:structure
+      - run: node ../../scripts/check-preview-parity.mjs
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Start local production preview
+        run: |
+          npm run start -- --port 3000 > preview-server.log 2>&1 &
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:3000/ > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat preview-server.log
+          exit 1
+      - run: node tests/browser/release-check.mjs
+      - run: node tests/browser/concepts-and-spaces.mjs
+      - run: npm run test:browser
+      - run: node tests/browser/details-check.mjs
+      - run: node tests/browser/review-check.mjs
+      - run: node tests/browser/integration-check.mjs
+      - run: node tests/browser/audit-check.mjs
+      - run: node tests/browser/content-check.mjs
+      - run: node tests/browser/portfolio-check.mjs
+      - run: node tests/browser/visual-tour.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: preview-verification
+          path: |
+            apps/marketing/docs/preview-evidence
+            apps/marketing/preview-server.log
+          retention-days: 7
+  portal:
+    defaults:
+      run:
+        working-directory: apps/portal
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: apps/portal/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Start isolated real Supabase
+        run: supabase start -x studio,imgproxy,edge-runtime,logflare,vector,supavisor > /tmp/fourthform-supabase.log
+      - name: Configure disposable integration environment
+        run: node scripts/ci-environment.mjs
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium
+      - name: Start connected production application
+        run: |
+          set -a
+          source .env.local
+          set +a
+          npm start > /tmp/fourthform-system.log 2>&1 &
+          for i in {1..40}; do curl -fsS http://localhost:4173/start >/dev/null && break; sleep 2; done
+      - name: Exercise real accounts, storage, CMS and customer workflows
+        run: node tests/browser/connected-system.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: connected-system-evidence
+          path: apps/portal/test-results/
+      - name: Stop disposable services
+        if: always()
+        run: supabase stop --no-backup
