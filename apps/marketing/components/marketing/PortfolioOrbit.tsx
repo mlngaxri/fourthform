@@ -12,7 +12,7 @@ function position(index: number, angle: number): CSSProperties {
   const depth = (Math.cos(phase) + 1) / 2;
   return {
     left: `${50 + Math.sin(phase) * 44}%`,
-    top: `${50 - Math.cos(phase) * 36}%`,
+    top: `${50 - Math.cos(phase) * 45}%`,
     transform: `translate(-50%, -50%) perspective(900px) rotateX(${Math.sin(phase) * 9}deg) rotateY(${Math.sin(phase) * -19}deg) rotate(${Math.sin(phase * 2) * 13}deg) scale(${.74 + depth * .26})`,
     zIndex: Math.round(depth * 4) + 1,
   };

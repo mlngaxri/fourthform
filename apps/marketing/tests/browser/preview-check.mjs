@@ -23,7 +23,7 @@ async function responsive(url,name){
 await check('Marketing reflows at five widths',()=>responsive(base,'marketing'));
 await check('Marketing funnel exposes preview and onboarding',async()=>{
  await page.goto(base,{waitUntil:'networkidle'});
- assert.ok(await page.getByRole('heading',{name:'A website that feels like you.'}).isVisible());
+ assert.ok(await page.getByRole('heading',{name:'A website. All your own.'}).isVisible());
  assert.ok(await page.locator('a[href="/preview/start"]').count());
  assert.equal(await page.locator('iframe').count(),0);assert.ok(await page.locator('.mk-portal-summary a[href="/preview"]').isVisible());
 });

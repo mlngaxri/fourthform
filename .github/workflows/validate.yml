@@ -69,7 +69,8 @@ jobs:
       - run: npm test
       - uses: supabase/setup-cli@v1
         with:
-          version: latest
+          version: 2.119.0
+          github-token: ${{ github.token }}
       - name: Start isolated real Supabase
         run: supabase start -x studio,imgproxy,edge-runtime,logflare,vector,supavisor > /tmp/fourthform-supabase.log
       - name: Configure disposable integration environment
