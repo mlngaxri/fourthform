@@ -63,7 +63,7 @@
 .mk-orbit-site:after{display:none}
 
 /* Keep the navigation in a single row through the tablet breakpoint. */
-.mk-orbit-site .mk-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:24px}
-.mk-orbit-site .mk-nav>.mk-button{grid-column:auto;flex-shrink:0}
-.mk-orbit-site .mk-nav>.mk-nav-links>a{display:inline-flex;align-items:center;white-space:nowrap}
-@media(max-width:760px){.mk-orbit-site .mk-nav{gap:10px}}
+.mk-site .mk-nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:nowrap;gap:24px}
+.mk-site .mk-nav>.mk-button{grid-column:auto;flex-shrink:0}
+.mk-site .mk-nav>.mk-nav-links>a{display:inline-flex;align-items:center;white-space:nowrap}
+@media(max-width:760px){.mk-site .mk-nav{gap:10px}}
