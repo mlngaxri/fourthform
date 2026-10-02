@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import "@fontsource-variable/geist";
 import "@fontsource-variable/geist-mono";
 import "@fontsource/instrument-serif/400.css";
+import "./brand-font.css";
 import "./tokens.css";
 import "./globals.css";
 import "./product.css";
 import "./connected.css";
 import "./customer-site.css";
 import "./release.css";
+import "./brand-type.css";
 import "@fontsource/instrument-serif/400-italic.css";
 
 export const metadata: Metadata = {

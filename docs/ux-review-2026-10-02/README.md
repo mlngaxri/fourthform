@@ -18,6 +18,8 @@ Reviewed the existing Vercel preview in a desktop browser on 2 October 2026. The
 - Replace GSAP/Lenis scroll interception and pinned timelines on the homepage with native scrolling, progressive reveal animation and inline original video. Content begins visible and remains accessible with reduced motion or JavaScript disabled.
 - Preserve keyboard closure and focus restoration for navigation and portfolio dialogs. Separate original image and requested motion modes.
 
+- Apply Cabinet Grotesk from the requested Awwwards collection to headings and identity, with Geist for reading and controls. Share the pairing across both apps and the portal preview while retaining the original portfolio typography.
+
 ## Verification boundary
 
 Screenshots establish the visual and hierarchy findings; they do not establish full accessibility compliance. The managed local interactive preview was unavailable. Production build and browser-flow checks run in GitHub Actions, including actual video time progression, pause/resume, reduced motion, responsive reflow, original media dimensions, reference handoff and portal flows. Production Vercel publication still requires a working deployment connection.

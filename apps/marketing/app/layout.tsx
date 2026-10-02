@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "@fontsource-variable/geist";
 import "@fontsource-variable/geist-mono";
 import "@fontsource/instrument-serif/400.css";
+import "./brand-font.css";
 import "./tokens.css";
 import "./globals.css";
 import "./product.css";
@@ -9,6 +10,7 @@ import "./marketing.css";
 import "./work.css";
 import "./refinements.css";
 import "./declutter.css";
+import "./brand-type.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fourthform-marketing.vercel.app/"),

@@ -12,7 +12,9 @@
     "test:backend": "node --import tsx --test tests/backend/*.test.ts",
     "test:environment": "node --test scripts/check-environment.test.mjs",
     "check:environment": "node scripts/check-environment.mjs",
-    "test": "npm run test:preview && npm run test:backend && npm run test:environment"
+    "test": "npm run test:preview && npm run test:backend && npm run test:environment",
+    "prebuild": "node ../../scripts/ensure-brand-font.mjs",
+    "predev": "node ../../scripts/ensure-brand-font.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",

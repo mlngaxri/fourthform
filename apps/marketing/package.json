@@ -8,7 +8,9 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test:browser": "node tests/browser/preview-check.mjs",
-    "test:structure": "node --test tests/*.test.mjs"
+    "test:structure": "node --test tests/*.test.mjs",
+    "prebuild": "node ../../scripts/ensure-brand-font.mjs",
+    "predev": "node ../../scripts/ensure-brand-font.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",
