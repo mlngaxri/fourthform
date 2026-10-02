@@ -96,3 +96,5 @@
  .work-original-dialog .work-dialog-media{display:block;overflow:auto}.work-original-dialog .work-dialog-media[data-pane=about]{display:none}.original-design-intro,.original-design-page>footer{flex-direction:column;align-items:flex-start;gap:24px}.original-design-intro h1{font-size:40px}.original-design-page>header{padding-inline:16px}.original-motion-toggle{left:10px;bottom:10px;font-size:10px;min-height:40px}.mk-simple .mk-nav-links{display:none}
 }
 @media(prefers-reduced-motion:reduce){.original-media>video,.original-media .original-motion-toggle{display:none}.mk-package-details>summary>span{transition:none}}
+
+@media(max-width:400px){.mk-simple .mk-nav>.mk-button{display:none}.mk-simple .mk-nav{gap:12px}.mk-simple .mk-nav .mk-wordmark{font-size:18px}}
