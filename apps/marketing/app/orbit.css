@@ -70,3 +70,10 @@
 .mk-site .mk-nav>.mk-button{grid-column:auto;flex-shrink:0}
 .mk-site .mk-nav>.mk-nav-links>a{display:inline-flex;align-items:center;white-space:nowrap}
 @media(max-width:760px){.mk-site .mk-nav{gap:10px}}
+
+/* An explicit visitor choice can enable the decorative scene without changing device settings. */
+.orbit-motion-start{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:9;display:flex;align-items:center;gap:14px;font-size:11px;color:#c4c0cd}
+.orbit-motion-start button{display:flex;gap:16px;align-items:center;padding:10px 15px;border:1px solid #bcb0ff50;border-radius:24px;background:#191321;color:#f3f1eb;cursor:pointer;font:inherit}
+.orbit-motion-start button:hover{background:#30203d;border-color:#bcb0ff}
+.orbit-motion-start button:focus-visible{outline:2px solid #bcb0ff;outline-offset:4px}
+@media(prefers-reduced-motion:reduce){.mk-orbit-hero[data-motion-choice="enabled"] .orbit-depth-glow{animation-name:orbit-light-drift;animation-duration:16s!important;animation-iteration-count:infinite;animation-direction:alternate;animation-timing-function:ease-in-out;will-change:transform}}

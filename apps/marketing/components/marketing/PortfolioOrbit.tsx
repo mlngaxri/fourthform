@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {projects} from "../../lib/portfolio/projects";
 
 const selection = ["monolith-hero", "playful-idea", "oyla", "keel", "nature-ritual", "golden-portal", "digital-epoch-hero", "orla-fashion"].map(id => projects.find(project => project.id === id)!);
@@ -21,6 +21,8 @@ function position(index: number, angle: number) {
 
 export default function PortfolioOrbit() {
   const stage = useRef<HTMLDivElement>(null);
+  const enableMotion = useRef<() => void>(() => {});
+  const [showStart, setShowStart] = useState(false);
 
   useEffect(() => {
     const element = stage.current;
@@ -30,6 +32,9 @@ export default function PortfolioOrbit() {
     const desktop = matchMedia("(min-width: 900px)");
     const cards = Array.from(element.querySelectorAll<HTMLDivElement>(".orbit-card"));
     let visible = true;
+    let optedIn = false;
+    try { optedIn = localStorage.getItem("fourthform.orbit-motion") === "enabled"; } catch { /* The current visit still works without storage. */ }
+
 
     // Native animation time keeps moving without a JavaScript frame loop.
     // All cards share one start time so their spacing remains constant.
@@ -44,14 +49,23 @@ export default function PortfolioOrbit() {
     if (typeof start === "number") players.forEach(player => { player.startTime = start; });
 
     function sync() {
-      const running = desktop.matches && visible && document.visibilityState === "visible" && !preference.matches;
+      const running = desktop.matches && visible && document.visibilityState === "visible" && (!preference.matches || optedIn);
       const heldTime = Number(players[0]?.currentTime ?? 0);
       players.forEach(player => {
         if (running && player.playState !== "running") player.play();
         else if (!running && player.playState !== "paused") { player.pause(); player.currentTime = heldTime; }
       });
-      if (hero) hero.dataset.orbitRunning = String(running);
+      setShowStart(desktop.matches && preference.matches && !optedIn);
+      if (hero) {
+        hero.dataset.orbitRunning = String(running);
+        hero.dataset.motionChoice = optedIn ? "enabled" : "system";
+      }
     }
+    enableMotion.current = () => {
+      optedIn = true;
+      try { localStorage.setItem("fourthform.orbit-motion", "enabled"); } catch { /* Apply the explicit choice for this visit. */ }
+      sync();
+    };
     const observer = new IntersectionObserver(entries => {
       visible = entries.some(entry => entry.isIntersecting);
       sync();
@@ -62,12 +76,13 @@ export default function PortfolioOrbit() {
     document.addEventListener("visibilitychange", sync);
     sync();
     return () => {
+      enableMotion.current = () => {};
       observer.disconnect();
       players.forEach(player => player.cancel());
       preference.removeEventListener("change", sync);
       desktop.removeEventListener("change", sync);
       document.removeEventListener("visibilitychange", sync);
-      if (hero) delete hero.dataset.orbitRunning;
+      if (hero) { delete hero.dataset.orbitRunning; delete hero.dataset.motionChoice; }
     };
   }, []);
 
@@ -78,5 +93,6 @@ export default function PortfolioOrbit() {
         <img src={project.thumbnail} width={560} height={Math.round(560 * project.height / project.width)} alt="" loading={index < 4 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"}/>
       </div>)}
     </div>
+    {showStart && <div className="orbit-motion-start"><button type="button" onClick={() => enableMotion.current()}>Start animation <span aria-hidden="true">↗</span></button><span>Your device has reduced motion enabled.</span></div>}
   </>;
 }

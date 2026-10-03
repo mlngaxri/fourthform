@@ -25,6 +25,13 @@ await check('Motion preferences stop and restore the scene without a visible con
 await check('Reduced motion starts still with no decorative animation controls',async page=>{
  await page.waitForFunction(()=>document.querySelector('.mk-orbit-hero').dataset.orbitRunning==='false');const held=await point(page);await page.waitForTimeout(300);assert.ok(distance(held,await point(page))<.5);assert.equal(await page.locator('.orbit-depth-glow').evaluate(node=>getComputedStyle(node).animationName),'none');assert.equal(await page.getByRole('button',{name:/Pause motion|Play motion/}).count(),0);
 },{reducedMotion:'reduce'});
+await check('A reduced-motion visitor can start the scene once and keep that choice after reload',async page=>{
+ const start=page.getByRole('button',{name:'Start animation',exact:true});await start.waitFor();await start.click();await moving(page);assert.equal(await start.count(),0);const before=await point(page);await page.waitForTimeout(550);assert.ok(distance(before,await point(page))>8);assert.equal(await page.locator('.orbit-depth-glow').evaluate(node=>getComputedStyle(node).animationName),'orbit-light-drift');
+ await page.reload();await moving(page);assert.equal(await start.count(),0);const reloaded=await point(page);await page.waitForTimeout(550);assert.ok(distance(reloaded,await point(page))>8,'The saved explicit choice starts automatically');
+},{reducedMotion:'reduce'});
+await check('Motion still starts when browser storage is unavailable',async page=>{
+ await page.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new DOMException('Storage unavailable','SecurityError');}});});await page.reload();await page.getByRole('button',{name:'Start animation',exact:true}).click();await moving(page);const before=await point(page);await page.waitForTimeout(550);assert.ok(distance(before,await point(page))>8);assert.equal(await page.getByRole('button',{name:'Start animation',exact:true}).count(),0);
+},{reducedMotion:'reduce'});
 await check('The staircase drops left to right, reveals right to left and returns focus to the destination',async page=>{
  const links=[['/work','Selected designs.'],['/how-we-work','Good work. Clear collaboration.'],['/pricing','Built around you.']];
  for(const [href] of links){
