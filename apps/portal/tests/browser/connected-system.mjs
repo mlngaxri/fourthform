@@ -28,7 +28,22 @@ async function check(name, fn) { try { await fn(); results.push({ name, result: 
 async function page() { const context = await browser.newContext({ viewport: { width: 1440, height: 1000 } }); const p = await context.newPage(); p.on("pageerror", (e) => errors.push(e.message)); return p; }
 async function call(p, path, data) { return p.evaluate(async ({ path, data }) => { const r = await fetch(path, { method: data === undefined ? "GET" : "POST", headers: data === undefined ? {} : { "Content-Type": "application/json" }, body: data === undefined ? undefined : JSON.stringify(data) }); const value = await r.json().catch(() => ({})); return { status: r.status, value }; }, { path, data }); }
 async function ok(p, path, data) { const r = await call(p, path, data); assert.ok(r.status >= 200 && r.status < 300, `${path}: HTTP ${r.status}, ${r.value.error || ""}`); return r.value; }
-async function visual(p, name) { await p.locator(".route-state").waitFor({ state: "hidden" }); await p.evaluate(() => document.fonts.ready); await p.screenshot({ path: `test-results/${name}.png` }); console.log(`FF_SYSTEM_VISUAL_${name}=${(await p.screenshot({ type: "jpeg", quality: 55 })).toString("base64")}`); }
+async function visual(p, name) {
+  await p.locator(".route-state").waitFor({ state: "hidden" }); await p.evaluate(() => document.fonts.ready);
+  const contrast = await p.locator(".production-portal .direction-workspace h1,.production-portal .progress-row.current").evaluateAll(nodes => {
+    const channels = color => color.match(/[\d.]+/g).map(Number);
+    const luminance = rgb => rgb.map(v => { const c = v / 255; return c <= .04045 ? c / 12.92 : ((c + .055) / 1.055) ** 2.4; }).reduce((sum, v, i) => sum + v * [.2126, .7152, .0722][i], 0);
+    return nodes.filter(node => node.getBoundingClientRect().width > 0).map(node => {
+      const ancestors = []; for (let parent = node; parent; parent = parent.parentElement) ancestors.unshift(parent);
+      let background = [255, 255, 255];
+      for (const parent of ancestors) { const c = channels(getComputedStyle(parent).backgroundColor), alpha = c[3] ?? 1; background = background.map((v, i) => c[i] * alpha + v * (1 - alpha)); }
+      const a = luminance(channels(getComputedStyle(node).color).slice(0, 3)), b = luminance(background);
+      return { text: node.textContent, ratio: (Math.max(a, b) + .05) / (Math.min(a, b) + .05) };
+    });
+  });
+  for (const item of contrast) assert.ok(item.ratio >= 4.5, `${name}: ${item.text} must stay readable (${item.ratio})`);
+  await p.screenshot({ path: `test-results/${name}.png` }); console.log(`FF_SYSTEM_VISUAL_${name}=${(await p.screenshot({ type: "jpeg", quality: 55 })).toString("base64")}`);
+}
 async function current() { return ok(ownerPage, `/api/projects/${id}`); }
 async function command(p, action, payload = {}, board) { if(action === "approve") payload={...payload,siteRevision:String((await ok(p,`/api/projects/${id}/site`)).manifest.revision)}; const { project } = await current(); return ok(p, `/api/projects/${id}/command`, { action, payload, expected: board?.version ?? project.version, key: randomUUID() }); }
 async function signIn(p, who, pass = password) { await p.goto(base + "/start"); await ok(p, "/api/auth", { mode: "signin", email: who, password: pass, remember: true }); }

@@ -77,7 +77,8 @@
 .shell .revision-summary,.production-portal .portal-project-progress{border-color:var(--ff-edge)}
 .shell .revision-summary p,.production-portal .portal-back-link{color:var(--ff-light)}
 .production-portal .progress-row{color:#b3aabb}
-.production-portal .progress-row.current{color:var(--ff-violet)}
+.production-portal .progress-row.current{color:var(--ff-violet);background:#bcb0ff1c;border-color:#bcb0ff50}
+.production-portal .direction-workspace{background:#f3f1eb;color:#171715}
 .production-portal .portal-more-nav>summary{color:var(--ff-light)}
 .production-portal .portal-more-nav>div{background:transparent}
 .production-portal .portal-v2-account>button{color:var(--ff-mist)}
@@ -108,6 +109,9 @@
 .shell .mobile-dock{background:#100e15;color:var(--ff-mist);border-color:var(--ff-edge)}
 .shell .mobile-dock button{color:var(--ff-light)}
 .shell .mobile-dock button.active{color:var(--ff-violet);background:#bcb0ff1c}
+body>.mobile-dock{background:#100e15;color:var(--ff-mist);border-color:var(--ff-edge)}
+body>.mobile-dock button{color:var(--ff-light)}
+body>.mobile-dock button.active{color:var(--ff-violet);background:#bcb0ff1c}
 
 /* Account and brief screens are the same threshold into the workspace. */
 .start-page,.obp,.standalone-preview{background:var(--ff-night)}
