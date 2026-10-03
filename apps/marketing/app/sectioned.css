@@ -1,0 +1,85 @@
+/* One spacious entrance, three deliberate destinations. */
+.ff-route-root{min-height:100svh}
+.ff-staircase{position:fixed;inset:0;z-index:10000;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));pointer-events:none;overflow:hidden}
+.ff-staircase>div{background:#bcb0ff;border-right:1px solid #aca0ed;transform:translateY(-102%);will-change:transform}
+.ff-staircase:not([data-state="idle"]){pointer-events:auto}
+.ff-staircase[data-state="idle"]>div{will-change:auto}
+.ff-navigation .mk-nav-links{display:flex;gap:32px;align-items:center}
+.ff-navigation .mk-nav-links>a{font-size:12px}
+.ff-navigation a[aria-current="page"]{color:inherit}
+.ff-navigation .mk-nav-links>a[aria-current="page"]:after{content:"";display:block;width:4px;height:4px;margin-left:7px;border-radius:50%;background:currentColor}
+.ff-navigation .mk-menu-toggle{display:none}
+.ff-navigation .mk-mobile-menu{position:absolute;top:100%;left:0;right:0;z-index:30;padding:12px 24px 20px;background:var(--mk-paper);border-bottom:1px solid var(--mk-line)}
+.ff-navigation .mk-mobile-menu[hidden]{display:none}
+.ff-navigation .mk-mobile-menu>a{display:block;padding:16px 0;font-size:18px;text-decoration:none;border-bottom:1px solid var(--mk-line)}
+.ff-navigation .mk-mobile-menu .ff-menu-signin{border:0;font-size:12px;color:#7b7974;padding-bottom:0}
+.mk-orbit-site .ff-navigation .mk-mobile-menu{background:#0b0c0e;color:#f3f1eb}
+.mk-orbit-site .ff-navigation .mk-mobile-menu>a{border-color:#ffffff20}
+.mk-simple .mk-orbit-hero{height:100svh;max-height:none;min-height:0;padding:0}
+.mk-orbit{inset:120px 0 92px}
+.orbit-card{width:clamp(145px,min(16.5vw,25svh),245px);box-shadow:0 28px 54px #000a,0 2px 6px #0005;border-color:#ffffff26}
+.mk-simple .mk-orbit-copy{top:52%;width:min(740px,60vw);max-width:none}
+.mk-simple .mk-orbit-copy .mk-display{font-size:clamp(48px,min(7.1vw,13.2svh),104px);line-height:1.03;font-weight:600;letter-spacing:-.045em}
+.mk-simple .mk-orbit-copy .mk-body{font-size:clamp(13px,1.1vw,15px);line-height:1.7;max-width:44ch;margin:25px auto 0;color:#c4c0cd}
+.mk-orbit-controls{position:absolute;bottom:22px;right:32px;z-index:9}
+.mk-orbit-controls .mk-orbit-pause{display:flex;align-items:center;gap:8px;min-width:76px;min-height:44px;padding:0 10px;border:1px solid #ffffff16;color:#aaa5b5;font-size:10px;background:#0b0c0e42}
+.orbit-pause-icon{width:7px;height:9px;border-inline:2px solid currentColor}
+.orbit-play-icon{width:0;height:0;border-block:5px solid transparent;border-left:7px solid currentColor}
+.orbit-depth{background:radial-gradient(ellipse at 50% 108%,#3b2e54 0%,#191321 34%,#0b0c0e 76%)}
+.orbit-depth-glow{background:radial-gradient(ellipse at 14% 55%,#7960b629 0%,transparent 40%),radial-gradient(ellipse at 84% 30%,#987ac91f 0%,transparent 38%)}
+.orbit-depth-floor{bottom:-1%;left:-50%;width:200%;height:145%;transform:perspective(740px) rotateX(66deg);transform-origin:center bottom;background-image:linear-gradient(#bcb0ff22 1px,transparent 1px),linear-gradient(90deg,#bcb0ff22 1px,transparent 1px);background-size:88px 88px;mask-image:radial-gradient(ellipse at 50% 92%,#000 15%,#0009 47%,transparent 76%)}
+.orbit-depth-horizon{top:67%;width:115%;height:55%;border-color:#bcb0ff25;transform:translate(-50%,-50%) perspective(800px) rotateX(65deg)}
+.orbit-depth:after{background:radial-gradient(ellipse at 50% 45%,#0b0c0ed9 0%,#0b0c0e80 25%,#0b0c0e00 64%)}
+.mk-section-site .ff-section-intro{padding-top:160px;padding-bottom:12px}
+.ff-section-intro h1{font-size:clamp(48px,6.5vw,88px);line-height:1.03;margin:24px 0 28px;font-weight:500;letter-spacing:-.04em;max-width:900px}
+.ff-section-intro>p{max-width:52ch;font-size:16px;line-height:1.8;color:#68665f}
+.mk-section-site .mk-process{padding-top:65px}
+.ff-pricing-site .mk-pricing{padding-top:150px}
+.ff-pricing-site .mk-pricing-head h1{font-size:clamp(48px,5.8vw,82px);line-height:1.05;letter-spacing:-.04em;font-weight:500}
+.mk-section-site .mk-footer .mk-container{justify-content:space-between}
+@media(max-width:980px){
+ .ff-navigation .mk-nav-links{display:none!important}
+ .ff-navigation .mk-menu-toggle{display:block;margin-left:auto}
+ .mk-site .ff-navigation{gap:18px}
+ .ff-navigation>.mk-button{padding-inline:14px;font-size:11px}
+}
+@media(max-width:899px){
+ .mk-simple .mk-orbit-hero{height:100svh;padding:0}
+ .mk-orbit{inset:86px 0 58px}
+ .orbit-card{width:clamp(100px,min(24vw,21svh),185px)}
+ .orbit-card:nth-child(1){left:19%!important;top:10%!important}
+ .orbit-card:nth-child(2){left:81%!important;top:12%!important}
+ .orbit-card:nth-child(3){left:18%!important;top:89%!important}
+ .orbit-card:nth-child(4){left:82%!important;top:88%!important}
+ .mk-simple .mk-orbit-copy{top:52%;width:calc(100% - 40px);max-width:660px}
+ .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(42px,min(10vw,13svh),80px)}
+ .mk-simple .mk-orbit-copy .mk-body{font-size:14px;max-width:36ch;margin-top:22px}
+ .mk-orbit-controls{display:none}
+ .orbit-depth-floor{background-size:60px 60px;opacity:.7}
+ .mk-section-site .ff-section-intro{padding-top:120px}
+ .ff-pricing-site .mk-pricing{padding-top:115px}
+}
+@media(max-width:400px){
+ .mk-simple .mk-orbit-hero{height:100svh}
+ .mk-simple .mk-orbit-copy{width:calc(100% - 32px);top:52%}
+ .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(39px,min(12.5vw,12.4svh),49px)}
+ .mk-simple .mk-orbit-copy .mk-body{font-size:12px;max-width:33ch;margin-top:20px}
+ .ff-navigation>.mk-button{display:none}
+ .ff-navigation .mk-wordmark{font-size:18px}
+ .orbit-card{width:clamp(94px,min(26vw,20svh),110px)}
+}
+@media(max-height:600px) and (min-width:900px){
+ .mk-orbit{inset:95px 0 48px}
+ .mk-simple .mk-orbit-copy .mk-display{font-size:min(6.6vw,13svh)}
+ .mk-simple .mk-orbit-copy .mk-body{margin-top:16px;font-size:12px}
+ .orbit-card{width:min(15vw,26svh)}
+}
+@media(max-height:500px) and (max-width:899px){
+ .mk-orbit{inset:92px 0 22px}
+ .mk-simple .mk-orbit-copy{top:56%}
+ .mk-simple .mk-orbit-copy .mk-display{font-size:min(8.5vw,12.5svh)}
+ .mk-simple .mk-orbit-copy .mk-body{margin-top:12px;font-size:11px}
+ .orbit-card{width:min(19vw,24svh)}
+ .ff-desktop-break{display:none}
+}
+@media(prefers-reduced-motion:reduce){.ff-staircase{display:none}.ff-staircase>div{will-change:auto}}

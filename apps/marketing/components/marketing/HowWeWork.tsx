@@ -1,0 +1,12 @@
+"use client";
+import {useRef} from "react";
+import Link from "next/link";
+import {usePageMotion} from "../../lib/use-page-motion";
+import NavigationHeader from "./NavigationHeader";
+import ServiceFooter from "./ServiceFooter";
+export default function HowWeWork(){
+ const root=useRef<HTMLElement>(null);usePageMotion(root);
+ return <main ref={root} className="mk-site mk-simple mk-section-site" id="top"><a className="skip-link" href="#main-content">Skip to content</a><NavigationHeader/><div id="main-content" tabIndex={-1}>
+ <header className="ff-section-intro mk-container"><span className="mk-kicker">How we work with you</span><h1 className="mk-display">Good work.<br/>Clear collaboration.</h1><p>We design and build your website. You help shape it, with a clear place to review, give feedback and keep track of what happens next.</p></header>
+ <section className="mk-process" id="process"><div className="mk-container"><div className="mk-process-rail">{[["01","Tell us what matters","Share your business, goals and references in a short brief."],["02","We design and build","We create your website. You can follow the progress in your client portal."],["03","Make it yours","Review the working website and collect your feedback. Three revision rounds are included."],["04","Launch and keep it current","Approve the result, connect your domain and launch. Update everyday content in your portal."]].map(([n,title,copy])=><div className="mk-process-step" data-reveal key={n}><span>{n}</span><h3>{title}</h3><p>{copy}</p></div>)}</div></div></section><section className="mk-portal" id="portal"><div className="mk-container mk-portal-summary"><div data-reveal><span className="mk-kicker">The client portal</span><h2 className="mk-display">One place for<br/><em>your website.</em></h2><p className="mk-body">Leave feedback on the design, keep track of the project and update your website after launch. Everything is in one place.</p><Link className="mk-button mk-button-dark" href="/preview">Try the portal ↗</Link><p className="mk-preview-note">An interactive example. No account or payment needed.</p></div><Link className="mk-portal-showcase" href="/preview?space=content&view=pages" aria-label="Try editing website content in the portal" data-reveal><img src="/portal-content-showcase.jpg" width="1363" height="936" alt="Fourthform client portal showing website content fields beside a live page preview" loading="lazy"/><span>Edit content. Keep the design. <span aria-hidden="true">↗</span></span></Link></div></section></div><ServiceFooter/></main>;
+}

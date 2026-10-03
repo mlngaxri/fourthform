@@ -1,18 +1,19 @@
 "use client";
 
-import {useEffect, useRef, useState, type CSSProperties} from "react";
-import Link from "next/link";
+import {useEffect, useRef, useState} from "react";
 import {projects} from "../../lib/portfolio/projects";
 
 const selection = ["monolith-hero", "playful-idea", "oyla", "keel", "nature-ritual", "golden-portal", "digital-epoch-hero", "orla-fashion"].map(id => projects.find(project => project.id === id)!);
 const spacing = Math.PI * 2 / selection.length;
+const duration = 80_000;
+const samples = 96;
 
-function position(index: number, angle: number): CSSProperties {
+function position(index: number, angle: number) {
   const phase = index * spacing + angle;
   const depth = (Math.cos(phase) + 1) / 2;
   return {
-    left: `${50 + Math.sin(phase) * 44}%`,
-    top: `${50 - Math.cos(phase) * 45}%`,
+    left: `${50 + Math.sin(phase) * 38}%`,
+    top: `${50 - Math.cos(phase) * 42}%`,
     transform: `translate(-50%, -50%) perspective(900px) rotateX(${Math.sin(phase) * 9}deg) rotateY(${Math.sin(phase) * -19}deg) rotate(${Math.sin(phase * 2) * 13}deg) scale(${.74 + depth * .26})`,
     zIndex: Math.round(depth * 4) + 1,
   };
@@ -20,10 +21,8 @@ function position(index: number, angle: number): CSSProperties {
 
 export default function PortfolioOrbit() {
   const stage = useRef<HTMLDivElement>(null);
-  const angle = useRef(spacing / 2);
-  const destination = useRef(spacing / 2);
+  const players = useRef<Animation[]>([]);
   const pausedRef = useRef(false);
-  const interacting = useRef(false);
   const refresh = useRef<() => void>(() => {});
   const [paused, setPaused] = useState(false);
   const [automatic, setAutomatic] = useState(false);
@@ -31,30 +30,37 @@ export default function PortfolioOrbit() {
   useEffect(() => {
     const element = stage.current;
     if (!element) return;
+    const hero = element.closest<HTMLElement>(".mk-orbit-hero");
     const preference = matchMedia("(prefers-reduced-motion: reduce)");
     const desktop = matchMedia("(min-width: 900px)");
-    const cards = Array.from(element.querySelectorAll<HTMLAnchorElement>(".orbit-card"));
-    let frame = 0, last = 0, visible = true, disposed = false;
-    function paint() {
-      cards.forEach((card, index) => Object.assign(card.style, position(index, angle.current)));
-    }
-    function moving() { return !preference.matches && desktop.matches && visible && document.visibilityState === "visible"; }
-    function tick(time: number) {
-      frame = 0;
-      if (disposed || !moving()) return;
-      const delta = last ? Math.min((time - last) / 1000, .05) : 0;
-      last = time;
-      if (!pausedRef.current && !interacting.current) destination.current += delta * .045;
-      angle.current += (destination.current - angle.current) * (1 - Math.exp(-delta * 8));
-      if (Math.abs(destination.current - angle.current) < .00001) angle.current = destination.current;
-      paint();
-      if ((!pausedRef.current && !interacting.current) || angle.current !== destination.current) frame = requestAnimationFrame(tick);
-    }
+    const cards = Array.from(element.querySelectorAll<HTMLDivElement>(".orbit-card"));
+    let visible = true;
+
+    // Native animation time keeps moving without a JavaScript frame loop.
+    // All cards share one start time so their spacing remains constant.
+    players.current = cards.map((card, index) => card.animate(
+      Array.from({length: samples + 1}, (_, sample) => ({
+        ...position(index, spacing / 2 + sample / samples * Math.PI * 2),
+        offset: sample / samples,
+      })),
+      {duration, iterations: Infinity, easing: "linear", fill: "both"},
+    ));
+    const start = document.timeline.currentTime;
+    if (typeof start === "number") players.current.forEach(player => { player.startTime = start; });
+
     function sync() {
-      setAutomatic(!preference.matches && desktop.matches);
-      last = 0;
-      if (!moving()) { cancelAnimationFrame(frame); frame = 0; angle.current = destination.current; paint(); }
-      else if (!frame) frame = requestAnimationFrame(tick);
+      setAutomatic(desktop.matches);
+      const running = desktop.matches && visible && document.visibilityState === "visible" && !pausedRef.current;
+      players.current.forEach(player => {
+        if (running && player.playState !== "running") player.play();
+        else if (!running && player.playState !== "paused") player.pause();
+      });
+      if (hero) hero.dataset.orbitRunning = String(running);
+    }
+    function motionPreference() {
+      pausedRef.current = preference.matches;
+      setPaused(preference.matches);
+      sync();
     }
     refresh.current = sync;
     const observer = new IntersectionObserver(entries => {
@@ -62,41 +68,34 @@ export default function PortfolioOrbit() {
       sync();
     });
     observer.observe(element);
-    preference.addEventListener("change", sync);
+    preference.addEventListener("change", motionPreference);
     desktop.addEventListener("change", sync);
     document.addEventListener("visibilitychange", sync);
-    paint(); sync();
+    motionPreference();
     return () => {
-      disposed = true; cancelAnimationFrame(frame); observer.disconnect();
-      preference.removeEventListener("change", sync); desktop.removeEventListener("change", sync);
-      document.removeEventListener("visibilitychange", sync); refresh.current = () => {};
+      observer.disconnect();
+      players.current.forEach(player => player.cancel());
+      players.current = [];
+      preference.removeEventListener("change", motionPreference);
+      desktop.removeEventListener("change", sync);
+      document.removeEventListener("visibilitychange", sync);
+      refresh.current = () => {};
+      if (hero) delete hero.dataset.orbitRunning;
     };
   }, []);
 
-  function toggle() { pausedRef.current = !pausedRef.current; setPaused(pausedRef.current); refresh.current(); }
-  function step(direction: number) {
-    pausedRef.current = true; setPaused(true);
-    destination.current += direction * spacing;
+  function toggle() {
+    pausedRef.current = !pausedRef.current;
+    setPaused(pausedRef.current);
     refresh.current();
   }
-
   return <>
-    <div ref={stage} className="mk-orbit" role="group" aria-label="Selected original website designs"
-      onPointerEnter={() => { interacting.current = true; }} onPointerLeave={() => { interacting.current = false; refresh.current(); }}
-      onFocusCapture={() => { interacting.current = true; }} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) { interacting.current = false; refresh.current(); } }}>
-      {selection.map((project, index) => <Link key={project.id} className="orbit-card" href={`/work?project=${project.id}`} style={position(index, spacing / 2)} aria-label={`Explore ${project.title}`}>
-        <img src={project.thumbnail} width={560} height={Math.round(560 * project.height / project.width)} alt={`${project.title}, original website design`} loading={index < 4 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"}/>
-        <span className="orbit-card-label">{project.title}<span aria-hidden="true">↗</span></span>
-      </Link>)}
+    <div className="orbit-depth" aria-hidden="true"><div className="orbit-depth-glow"/><div className="orbit-depth-floor"/><div className="orbit-depth-horizon"/></div>
+    <div ref={stage} className="mk-orbit" aria-hidden="true">
+      {selection.map((project, index) => <div key={project.id} className="orbit-card" style={position(index, spacing / 2)}>
+        <img src={project.thumbnail} width={560} height={Math.round(560 * project.height / project.width)} alt="" loading={index < 4 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"}/>
+      </div>)}
     </div>
-    <div className="mk-orbit-foot">
-      <span>20 original design studies</span>
-      <span className="mk-orbit-foot-note">A different form for every business.</span>
-      <div className="mk-orbit-controls" aria-label="Portfolio motion controls">
-        <button type="button" onClick={() => step(-1)} aria-label="Rotate portfolio backwards">Previous</button>
-        {automatic && <button className="mk-orbit-pause" type="button" onClick={toggle} aria-pressed={paused}>{paused ? "Play motion" : "Pause motion"}</button>}
-        <button type="button" onClick={() => step(1)} aria-label="Rotate portfolio forwards">Next</button>
-      </div>
-    </div>
+    {automatic && <div className="mk-orbit-controls"><button className="mk-orbit-pause" type="button" onClick={toggle} aria-pressed={paused} aria-label={paused ? "Play motion" : "Pause motion"}><span className={paused ? "orbit-play-icon" : "orbit-pause-icon"} aria-hidden="true"/>{paused ? "Play" : "Pause"}</button></div>}
   </>;
 }

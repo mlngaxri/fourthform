@@ -12,6 +12,8 @@ import "./refinements.css";
 import "./declutter.css";
 import "./brand-type.css";
 import "./orbit.css";
+import "./sectioned.css";
+import {SiteTransition} from "../components/marketing/SiteTransition";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://fourthform-marketing.vercel.app/"),
@@ -25,7 +27,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body><SiteTransition>{children}</SiteTransition></body>
     </html>
   );
 }

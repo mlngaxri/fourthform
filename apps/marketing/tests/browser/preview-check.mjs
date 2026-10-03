@@ -25,7 +25,7 @@ await check('Marketing funnel exposes preview and onboarding',async()=>{
  await page.goto(base,{waitUntil:'networkidle'});
  assert.ok(await page.getByRole('heading',{name:'A website. All your own.'}).isVisible());
  assert.ok(await page.locator('a[href="/preview/start"]').count());
- assert.equal(await page.locator('iframe').count(),0);assert.ok(await page.locator('.mk-portal-summary a[href="/preview"]').isVisible());
+ assert.equal(await page.locator('iframe').count(),0);await page.goto(base+'/how-we-work');assert.ok(await page.locator('.mk-portal-summary a[href="/preview"]').isVisible());
 });
 await check('Onboarding sample can save, reload and complete example checkout',async()=>{
  await page.goto(`${base}/preview/start`,{waitUntil:'networkidle'});

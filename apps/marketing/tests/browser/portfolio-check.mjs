@@ -74,12 +74,7 @@ await check('Portfolio, dialog and reference brief reflow at small widths',async
  await page.setViewportSize({width:390,height:844});await page.goto(base+'/work');await page.evaluate(async()=>document.fonts.ready);await shot(page,'phone');
  await page.goto(base+'/preview/start?reference=oyla');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
 });
-await check('The homepage features the portfolio and lets visitors compare visual directions',async page=>{
- await page.goto(base);await page.locator('.orbit-card img').first().evaluate(image=>image.decode());assert.equal(await page.locator('.work-featured .portfolio-card').count(),4);
- for(const card of await page.locator('.work-featured .portfolio-card').all()){const size=await card.evaluate(element=>({card:element.getBoundingClientRect().width,image:element.querySelector('img').getBoundingClientRect().width}));assert.ok(size.image>=size.card*.95);}
- assert.equal(await page.locator('.orbit-card').first().getAttribute('href'),'/work?project=monolith-hero');
- await page.locator('.work-collection-link').click();await page.locator('.portfolio-card').nth(19).waitFor();
-});
+await check('The homepage previews original work without a second collection or extra gallery controls',async page=>{await page.goto(base);await page.locator('.orbit-card img').first().evaluate(image=>image.decode());assert.equal(await page.locator('.orbit-card').count(),8);assert.equal(await page.locator('.work-featured').count(),0);assert.equal(await page.getByRole('button',{name:'Rotate portfolio forwards',exact:true}).count(),0);assert.equal(await page.locator('.mk-orbit').getAttribute('aria-hidden'),'true');await page.locator('.ff-navigation .mk-nav-links a[href="/work"]').click();await page.locator('.portfolio-card').nth(19).waitFor();});
 await check('Portal navigation separates project, website and account tools and preserves the shared view',async page=>{
  await page.goto(base+'/portal-preview/index.html');
  const groups=await page.locator('#leftRail [data-nav-group]').evaluateAll(elements=>elements.map(group=>({name:group.dataset.navGroup,views:[...group.querySelectorAll('button')].map(button=>button.dataset.view||button.dataset.stage)})));
