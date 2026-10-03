@@ -33,6 +33,12 @@ await check('The staircase drops left to right, reveals right to left and return
   await page.waitForFunction(()=>{const nodes=[...document.querySelectorAll('.ff-staircase>div')],positions=nodes.map(node=>new DOMMatrixReadOnly(getComputedStyle(node).transform).m42);return document.querySelector('.ff-staircase').dataset.state==='revealing'&&positions.at(-1)<positions[0]-100;});
   const ascending=await page.locator('.ff-staircase>div').evaluateAll(nodes=>nodes.map(node=>new DOMMatrixReadOnly(getComputedStyle(node).transform).m42));assert.ok(ascending.at(-1)<ascending[0]-100,'Right panel rises first');
   await page.waitForFunction(()=>document.querySelector('.ff-staircase').dataset.state==='idle');assert.equal(new URL(page.url()).pathname,href);assert.ok(await page.locator('main h1').evaluate(node=>node===document.activeElement));assert.equal(await page.locator('.ff-staircase').evaluate(node=>getComputedStyle(node).pointerEvents),'none');
+  const contrasts=await page.locator('.ff-navigation').evaluate(nav=>{
+   const luminance=color=>color.match(/[\d.]+/g).slice(0,3).map(Number).map(value=>{const c=value/255;return c<=.04045?c/12.92:((c+.055)/1.055)**2.4;}).reduce((sum,value,index)=>sum+value*[.2126,.7152,.0722][index],0);
+   const background=luminance(getComputedStyle(nav).backgroundColor);
+   return [...nav.querySelectorAll('.mk-wordmark,.mk-nav-links>a')].map(link=>{const text=luminance(getComputedStyle(link).color);return {label:link.textContent,ratio:(Math.max(text,background)+.05)/(Math.min(text,background)+.05)};});
+  });
+  for(const contrast of contrasts)assert.ok(contrast.ratio>=4.5,`${href}: ${contrast.label} must remain readable against its navigation background`);
  }
  await page.getByRole('link',{name:'Fourthform home',exact:true}).click();await moving(page);await page.waitForFunction(()=>document.querySelector('.ff-staircase').dataset.state==='idle');assert.equal(await page.locator('.orbit-card').count(),8);
 });

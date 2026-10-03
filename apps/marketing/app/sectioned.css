@@ -15,6 +15,11 @@
 .ff-navigation .mk-mobile-menu .ff-menu-signin{border:0;font-size:12px;color:#7b7974;padding-bottom:0}
 .mk-orbit-site .ff-navigation .mk-mobile-menu{background:#0b0c0e;color:#f3f1eb}
 .mk-orbit-site .ff-navigation .mk-mobile-menu>a{border-color:#ffffff20}
+.work-site .ff-navigation{background:#191a18e8;border-color:#ffffff24;color:#f2f0e8}
+.work-site .ff-navigation .mk-nav-links>a{color:#c2c1b9}
+.work-site .ff-navigation .mk-nav-links>a[aria-current="page"]{color:#fff}
+.work-site .ff-navigation .mk-mobile-menu{background:#191a18;color:#f2f0e8}
+.work-site .ff-navigation .mk-mobile-menu>a{border-color:#ffffff24}
 .mk-simple .mk-orbit-hero{height:100svh;max-height:none;min-height:0;padding:0}
 .mk-orbit{inset:120px 0 92px}
 .orbit-card{width:clamp(145px,min(16.5vw,25svh),245px);box-shadow:0 28px 54px #000a,0 2px 6px #0005;border-color:#ffffff26}
