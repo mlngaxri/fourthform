@@ -76,4 +76,4 @@
 .orbit-motion-start button{display:flex;gap:16px;align-items:center;padding:10px 15px;border:1px solid #bcb0ff50;border-radius:24px;background:#191321;color:#f3f1eb;cursor:pointer;font:inherit}
 .orbit-motion-start button:hover{background:#30203d;border-color:#bcb0ff}
 .orbit-motion-start button:focus-visible{outline:2px solid #bcb0ff;outline-offset:4px}
-@media(prefers-reduced-motion:reduce){.mk-orbit-hero[data-motion-choice="enabled"] .orbit-depth-glow{animation-name:orbit-light-drift;animation-duration:16s!important;animation-iteration-count:infinite;animation-direction:alternate;animation-timing-function:ease-in-out;will-change:transform}}
+@media(min-width:900px) and (prefers-reduced-motion:reduce){.mk-orbit-hero[data-motion-choice="enabled"] .orbit-depth-glow{animation:orbit-light-drift 16s ease-in-out infinite alternate!important;will-change:transform}.mk-orbit-hero[data-motion-choice="enabled"][data-orbit-running="false"] .orbit-depth-glow{animation-play-state:paused!important}}
