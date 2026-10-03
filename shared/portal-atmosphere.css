@@ -130,6 +130,11 @@
 .projects-index>.connected-actions>.primary{background:var(--ff-violet);color:#171321;border-color:var(--ff-violet)}
 .standalone-preview>header{box-shadow:0 1px 0 #bcb0ff22}
 .standalone-preview>header>span{color:var(--ff-light)}
+.route-state{background:radial-gradient(ellipse at 50% 100%,#30203d,transparent 70%),var(--ff-night);color:var(--ff-mist)}
+.route-state :is(p,.overline){color:var(--ff-light)}
+.route-state a{color:var(--ff-mist)}
+.route-state .primary{background:var(--ff-violet);color:#171321;border-color:var(--ff-violet)}
+.route-state .route-loader{border-color:#ffffff26;border-top-color:var(--ff-violet)}
 @media(hover:hover){
  .mk-section-site .mk-portal-showcase{transition:transform .65s var(--ff-lift),box-shadow .65s}
  .mk-section-site .mk-portal-showcase:hover{transform:perspective(1200px) rotateY(-2deg) translateY(-3px);box-shadow:0 34px 80px #0008}
