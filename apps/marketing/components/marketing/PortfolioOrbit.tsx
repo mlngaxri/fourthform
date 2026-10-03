@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {projects} from "../../lib/portfolio/projects";
 
 const selection = ["monolith-hero", "playful-idea", "oyla", "keel", "nature-ritual", "golden-portal", "digital-epoch-hero", "orla-fashion"].map(id => projects.find(project => project.id === id)!);
@@ -21,11 +21,6 @@ function position(index: number, angle: number) {
 
 export default function PortfolioOrbit() {
   const stage = useRef<HTMLDivElement>(null);
-  const players = useRef<Animation[]>([]);
-  const pausedRef = useRef(false);
-  const refresh = useRef<() => void>(() => {});
-  const [paused, setPaused] = useState(false);
-  const [automatic, setAutomatic] = useState(false);
 
   useEffect(() => {
     const element = stage.current;
@@ -38,7 +33,7 @@ export default function PortfolioOrbit() {
 
     // Native animation time keeps moving without a JavaScript frame loop.
     // All cards share one start time so their spacing remains constant.
-    players.current = cards.map((card, index) => card.animate(
+    const players = cards.map((card, index) => card.animate(
       Array.from({length: samples + 1}, (_, sample) => ({
         ...position(index, spacing / 2 + sample / samples * Math.PI * 2),
         offset: sample / samples,
@@ -46,50 +41,36 @@ export default function PortfolioOrbit() {
       {duration, iterations: Infinity, easing: "linear", fill: "both"},
     ));
     const start = document.timeline.currentTime;
-    if (typeof start === "number") players.current.forEach(player => { player.startTime = start; });
+    if (typeof start === "number") players.forEach(player => { player.startTime = start; });
 
     function sync() {
-      setAutomatic(desktop.matches);
-      const running = desktop.matches && visible && document.visibilityState === "visible" && !pausedRef.current;
-      const heldTime = Number(players.current[0]?.currentTime ?? 0);
-      players.current.forEach(player => {
+      const running = desktop.matches && visible && document.visibilityState === "visible" && !preference.matches;
+      const heldTime = Number(players[0]?.currentTime ?? 0);
+      players.forEach(player => {
         if (running && player.playState !== "running") player.play();
         else if (!running && player.playState !== "paused") { player.pause(); player.currentTime = heldTime; }
       });
       if (hero) hero.dataset.orbitRunning = String(running);
     }
-    function motionPreference() {
-      pausedRef.current = preference.matches;
-      setPaused(preference.matches);
-      sync();
-    }
-    refresh.current = sync;
     const observer = new IntersectionObserver(entries => {
       visible = entries.some(entry => entry.isIntersecting);
       sync();
     });
     observer.observe(element);
-    preference.addEventListener("change", motionPreference);
+    preference.addEventListener("change", sync);
     desktop.addEventListener("change", sync);
     document.addEventListener("visibilitychange", sync);
-    motionPreference();
+    sync();
     return () => {
       observer.disconnect();
-      players.current.forEach(player => player.cancel());
-      players.current = [];
-      preference.removeEventListener("change", motionPreference);
+      players.forEach(player => player.cancel());
+      preference.removeEventListener("change", sync);
       desktop.removeEventListener("change", sync);
       document.removeEventListener("visibilitychange", sync);
-      refresh.current = () => {};
       if (hero) delete hero.dataset.orbitRunning;
     };
   }, []);
 
-  function toggle() {
-    pausedRef.current = !pausedRef.current;
-    setPaused(pausedRef.current);
-    refresh.current();
-  }
   return <>
     <div className="orbit-depth" aria-hidden="true"><div className="orbit-depth-glow"/><div className="orbit-depth-floor"/><div className="orbit-depth-horizon"/></div>
     <div ref={stage} className="mk-orbit" aria-hidden="true">
@@ -97,6 +78,5 @@ export default function PortfolioOrbit() {
         <img src={project.thumbnail} width={560} height={Math.round(560 * project.height / project.width)} alt="" loading={index < 4 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"}/>
       </div>)}
     </div>
-    {automatic && <div className="mk-orbit-controls"><button className="mk-orbit-pause" type="button" onClick={toggle} aria-pressed={paused} aria-label={paused ? "Play motion" : "Pause motion"}><span className={paused ? "orbit-play-icon" : "orbit-pause-icon"} aria-hidden="true"/>{paused ? "Play" : "Pause"}</button></div>}
   </>;
 }

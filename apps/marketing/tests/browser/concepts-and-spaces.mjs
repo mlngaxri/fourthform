@@ -36,10 +36,10 @@ await check('Focused saved drafts and preferences cannot change the complete wor
 await check('Desktop motion advances, pauses, respects preferences and survives navigation',async p=>{
  await p.goto(base);await p.waitForFunction(()=>document.querySelector('.mk-site').classList.contains('mk-motion'));
  const card=p.locator('.orbit-card').first();const first=await card.evaluate(node=>getComputedStyle(node).left);await p.waitForFunction(first=>getComputedStyle(document.querySelector('.orbit-card')).left!==first,first);
- await p.getByRole('button',{name:'Pause motion',exact:true}).click();await p.waitForTimeout(1000);const paused=await card.evaluate(node=>getComputedStyle(node).left);await p.waitForTimeout(250);assert.equal(await card.evaluate(node=>getComputedStyle(node).left),paused);
- await p.getByRole('button',{name:'Play motion',exact:true}).click();
+ await p.emulateMedia({reducedMotion:'reduce'});await p.waitForFunction(()=>document.querySelector('.mk-orbit-hero').dataset.orbitRunning==='false');await p.waitForTimeout(1000);const paused=await card.evaluate(node=>getComputedStyle(node).left);await p.waitForTimeout(250);assert.equal(await card.evaluate(node=>getComputedStyle(node).left),paused);
+ await p.emulateMedia({reducedMotion:'no-preference'});await p.waitForFunction(()=>document.querySelector('.mk-orbit-hero').dataset.orbitRunning==='true');
  for(const width of [1280,1024,1440]){await p.setViewportSize({width,height:1000});const height=await p.locator('.mk-hero-wrap').evaluate(node=>node.getBoundingClientRect().height);assert.ok(height<1600,'Hero must not create an extended scroll trap');}
- await p.emulateMedia({reducedMotion:'reduce'});await p.waitForFunction(()=>!document.querySelector('.mk-site').classList.contains('mk-motion'));await p.getByRole('button',{name:'Play motion',exact:true}).waitFor();assert.equal(await p.getByRole('button',{name:'Pause motion',exact:true}).count(),0);
+ await p.emulateMedia({reducedMotion:'reduce'});await p.waitForFunction(()=>!document.querySelector('.mk-site').classList.contains('mk-motion'));await p.waitForFunction(()=>document.querySelector('.mk-orbit-hero').dataset.orbitRunning==='false');assert.equal(await p.getByRole('button',{name:/Pause motion|Play motion/}).count(),0);
  await p.emulateMedia({reducedMotion:'no-preference'});await p.waitForFunction(()=>document.querySelector('.mk-site').classList.contains('mk-motion'));await p.goto(base+'/pricing');await p.waitForTimeout(1000);await p.reload();await p.waitForTimeout(1000);
  assert.equal(await p.locator('.mk-price-line').evaluate(node=>getComputedStyle(node).opacity),'1');
 },{reducedMotion:'no-preference'});

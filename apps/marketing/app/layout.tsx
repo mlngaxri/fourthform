@@ -13,6 +13,7 @@ import "./declutter.css";
 import "./brand-type.css";
 import "./orbit.css";
 import "./sectioned.css";
+import "../../../shared/portal-atmosphere.css";
 import {SiteTransition} from "../components/marketing/SiteTransition";
 
 export const metadata: Metadata = {

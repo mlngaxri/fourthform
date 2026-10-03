@@ -11,6 +11,7 @@ import "./customer-site.css";
 import "./release.css";
 import "./brand-type.css";
 import "@fontsource/instrument-serif/400-italic.css";
+import "../../../shared/portal-atmosphere.css";
 
 export const metadata: Metadata = {
   title: "Fourthform client workspace",

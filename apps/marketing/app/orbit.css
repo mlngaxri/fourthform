@@ -32,10 +32,6 @@
 .mk-simple .mk-orbit-copy .mk-included{color:#a3a3ae;font-size:11px;margin:19px 0 0}
 .mk-orbit-foot{position:absolute;inset:auto max(28px,calc((100vw - 1280px)/2)) 0;height:76px;z-index:9;display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid #ffffff24;font-size:10px;color:#a3a3ae;letter-spacing:.015em}
 .mk-orbit-foot-note{color:#bdbdc3}
-.mk-orbit-controls{display:flex;align-items:center;gap:4px}
-.mk-orbit-controls button{border:0;background:transparent;color:#c0c0c4;min-width:60px;min-height:44px;font:inherit;font-size:10px;cursor:pointer;border-radius:4px}
-.mk-orbit-controls .mk-orbit-pause{font-size:10px;min-width:98px;letter-spacing:0}
-.mk-orbit-controls button:hover{background:#ffffff12;color:#f3f1eb}
 .mk-orbit-site .mk-display{line-height:1.04}
 .mk-orbit-site .work-featured{border-top:1px solid #ffffff18}
 @media(min-width:1800px){.mk-orbit{inset-inline:calc((100% - 1800px)/2)}}
@@ -53,7 +49,6 @@
  .orbit-card:nth-child(3){left:15%!important;top:85%!important;transform:translate(-50%,-50%) rotate(11deg)!important}
  .orbit-card:nth-child(4){left:84%!important;top:87%!important;transform:translate(-50%,-50%) rotate(-13deg)!important}
  .orbit-card:nth-child(n+5){display:none}
- .mk-orbit-controls{display:none}
  .mk-orbit-foot{inset-inline:20px;height:68px;font-size:9px}
 }
 @media(max-width:400px){
