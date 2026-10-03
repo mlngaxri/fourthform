@@ -168,3 +168,5 @@ body>.mobile-dock button.active{color:var(--ff-ochre);background:#7562391c}
 
 .mk-wordmark,.work-wordmark,.wordmark,.obp-brand{font-family:"Clash Display",var(--font-sans);font-weight:600}
 .shell .top button,.shell .panel-head h1{font-family:var(--sans)}
+
+.shell .pill.active{border-color:#75623940;color:#756239;background:#7562390b}
