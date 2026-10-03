@@ -10,7 +10,7 @@ async function check(name,fn,options={}){
 }
 const point=page=>page.locator('.orbit-card').first().evaluate(card=>{const r=card.getBoundingClientRect();return {x:r.x,y:r.y};});
 const distance=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
-const moving=page=>page.waitForFunction(()=>document.querySelector('.mk-orbit-hero').dataset.orbitRunning==='true');
+const moving=page=>page.waitForFunction(()=>document.querySelector('.mk-orbit-hero')?.dataset.orbitRunning==='true');
 await check('The desktop circle moves visibly with the cursor over the message or the imagery',async page=>{
  for(const width of [1024,1440,1920]){await page.setViewportSize({width,height:900});await page.mouse.move(width/2,400);await moving(page);const before=await point(page);await page.waitForTimeout(550);assert.ok(distance(before,await point(page))>8,`Circular motion at ${width}px`);}
  const box=await page.locator('.orbit-card').first().boundingBox();await page.mouse.move(box.x+box.width/2,box.y+box.height/2);const before=await point(page);await page.waitForTimeout(500);assert.ok(distance(before,await point(page))>8,'Decorative cards do not pause the gallery on hover');
