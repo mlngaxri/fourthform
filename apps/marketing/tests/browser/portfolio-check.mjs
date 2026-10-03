@@ -15,8 +15,8 @@ await check('The collection has 20 unique local previews with source and referen
  for(const card of await page.locator('.portfolio-card').all()){const size=await card.evaluate(element=>({card:element.getBoundingClientRect().width,image:element.querySelector('img').getBoundingClientRect().width}));assert.ok(size.image>=size.card*.95,'The design must fill its gallery card');}
  for(const card of await page.locator('.portfolio-card').all()){
   const id=await card.getAttribute('data-project');await card.locator('button').click();
-  await page.locator('.work-dialog[open]').waitFor();assert.equal(await page.locator('.work-source').getAttribute('href'),`/work/${id}`);
-  assert.equal(await page.locator('.work-reference').getAttribute('href'),`/preview/start?reference=${id}`);
+  await page.locator('.work-dialog[open]').waitFor();assert.equal(await page.locator('.work-explore').getAttribute('href'),`/work/${id}`);
+  assert.equal(await page.locator('.work-reference').getAttribute('href'),`/brief?reference=${id}`);
   await page.locator('.work-dialog-media img').evaluate(image=>image.decode());
   assert.ok((await page.locator('#work-dialog-description').textContent()).length>80);
   await page.getByRole('button',{name:'Close design preview'}).click();
@@ -46,11 +46,9 @@ await check('Original motion previews open by request and can return to their im
  await page.getByRole('button',{name:'Play original animation',exact:true}).click();await page.locator('.work-dialog-media video').waitFor();await page.waitForFunction(()=>document.querySelector('.work-dialog-media video').currentTime>0);
  await page.getByRole('button',{name:'Show original image',exact:true}).click();assert.ok(await page.locator('.work-dialog-media img').isVisible());
 });
-await check('A chosen design survives the example brief and seeds Initial Direction',async page=>{
- await page.goto(base+'/work?project=oyla');await page.locator('.work-reference').click();await page.locator('.obp-design-reference').waitFor();
- assert.match(await page.locator('.obp-design-reference').textContent(),/OYLA/);await page.getByRole('button',{name:'Use the Mori House example'}).click();assert.match(await page.locator('textarea').nth(1).inputValue(),/fourthform-marketing.vercel.app\/work\/oyla/);
- await page.getByRole('button',{name:'Save & continue'}).click();await page.getByRole('button',{name:'Explore example checkout'}).click();await page.getByRole('link',{name:'Open Initial Direction'}).click();
- await page.locator('[data-initial-text="links"]').waitFor();assert.match(await page.locator('[data-initial-text="links"]').inputValue(),/fourthform-marketing.vercel.app\/work\/oyla/);
+await check('A chosen design reaches the real blank brief and survives save and reload',async page=>{
+ await page.goto(base+'/work?project=oyla');await page.locator('.work-reference').click();await page.locator('[name="businessName"]').waitFor();assert.equal(await page.locator('[name="businessName"]').inputValue(),'');assert.match(await page.getByRole('textbox',{name:'Design references'}).inputValue(),/work\/oyla/);
+ await page.locator('[name="businessName"]').fill('Own business');await page.locator('[name="businessDescription"]').fill('A real business brief.');await page.getByRole('button',{name:'Save brief',exact:true}).click();await page.reload();assert.equal(await page.locator('[name="businessName"]').inputValue(),'Own business');
 });
 await check('Choosing another design preserves an existing business brief and links',async page=>{
  await page.goto(base+'/preview/start');await page.evaluate(()=>localStorage.setItem('ff-preview-onboarding-v1',JSON.stringify({name:'Existing business',description:'Existing description',links:'https://example.com',goals:['Book'],feels:['Warm'],note:'Existing note'})));
@@ -74,7 +72,7 @@ await check('Portfolio, dialog and reference brief reflow at small widths',async
  await page.setViewportSize({width:390,height:844});await page.goto(base+'/work');await page.evaluate(async()=>document.fonts.ready);await shot(page,'phone');
  await page.goto(base+'/preview/start?reference=oyla');assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
 });
-await check('The homepage previews original work without a second collection or extra gallery controls',async page=>{await page.goto(base);await page.locator('.orbit-card img').first().evaluate(image=>image.decode());assert.equal(await page.locator('.orbit-card').count(),8);assert.equal(await page.locator('.work-featured').count(),0);assert.equal(await page.getByRole('button',{name:'Rotate portfolio forwards',exact:true}).count(),0);assert.equal(await page.locator('.mk-orbit').getAttribute('aria-hidden'),'true');await page.locator('.ff-navigation .mk-nav-links a[href="/work"]').click();await page.locator('.portfolio-card').nth(19).waitFor();});
+await check('The homepage previews original work without a second collection or extra gallery controls',async page=>{await page.goto(base);await page.locator('.orbit-card img').first().evaluate(image=>image.decode());assert.equal(await page.locator('.orbit-card').count(),8);assert.equal(await page.locator('.work-featured').count(),0);assert.equal(await page.getByRole('button',{name:'Rotate portfolio forwards',exact:true}).count(),0);assert.equal(await page.locator('.mk-orbit a').count(),8);await page.locator('.ff-navigation .mk-nav-links a[href="/work"]').click();await page.locator('.portfolio-card').nth(19).waitFor();});
 await check('Portal navigation separates project, website and account tools and preserves the shared view',async page=>{
  await page.goto(base+'/portal-preview/index.html');
  const groups=await page.locator('#leftRail [data-nav-group]').evaluateAll(elements=>elements.map(group=>({name:group.dataset.navGroup,views:[...group.querySelectorAll('button')].map(button=>button.dataset.view||button.dataset.stage)})));
@@ -95,5 +93,5 @@ await check('Overview and review instructions follow submitted, completed and ex
 await check('Reduced motion and no JavaScript retain the complete readable collection',async page=>{
  await page.goto(base+'/work');assert.equal(await page.locator('.work-intro-star').evaluate(element=>getComputedStyle(element).animationName),'none');assert.ok(!(await page.locator('body').innerText()).includes('\u2014'));
 },{reducedMotion:'reduce'});
-const staticContext=await browser.newContext({javaScriptEnabled:false});const staticPage=await staticContext.newPage();await staticPage.goto(base+'/work');assert.equal(await staticPage.locator('.portfolio-card').count(),20);assert.ok(await staticPage.getByRole('link',{name:'Try a website brief',exact:true}).isVisible());await staticContext.close();
+const staticContext=await browser.newContext({javaScriptEnabled:false});const staticPage=await staticContext.newPage();await staticPage.goto(base+'/work');assert.equal(await staticPage.locator('.portfolio-card').count(),20);assert.ok(await staticPage.getByRole('link',{name:'Start your website brief',exact:true}).isVisible());await staticContext.close();
 await writeFile('docs/preview-evidence/portfolio-results.json',JSON.stringify({results,uncaughtErrors:errors},null,2));console.log(JSON.stringify({results,uncaughtErrors:errors},null,2));await browser.close();if(results.some(result=>result.result==='fail')||errors.length)process.exitCode=1;

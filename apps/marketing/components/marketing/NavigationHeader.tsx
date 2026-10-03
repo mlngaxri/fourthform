@@ -4,7 +4,7 @@ import {usePathname} from "next/navigation";
 import {startHref, startLabel, clientSignInHref} from "../../lib/customer-flow";
 import {TransitionLink} from "./SiteTransition";
 
-const destinations = [["/work", "Work"], ["/how-we-work", "How we work with you"], ["/pricing", "Pricing"]];
+const destinations = [["/", "Home"], ["/work", "Work"], ["/how-we-work", "How we work with you"], ["/pricing", "Pricing"]];
 export default function NavigationHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);

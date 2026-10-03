@@ -18,9 +18,9 @@
   --success: #53634d;
   --warning: #7c6039;
   --error: #994d45;
-  --font-sans: "Geist Variable", Arial, sans-serif;
+  --font-sans: "General Sans", Arial, sans-serif;
   --font-mono: "Geist Mono Variable", monospace;
-  --font-display: "Clash Display", "Geist Variable", Arial, sans-serif;
+  --font-display: "General Sans", Arial, sans-serif;
   --radius-control: 10px;
   --radius-input: 12px;
   --radius-surface: 14px;

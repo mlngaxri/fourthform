@@ -1,7 +1,7 @@
 import {spawn} from 'node:child_process';
 import {createInterface} from 'node:readline';
 import {mkdir,writeFile} from 'node:fs/promises';
-const suites=['release-check','concepts-and-spaces','preview-check','details-check','review-check','integration-check','audit-check','content-check','portfolio-check','motion-check','brand-check','visual-tour'];
+const suites=['site-exploration','release-check','concepts-and-spaces','preview-check','details-check','review-check','integration-check','audit-check','content-check','portfolio-check','motion-check','brand-check','visual-tour'];
 const results=[];
 for(const suite of suites){
  console.log(`Running ${suite}`);

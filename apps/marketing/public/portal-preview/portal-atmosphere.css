@@ -1,6 +1,6 @@
-@font-face{font-family:"Bellefair";src:url("/fonts/bellefair.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"General Sans";src:url("/fonts/general-sans.woff2") format("woff2");font-weight:200 700;font-style:normal;font-display:swap}
 /* Fourthform atmosphere. Shared by the website, connected portal and preview. */
-:root{--accent:#756239;--accent-soft:#ece5d3;--mk-accent:#756239;--font-display:"Bellefair",Georgia,serif;--ff-paper:#f3efe5;--ff-ochre:#756239;--ff-ink-warm:#28261f;--ff-light:#686354;--ff-edge:#28261f26;--ff-lift:cubic-bezier(.22,1,.36,1)}
+:root{--accent:#756239;--accent-soft:#ece5d3;--mk-accent:#756239;--font-display:"General Sans",Arial,sans-serif;--ff-paper:#f3efe5;--ff-ochre:#756239;--ff-ink-warm:#28261f;--ff-light:#686354;--ff-edge:#28261f26;--ff-lift:cubic-bezier(.22,1,.36,1)}
 @keyframes ff-arrive{from{opacity:.72;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes ff-pane-light{from{opacity:.78}to{opacity:1}}
 @keyframes ff-line-open{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -98,11 +98,11 @@
 .shell .device,.production-portal .real-site-object{box-shadow:0 30px 70px #51473530,0 0 0 1px #75623930}
 .shell .context,.production-portal .portal-v2-inspector{background:#faf9f5;color:#171715;box-shadow:-14px 0 35px #0000000a;border-color:#75623930}
 .shell .panel-head,.shell .canvasbar,.production-portal .portal-workspace-toolbar{border-bottom-color:#75623944}
-.shell .panel-head h1{font-family:"Clash Display",var(--sans);font-size:20px;letter-spacing:-.025em}
+.shell .panel-head h1{font-family:"General Sans",var(--sans);font-size:20px;letter-spacing:-.025em}
 .shell .hero-summary,.production-portal .overview{
  background:radial-gradient(ellipse at 90% 10%,#75623912,transparent 70%),var(--surface)
 }
-.shell .hero-summary h2,.shell .stage-title h2,.shell .comm-intro h2{font-family:"Bellefair",Georgia,serif;font-weight:400;letter-spacing:-.025em}
+.shell .hero-summary h2,.shell .stage-title h2,.shell .comm-intro h2{font-family:"General Sans",Arial,sans-serif;font-weight:400;letter-spacing:-.025em}
 .shell .quiet-card,.production-portal .connected-card{background:#faf9f5;box-shadow:0 10px 30px #84734b06;border-radius:14px}
 .shell .view.active,.production-portal :is(.direction-workspace,.portal-v2-workspace){animation:ff-pane-light .5s var(--ff-lift)}
 .shell :is(.page-card,.quiet-card),.projects-index .project-list-item{transition:box-shadow .35s var(--ff-lift),border-color .25s}
@@ -162,11 +162,11 @@ body>.mobile-dock button.active{color:var(--ff-ochre);background:#7562391c}
 .ff-accent-text{color:var(--ff-ochre)}
 
 /* Editorial display, with quiet sans-serif reading and a stable agency identity. */
-:is(.mk-section-site,.work-site,.contact-site) :is(h1.mk-display,.ff-section-intro h1,.mk-pricing-head h1,.work-intro h1){font-family:"Bellefair",Georgia,serif;font-weight:400;letter-spacing:-.025em}
-:is(.start-page,.obp,.production-portal,.projects-index) :is(.start-progress h1,.obp-story h1,.direction-workspace h1,.projects-index h1){font-family:"Bellefair",Georgia,serif;font-weight:400;letter-spacing:-.025em}
+:is(.mk-section-site,.work-site,.contact-site) :is(h1.mk-display,.ff-section-intro h1,.mk-pricing-head h1,.work-intro h1){font-family:"General Sans",Arial,sans-serif;font-weight:400;letter-spacing:-.025em}
+:is(.start-page,.obp,.production-portal,.projects-index) :is(.start-progress h1,.obp-story h1,.direction-workspace h1,.projects-index h1){font-family:"General Sans",Arial,sans-serif;font-weight:400;letter-spacing:-.025em}
 .shell .top .brand,.production-portal .wordmark{color:#28261f}
 
-.mk-wordmark,.work-wordmark,.wordmark,.obp-brand{font-family:"Clash Display",var(--font-sans);font-weight:600}
+.mk-wordmark,.work-wordmark,.wordmark,.obp-brand{font-family:"General Sans",var(--font-sans);font-weight:600}
 .shell .top button,.shell .panel-head h1{font-family:var(--sans)}
 
 .shell .pill.active{border-color:#75623940;color:#756239;background:#7562390b}
@@ -175,3 +175,17 @@ body>.mobile-dock button.active{color:var(--ff-ochre);background:#7562391c}
  :is(.mk-section-site,.work-site,.contact-site) :is(.ff-section-intro,.mk-pricing-head,.work-intro,.contact-grid>div:first-child){animation:ff-arrive .8s var(--ff-lift)!important}
  .mk-section-site .ff-section-intro:after{animation:ff-line-open 1.1s var(--ff-lift)!important}
 }
+
+/* One measured family, from the first impression to everyday work. */
+:root{--font-sans:"General Sans",Arial,sans-serif;--font-display:"General Sans",Arial,sans-serif;--sans:"General Sans",Arial,sans-serif}
+body{font-family:var(--font-sans)}
+.mk-site,.obp,.start-page,.production-portal,.projects-index,.shell{font-family:var(--font-sans)}
+.mk-wordmark,.wordmark,.obp-brand,.shell .brand,.shell .ops-title{font-family:var(--font-sans);font-weight:600;letter-spacing:-.04em}
+:is(.mk-site,.obp,.start-page,.projects-index) :is(h1,h2,h3){font-family:var(--font-display);font-weight:500}
+.shell :is(.panel-head h1,.hero-summary h2,.stage-title h2,.comm-intro h2,.ops-title){font-family:var(--font-display);font-weight:500}
+.shell :is(button,input,textarea,select){font-family:var(--font-sans)}
+/* Customer websites retain the typography selected for their own identity. */
+#moriPage{--sans:Geist,Arial,sans-serif;--font-sans:Geist,Arial,sans-serif}
+.production-portal .customer-site{--font-sans:"Geist Variable",Arial,sans-serif;--font-display:"Instrument Serif",Georgia,serif}
+
+.shell{--sans:"General Sans",Arial,sans-serif;--font-sans:var(--sans)}

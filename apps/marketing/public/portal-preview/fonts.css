@@ -1,5 +1,5 @@
 @font-face{font-family:Geist;src:url('fonts/geist.woff2') format('woff2');font-weight:100 900;font-style:normal;font-display:swap}@font-face{font-family:'Instrument Serif';src:url('fonts/instrument-serif.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Instrument Serif';src:url('fonts/instrument-serif-italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
 
-@font-face{font-family:"Clash Display";src:url("fonts/clash-display.woff2") format("woff2");font-weight:200 700;font-style:normal;font-display:swap}
-.brand,.wordmark,.portal-preview-logo{font-family:"Clash Display",var(--sans);font-weight:700;letter-spacing:-.025em}
-.ops-title{font-family:"Clash Display",var(--sans);letter-spacing:-.025em}
+@font-face{font-family:"General Sans";src:url("fonts/general-sans.woff2") format("woff2");font-weight:200 700;font-style:normal;font-display:swap}
+.brand,.wordmark,.portal-preview-logo{font-family:"General Sans",var(--sans);font-weight:700;letter-spacing:-.025em}
+.ops-title{font-family:"General Sans",var(--sans);letter-spacing:-.025em}

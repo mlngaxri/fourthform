@@ -18,7 +18,7 @@ async function readable(page,selector,backgroundSelector){
 }
 await check('The landing page uses a warm editorial display with an accessible complete message',async page=>{
  await page.goto(base);await page.evaluate(()=>document.fonts.ready);await page.getByRole('heading',{name:'A website. All your own.',exact:true}).waitFor();
- const design=await page.locator('#hero-heading').evaluate(node=>({font:getComputedStyle(node).fontFamily,loaded:document.fonts.check('100px Bellefair'),large:parseFloat(getComputedStyle(node.querySelector('.hero-word')).fontSize),small:parseFloat(getComputedStyle(node.querySelector('.hero-connector')).fontSize)}));assert.match(design.font,/Bellefair/);assert.equal(design.loaded,true);assert.ok(design.large>design.small*2);assert.equal(await page.getByRole('button',{name:/Start animation|Pause motion|Play motion/}).count(),0);
+ const design=await page.locator('#hero-heading').evaluate(node=>({font:getComputedStyle(node).fontFamily,loaded:document.fonts.check('100px General Sans'),large:parseFloat(getComputedStyle(node.querySelector('.hero-word')).fontSize),small:parseFloat(getComputedStyle(node.querySelector('.hero-connector')).fontSize)}));assert.match(design.font,/General Sans/);assert.equal(design.loaded,true);assert.ok(design.large>design.small&&design.large<design.small*2);assert.equal(await page.getByRole('button',{name:/Start animation|Pause motion|Play motion/}).count(),0);
 });
 await check('All public destinations keep the same readable dark navigation',async page=>{
  for(const route of ['/','/work','/how-we-work','/pricing','/contact']){

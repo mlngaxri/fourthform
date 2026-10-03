@@ -16,3 +16,7 @@ apps/marketing/public/portal-preview/fonts/clash-display.woff2
 # Ignore previous locally cached brand font files as well.
 apps/*/public/fonts/cabinet-grotesk.woff2
 apps/marketing/public/portal-preview/fonts/cabinet-grotesk.woff2
+
+# General Sans is obtained unmodified from Fontshare at build time.
+apps/*/public/fonts/general-sans.woff2
+apps/marketing/public/portal-preview/fonts/general-sans.woff2

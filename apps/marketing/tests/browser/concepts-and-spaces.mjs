@@ -8,9 +8,9 @@ const results=[],errors=[];await mkdir('docs/preview-evidence',{recursive:true})
 async function check(name,fn,options={}){const c=await browser.newContext({viewport:{width:1440,height:1080},reducedMotion:'reduce',...options}),p=await c.newPage();p.setDefaultTimeout(10000);p.on('pageerror',e=>errors.push({name,error:e.message}));try{await fn(p);results.push({name,result:'pass'});}catch(e){results.push({name,result:'fail',detail:e.message});}finally{await c.close();}}
 await check('All 20 portfolio routes preserve the original visual designs',async p=>{
  for(const project of concepts){
-  await p.goto(`${base}/work/${project.id}`);await p.locator('.original-media img').evaluate(image=>image.decode());assert.equal(await p.locator('h1').textContent(),project.title);
+  await p.goto(`${base}/work/${project.id}?view=original`);await p.locator('.original-media img').evaluate(image=>image.decode());assert.equal(await p.locator('h1').textContent(),project.title);
   const dimensions=await p.locator('.original-media img').evaluate(image=>({width:image.naturalWidth,height:image.naturalHeight}));assert.equal(dimensions.width,project.width);assert.equal(dimensions.height,project.height);
-  assert.equal(await p.locator('.original-design-intro a').getAttribute('href'),`/preview/start?reference=${project.id}`);
+  assert.equal(await p.locator('.original-design-intro a').getAttribute('href'),`/brief?reference=${project.id}`);
   assert.equal(await p.locator('.concept-enquiry').count(),0);assert.ok(!(await p.locator('body').innerText()).includes('\u2014'));
   await p.setViewportSize({width:320,height:844});assert.ok(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),project.id+' overflows on a phone');await p.setViewportSize({width:1440,height:1080});
  }

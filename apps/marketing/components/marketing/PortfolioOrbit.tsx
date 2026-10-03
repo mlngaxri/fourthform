@@ -28,7 +28,7 @@ export default function PortfolioOrbit() {
     if (!element) return;
     const hero = element.closest<HTMLElement>(".mk-orbit-hero");
     const desktop = matchMedia("(min-width: 900px)");
-    const cards = Array.from(element.querySelectorAll<HTMLDivElement>(".orbit-card"));
+    const cards = Array.from(element.querySelectorAll<HTMLElement>(".orbit-card"));
     let visible = true;
 
     // Native animation time keeps moving without a JavaScript frame loop.
@@ -84,10 +84,11 @@ export default function PortfolioOrbit() {
 
   return <>
     <div className="orbit-depth" aria-hidden="true"><div className="orbit-depth-glow"/><div className="orbit-depth-floor"/><div className="orbit-depth-horizon"/></div>
-    <div ref={stage} className="mk-orbit" aria-hidden="true">
-      {selection.map((project, index) => <div key={project.id} className="orbit-card" style={position(index, spacing / 2)}>
+    <div ref={stage} className="mk-orbit" aria-label="Explore selected website studies">
+      {selection.map((project, index) => <a key={project.id} href={`/work/${project.id}`} aria-label={`Explore ${project.title} website`} className="orbit-card" style={position(index, spacing / 2)}>
         <img src={project.thumbnail} width={560} height={Math.round(560 * project.height / project.width)} alt="" loading={index < 4 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : "auto"}/>
-      </div>)}
+        <span className="orbit-card-label"><span>{project.title}</span><span aria-hidden="true">Explore ↗</span></span>
+      </a>)}
     </div>
   </>;
 }
