@@ -1,39 +1,40 @@
-/* Reference direction: a quiet dark canvas, original designs in depth, one clear message. */
-.mk-orbit-site .mk-nav{background:#0b0c0eea;color:#f3f1eb;border-color:#ffffff1c;backdrop-filter:blur(16px)}
-.mk-orbit-site .mk-nav-links a{color:#c0c0c4}
-.mk-orbit-site .mk-nav>.mk-button{background:#f3f1eb;border-color:#f3f1eb;color:#0b0c0e}
-.mk-orbit-site .mk-menu-toggle{border-color:#ffffff38}
-.mk-orbit-site .mk-mobile-menu{background:#0b0c0e;border-color:#ffffff30;color:#f3f1eb}
-.mk-orbit-site .mk-mobile-menu a{border-color:#ffffff25}
-.mk-orbit-site .mk-hero-wrap{background:#0b0c0e;color:#f3f1eb;border-bottom:0;position:relative}
-.mk-simple .mk-orbit-hero{height:max(820px,100svh);max-height:1080px;min-height:0;padding:68px 0 0;background:#0b0c0e;position:relative;isolation:isolate;overflow:hidden}
+/* A warm gallery canvas. Original websites float around one clear message. */
+.mk-orbit-site .mk-nav{background:#f3efe5ed;color:#28261f;border-color:#28261f20;backdrop-filter:blur(16px)}
+.mk-orbit-site .mk-nav-links a{color:#625f50}
+.mk-orbit-site .mk-nav>.mk-button{background:#28261f;border-color:#28261f;color:#f3efe5}
+.mk-orbit-site .mk-menu-toggle{border-color:#28261f38}
+.mk-orbit-site .mk-mobile-menu{background:#f3efe5;border-color:#28261f30;color:#28261f}
+.mk-orbit-site .mk-mobile-menu a{border-color:#28261f25}
+.mk-orbit-site .mk-hero-wrap{background:#f3efe5;color:#28261f;border-bottom:0;position:relative}
+.mk-simple .mk-orbit-hero{height:max(820px,100svh);max-height:1080px;min-height:0;padding:68px 0 0;background:#f3efe5;position:relative;isolation:isolate;overflow:hidden}
 .mk-orbit{position:absolute;inset:92px 0 140px;pointer-events:none}
-.orbit-depth{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 110%,#282239 0%,#121117 40%,#0b0c0e 75%)}
-.orbit-depth:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 43%,#0b0c0ef5 0%,#0b0c0eca 24%,#0b0c0e00 64%)}
-.orbit-depth-glow{position:absolute;inset:5% -15% -20%;background:radial-gradient(ellipse at 25% 72%,#8c77ef20 0%,transparent 43%),radial-gradient(ellipse at 78% 38%,#b7a0ed14 0%,transparent 40%);animation:orbit-light-drift 16s ease-in-out infinite alternate;will-change:transform}
-.orbit-depth-floor{position:absolute;bottom:-17%;left:-30%;width:160%;height:73%;transform:perspective(650px) rotateX(59deg);transform-origin:center bottom;background-image:linear-gradient(#bcb0ff16 1px,transparent 1px),linear-gradient(90deg,#bcb0ff16 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 50% 88%,#000 12%,#0008 40%,transparent 73%)}
-.orbit-depth-horizon{position:absolute;left:50%;top:69%;width:118%;height:44%;border:1px solid #bcb0ff1f;border-radius:50%;transform:translate(-50%,-50%) perspective(800px) rotateX(64deg);box-shadow:0 0 42px #aa8aff09,inset 0 0 48px #aa8aff09;mask-image:linear-gradient(transparent,#000 48%,transparent)}
+.orbit-depth{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 50% 110%,#d4ccb4 0%,#ede8d8 40%,#f3efe5 75%)}
+.orbit-depth:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 43%,#f3efe5f5 0%,#f3efe5ca 24%,#f3efe500 64%)}
+.orbit-depth-glow{position:absolute;inset:5% -15% -20%;background:radial-gradient(ellipse at 25% 72%,#cbbd7020 0%,transparent 43%),radial-gradient(ellipse at 78% 38%,#a8935914 0%,transparent 40%);animation:orbit-light-drift 16s ease-in-out infinite alternate;will-change:transform}
+.orbit-depth-floor{position:absolute;bottom:-17%;left:-30%;width:160%;height:73%;transform:perspective(650px) rotateX(59deg);transform-origin:center bottom;background-image:linear-gradient(#81765516 1px,transparent 1px),linear-gradient(90deg,#81765516 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse at 50% 88%,#000 12%,#51472c26 40%,transparent 73%)}
+.orbit-depth-horizon{position:absolute;left:50%;top:69%;width:118%;height:44%;border:1px solid #8176551f;border-radius:50%;transform:translate(-50%,-50%) perspective(800px) rotateX(64deg);box-shadow:0 0 42px #a28d5909,inset 0 0 48px #a28d5909;mask-image:linear-gradient(transparent,#000 48%,transparent)}
 @keyframes orbit-light-drift{from{transform:translate3d(-2%,-1%,0)}to{transform:translate3d(2%,2%,0)}}
 .mk-orbit-hero[data-orbit-running="false"] .orbit-depth-glow{animation-play-state:paused}
-.orbit-card{position:absolute;display:block;width:clamp(190px,18vw,280px);border:1px solid #ffffff1c;border-radius:5px;overflow:hidden;background:#141517;box-shadow:0 18px 38px #0008;pointer-events:auto;will-change:transform;backface-visibility:hidden}
+.orbit-card{position:absolute;display:block;width:clamp(190px,18vw,280px);border:1px solid #28261f20;border-radius:5px;overflow:hidden;background:#e6e0d0;box-shadow:0 18px 38px #51472c26;pointer-events:auto;will-change:transform;backface-visibility:hidden}
+.orbit-card:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,#fff2,transparent 38%,#51472c08);border-radius:inherit}
 .orbit-card>img{display:block;width:100%;height:auto;aspect-ratio:1.5;object-fit:cover;object-position:top;transition:opacity .2s}
-.orbit-card-label{position:absolute;inset:auto 0 0;display:flex;justify-content:space-between;gap:12px;padding:11px 13px;background:#0b0c0ef2;font-size:10px;line-height:1.4;color:#f3f1eb;opacity:0;transition:opacity .2s}
+.orbit-card-label{position:absolute;inset:auto 0 0;display:flex;justify-content:space-between;gap:12px;padding:11px 13px;background:#f3efe5f2;font-size:10px;line-height:1.4;color:#28261f;opacity:0;transition:opacity .2s}
 .orbit-card:hover .orbit-card-label,.orbit-card:focus-visible .orbit-card-label{opacity:1}
-.orbit-card:focus-visible{outline-color:#bcb0ff!important;outline-offset:6px!important}
+.orbit-card:focus-visible{outline-color:#756239!important;outline-offset:6px!important}
 .mk-simple .mk-orbit-copy{position:absolute;top:49%;left:50%;transform:translate(-50%,-50%);text-align:center;width:min(660px,52vw);z-index:8;pointer-events:none}
 .mk-simple .mk-orbit-copy :is(a,button){pointer-events:auto}
-.mk-simple .mk-orbit-copy .mk-hero-eyebrow{color:#c0c0c4;max-width:none;font-size:10px;letter-spacing:.14em;margin:0 0 25px}
+.mk-simple .mk-orbit-copy .mk-hero-eyebrow{color:#625f50;max-width:none;font-size:10px;letter-spacing:.14em;margin:0 0 25px}
 .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(68px,7.5vw,112px);font-weight:600;line-height:1.01;letter-spacing:-.045em;max-width:none}
-.mk-orbit-copy .mk-display>span{display:block;color:#bcb0ff}
-.mk-simple .mk-orbit-copy .mk-body{color:#bdbdc3;font-size:14px;line-height:1.75;max-width:41ch;margin:24px auto 0;text-wrap:pretty}
+.mk-orbit-copy .mk-display>span{display:block;color:#756239}
+.mk-simple .mk-orbit-copy .mk-body{color:#625f50;font-size:14px;line-height:1.75;max-width:41ch;margin:24px auto 0;text-wrap:pretty}
 .mk-simple .mk-orbit-copy .mk-hero-actions{justify-content:center;margin-top:26px;gap:24px}
-.mk-orbit-copy .mk-button-dark{background:#f3f1eb;border-color:#f3f1eb;color:#0b0c0e!important;padding-inline:22px}
-.mk-orbit-copy .mk-text-link{border-color:#ffffff38;color:#f3f1eb}
-.mk-simple .mk-orbit-copy .mk-included{color:#a3a3ae;font-size:11px;margin:19px 0 0}
-.mk-orbit-foot{position:absolute;inset:auto max(28px,calc((100vw - 1280px)/2)) 0;height:76px;z-index:9;display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid #ffffff24;font-size:10px;color:#a3a3ae;letter-spacing:.015em}
-.mk-orbit-foot-note{color:#bdbdc3}
+.mk-orbit-copy .mk-button-dark{background:#28261f;border-color:#28261f;color:#f3efe5!important;padding-inline:22px}
+.mk-orbit-copy .mk-text-link{border-color:#28261f38;color:#28261f}
+.mk-simple .mk-orbit-copy .mk-included{color:#6e6a5b;font-size:11px;margin:19px 0 0}
+.mk-orbit-foot{position:absolute;inset:auto max(28px,calc((100vw - 1280px)/2)) 0;height:76px;z-index:9;display:flex;align-items:center;justify-content:space-between;gap:24px;border-top:1px solid #28261f24;font-size:10px;color:#6e6a5b;letter-spacing:.015em}
+.mk-orbit-foot-note{color:#625f50}
 .mk-orbit-site .mk-display{line-height:1.04}
-.mk-orbit-site .work-featured{border-top:1px solid #ffffff18}
+.mk-orbit-site .work-featured{border-top:1px solid #28261f18}
 @media(min-width:1800px){.mk-orbit{inset-inline:calc((100% - 1800px)/2)}}
 @media(max-width:1050px) and (min-width:900px){.mk-simple .mk-orbit-copy{width:56vw}.mk-simple .mk-orbit-copy .mk-display{font-size:7.8vw}.orbit-card{width:195px}.mk-simple .mk-orbit-copy .mk-hero-eyebrow{font-size:9px;letter-spacing:.1em}}
 @media(max-width:899px){
@@ -61,7 +62,10 @@
  .mk-orbit-foot-note{display:none}
 }
 @media(max-width:899px){.orbit-depth-floor{background-size:56px 56px;opacity:.6}.orbit-depth-glow{animation:none;will-change:auto}}
-@media(prefers-reduced-motion:reduce){.orbit-card{will-change:auto}.orbit-card-label,.orbit-card>img{transition:none}.orbit-depth-glow{animation:none;will-change:auto}}
+@media(prefers-reduced-motion:reduce){.orbit-card-label,.orbit-card>img{transition:none}}
+/* This intentionally decorative desktop scene starts without an opt-in control.
+   Navigation and content reveals retain their separate reduced-motion behavior. */
+@media(min-width:900px){.mk-orbit-hero .orbit-depth-glow{animation:orbit-light-drift 24s ease-in-out infinite alternate!important;will-change:transform}.mk-orbit-hero[data-orbit-running="false"] .orbit-depth-glow{animation-play-state:paused!important}}
 
 .mk-orbit-site:after{display:none}
 
@@ -70,10 +74,3 @@
 .mk-site .mk-nav>.mk-button{grid-column:auto;flex-shrink:0}
 .mk-site .mk-nav>.mk-nav-links>a{display:inline-flex;align-items:center;white-space:nowrap}
 @media(max-width:760px){.mk-site .mk-nav{gap:10px}}
-
-/* An explicit visitor choice can enable the decorative scene without changing device settings. */
-.orbit-motion-start{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:9;display:flex;align-items:center;gap:14px;font-size:11px;color:#c4c0cd}
-.orbit-motion-start button{display:flex;gap:16px;align-items:center;padding:10px 15px;border:1px solid #bcb0ff50;border-radius:24px;background:#191321;color:#f3f1eb;cursor:pointer;font:inherit}
-.orbit-motion-start button:hover{background:#30203d;border-color:#bcb0ff}
-.orbit-motion-start button:focus-visible{outline:2px solid #bcb0ff;outline-offset:4px}
-@media(min-width:900px) and (prefers-reduced-motion:reduce){.mk-orbit-hero[data-motion-choice="enabled"] .orbit-depth-glow{animation:orbit-light-drift 16s ease-in-out infinite alternate!important;will-change:transform}.mk-orbit-hero[data-motion-choice="enabled"][data-orbit-running="false"] .orbit-depth-glow{animation-play-state:paused!important}}

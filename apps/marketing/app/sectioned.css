@@ -1,7 +1,7 @@
 /* One spacious entrance, three deliberate destinations. */
 .ff-route-root{min-height:100svh}
 .ff-staircase{position:fixed;inset:0;z-index:10000;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));pointer-events:none;overflow:hidden}
-.ff-staircase>div{background:#bcb0ff;border-right:1px solid #aca0ed;transform:translateY(-102%);will-change:transform}
+.ff-staircase>div{background:#ddd2ae;border-right:1px solid #c8ba96;transform:translateY(-102%);will-change:transform}
 .ff-staircase:not([data-state="idle"]){pointer-events:auto}
 .ff-staircase[data-state="idle"]>div{will-change:auto}
 .ff-navigation .mk-nav-links{display:flex;gap:32px;align-items:center}
@@ -13,24 +13,24 @@
 .ff-navigation .mk-mobile-menu[hidden]{display:none}
 .ff-navigation .mk-mobile-menu>a{display:block;padding:16px 0;font-size:18px;text-decoration:none;border-bottom:1px solid var(--mk-line)}
 .ff-navigation .mk-mobile-menu .ff-menu-signin{border:0;font-size:12px;color:#7b7974;padding-bottom:0}
-.mk-orbit-site .ff-navigation .mk-mobile-menu{background:#0b0c0e;color:#f3f1eb}
-.mk-orbit-site .ff-navigation .mk-mobile-menu>a{border-color:#ffffff20}
-.work-site .ff-navigation{background:#191a18e8;border-color:#ffffff24;color:#f2f0e8}
-.work-site .ff-navigation .mk-nav-links>a{color:#c2c1b9}
-.work-site .ff-navigation .mk-nav-links>a[aria-current="page"]{color:#fff}
-.work-site .ff-navigation .mk-mobile-menu{background:#191a18;color:#f2f0e8}
-.work-site .ff-navigation .mk-mobile-menu>a{border-color:#ffffff24}
+.mk-orbit-site .ff-navigation .mk-mobile-menu{background:#f3efe5;color:#28261f}
+.mk-orbit-site .ff-navigation .mk-mobile-menu>a{border-color:#28261f26}
+.work-site .ff-navigation{background:#f3efe5ee;border-color:#28261f26;color:#28261f}
+.work-site .ff-navigation .mk-nav-links>a{color:#686354}
+.work-site .ff-navigation .mk-nav-links>a[aria-current="page"]{color:#28261f}
+.work-site .ff-navigation .mk-mobile-menu{background:#f3efe5;color:#28261f}
+.work-site .ff-navigation .mk-mobile-menu>a{border-color:#28261f26}
 .mk-simple .mk-orbit-hero{height:100svh;max-height:none;min-height:0;padding:0}
 .mk-orbit{inset:120px 0 92px}
-.orbit-card{width:clamp(145px,min(16.5vw,25svh),245px);box-shadow:0 28px 54px #000a,0 2px 6px #0005;border-color:#ffffff26}
+.orbit-card{width:clamp(145px,min(16.5vw,25svh),245px);box-shadow:0 26px 48px #51473525,0 2px 6px #51473520;border-color:#28261f26}
 .mk-simple .mk-orbit-copy{top:52%;width:min(740px,60vw);max-width:none}
 .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(48px,min(7.1vw,13.2svh),104px);line-height:1.03;font-weight:600;letter-spacing:-.045em}
-.mk-simple .mk-orbit-copy .mk-body{font-size:clamp(13px,1.1vw,15px);line-height:1.7;max-width:44ch;margin:25px auto 0;color:#c4c0cd}
-.orbit-depth{background:radial-gradient(ellipse at 50% 108%,#3b2e54 0%,#191321 34%,#0b0c0e 76%)}
-.orbit-depth-glow{background:radial-gradient(ellipse at 14% 55%,#7960b629 0%,transparent 40%),radial-gradient(ellipse at 84% 30%,#987ac91f 0%,transparent 38%)}
-.orbit-depth-floor{bottom:-1%;left:-50%;width:200%;height:145%;transform:perspective(740px) rotateX(66deg);transform-origin:center bottom;background-image:linear-gradient(#bcb0ff22 1px,transparent 1px),linear-gradient(90deg,#bcb0ff22 1px,transparent 1px);background-size:88px 88px;mask-image:radial-gradient(ellipse at 50% 92%,#000 15%,#0009 47%,transparent 76%)}
-.orbit-depth-horizon{top:67%;width:115%;height:55%;border-color:#bcb0ff25;transform:translate(-50%,-50%) perspective(800px) rotateX(65deg)}
-.orbit-depth:after{background:radial-gradient(ellipse at 50% 45%,#0b0c0ed9 0%,#0b0c0e80 25%,#0b0c0e00 64%)}
+.mk-simple .mk-orbit-copy .mk-body{font-size:clamp(13px,1.1vw,15px);line-height:1.7;max-width:44ch;margin:25px auto 0;color:#686354}
+.orbit-depth{background:radial-gradient(ellipse at 50% 108%,#3b2e54 0%,#e7dfcf 34%,#f3efe5 76%)}
+.orbit-depth-glow{background:radial-gradient(ellipse at 14% 55%,#b0a07a29 0%,transparent 40%),radial-gradient(ellipse at 84% 30%,#c3b2861f 0%,transparent 38%)}
+.orbit-depth-floor{bottom:-1%;left:-50%;width:200%;height:145%;transform:perspective(740px) rotateX(66deg);transform-origin:center bottom;background-image:radial-gradient(ellipse at 50% 95%,#bbaa8650,transparent 70%);background-size:88px 88px;mask-image:radial-gradient(ellipse at 50% 92%,#000 15%,#0009 47%,transparent 76%)}
+.orbit-depth-horizon{top:67%;width:115%;height:55%;border-color:#75623925;transform:translate(-50%,-50%) perspective(800px) rotateX(65deg)}
+.orbit-depth:after{background:radial-gradient(ellipse at 50% 45%,#f3efe5d9 0%,#f3efe580 25%,#f3efe500 64%)}
 .mk-section-site .ff-section-intro{padding-top:160px;padding-bottom:12px}
 .ff-section-intro h1{font-size:clamp(48px,6.5vw,88px);line-height:1.03;margin:24px 0 28px;font-weight:500;letter-spacing:-.04em;max-width:900px}
 .ff-section-intro>p{max-width:52ch;font-size:16px;line-height:1.8;color:#68665f}
@@ -83,3 +83,17 @@
  .ff-desktop-break{display:none}
 }
 @media(prefers-reduced-motion:reduce){.ff-staircase{display:none}.ff-staircase>div{will-change:auto}}
+
+/* A composed editorial lockup: small connecting words, expressive serif forms. */
+.mk-simple .mk-orbit-copy .mk-display{font-family:"Bellefair",Georgia,serif;font-weight:400;letter-spacing:-.045em;font-size:clamp(56px,min(8.8vw,15svh),120px);line-height:1.04;color:#28261f}
+.mk-orbit-copy .mk-display>.hero-line{display:flex;justify-content:center;align-items:baseline;gap:.12em;color:#28261f;white-space:nowrap}
+.mk-orbit-copy .mk-display .hero-connector{font-family:var(--font-sans);font-size:.32em;font-weight:400;letter-spacing:-.035em}
+.mk-orbit-copy .mk-display .hero-line-second{color:#756239;margin-top:.07em}
+.mk-orbit-copy .mk-display .hero-line-second .hero-connector{font-size:.27em;color:#686354}
+.mk-orbit-copy .mk-display .hero-initial{font-size:1.1em;line-height:.8}
+.mk-simple .mk-orbit-copy .mk-body{color:#686354;margin-top:24px}
+.orbit-depth-horizon{opacity:.18}
+@media(max-width:899px){.mk-simple .mk-orbit-copy .mk-display{font-size:clamp(55px,min(12vw,17svh),104px)}}
+@media(max-width:600px){.mk-simple .mk-orbit-copy .mk-display{font-size:clamp(53px,min(15vw,15svh),78px);line-height:1.09}.mk-simple .mk-orbit-copy .mk-body{margin-top:20px}}
+@media(max-height:560px) and (min-width:900px){.mk-simple .mk-orbit-copy .mk-display{font-size:min(8.2vw,16svh)}}
+@media(max-height:500px) and (max-width:899px){.mk-simple .mk-orbit-copy .mk-display{font-size:min(12vw,16svh)}}

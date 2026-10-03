@@ -19,19 +19,24 @@ await check('The desktop circle moves visibly with the cursor over the message o
 await check('A busy JavaScript thread cannot slow the circle to a capped frame clock',async page=>{
  await moving(page);await page.waitForTimeout(100);const before=await point(page);await page.evaluate(()=>{const end=performance.now()+700;while(performance.now()<end){/* A slow desktop task. */}});await page.waitForTimeout(80);assert.ok(distance(before,await point(page))>18,'Native animation advances by elapsed time after a blocked frame');
 });
-await check('Motion preferences stop and restore the scene without a visible control',async page=>{
- await moving(page);assert.equal(await page.getByRole('button',{name:/Pause motion|Play motion/}).count(),0);await page.emulateMedia({reducedMotion:'reduce'});await page.waitForFunction(()=>document.querySelector('.orbit-card').getAnimations().every(animation=>animation.playState==='paused'&&!animation.pending));const held=await point(page);await page.waitForTimeout(300);assert.ok(distance(held,await point(page))<.5);assert.equal(await page.locator('.orbit-depth-glow').evaluate(node=>getComputedStyle(node).animationName),'none');await page.emulateMedia({reducedMotion:'no-preference'});await moving(page);const before=await point(page);await page.waitForTimeout(500);assert.ok(distance(before,await point(page))>8);
+await check('Desktop motion runs automatically across system preferences with no controls',async page=>{
+ for(const reducedMotion of ['reduce','no-preference','reduce']){
+  await page.emulateMedia({reducedMotion});await moving(page);const before=await point(page);await page.waitForTimeout(550);assert.ok(distance(before,await point(page))>8,'The native desktop circle starts without a saved preference or click');
+  assert.equal(await page.getByRole('button',{name:/Start animation|Pause motion|Play motion/}).count(),0);
+  assert.equal(await page.locator('.orbit-depth-glow').evaluate(node=>getComputedStyle(node).animationName),'orbit-light-drift');
+ }
 });
-await check('Reduced motion starts still with no decorative animation controls',async page=>{
- await page.waitForFunction(()=>document.querySelector('.mk-orbit-hero').dataset.orbitRunning==='false');const held=await point(page);await page.waitForTimeout(300);assert.ok(distance(held,await point(page))<.5);assert.equal(await page.locator('.orbit-depth-glow').evaluate(node=>getComputedStyle(node).animationName),'none');assert.equal(await page.getByRole('button',{name:/Pause motion|Play motion/}).count(),0);
+await check('A fresh reduced-motion desktop visit starts automatically and continues after reload',async page=>{
+ await moving(page);assert.equal(await page.getByRole('button',{name:/Start animation|Pause motion|Play motion/}).count(),0);const before=await point(page);await page.waitForTimeout(550);assert.ok(distance(before,await point(page))>8);
+ await page.reload();await moving(page);const reloaded=await point(page);await page.waitForTimeout(550);assert.ok(distance(reloaded,await point(page))>8,'Reload needs no stored opt-in');
 },{reducedMotion:'reduce'});
-await check('A reduced-motion visitor can start the scene once and keep that choice after reload',async page=>{
- const start=page.getByRole('button',{name:'Start animation',exact:true});await start.waitFor();await start.click();await moving(page);assert.equal(await start.count(),0);const before=await point(page);await page.waitForTimeout(550);assert.ok(distance(before,await point(page))>8);assert.equal(await page.locator('.orbit-depth-glow').evaluate(node=>getComputedStyle(node).animationName),'orbit-light-drift');
- await page.reload();await moving(page);assert.equal(await start.count(),0);const reloaded=await point(page);await page.waitForTimeout(550);assert.ok(distance(reloaded,await point(page))>8,'The saved explicit choice starts automatically');
+await check('Automatic desktop motion does not depend on browser storage',async page=>{
+ await page.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new DOMException('Storage unavailable','SecurityError');}});});await page.reload();await moving(page);const before=await point(page);await page.waitForTimeout(550);assert.ok(distance(before,await point(page))>8);assert.equal(await page.getByRole('button',{name:/Start animation|Pause motion|Play motion/}).count(),0);
 },{reducedMotion:'reduce'});
-await check('Motion still starts when browser storage is unavailable',async page=>{
- await page.addInitScript(()=>{Object.defineProperty(window,'localStorage',{get(){throw new DOMException('Storage unavailable','SecurityError');}});});await page.reload();await page.getByRole('button',{name:'Start animation',exact:true}).click();await moving(page);const before=await point(page);await page.waitForTimeout(550);assert.ok(distance(before,await point(page))>8);assert.equal(await page.getByRole('button',{name:'Start animation',exact:true}).count(),0);
-},{reducedMotion:'reduce'});
+await check('The restrained phone composition holds every track and desktop resumes on one clock',async page=>{
+ await moving(page);await page.setViewportSize({width:390,height:844});await page.waitForFunction(()=>document.querySelector('.mk-orbit-hero').dataset.orbitRunning==='false');await page.waitForFunction(()=>[...document.querySelectorAll('.orbit-card,.orbit-card img')].every(node=>node.getAnimations().every(animation=>animation.playState==='paused'&&!animation.pending)));const held=await point(page);await page.waitForTimeout(350);assert.ok(distance(held,await point(page))<.5);assert.equal(await page.locator('.orbit-depth-glow').evaluate(node=>getComputedStyle(node).animationName),'none');
+ await page.setViewportSize({width:1440,height:900});await moving(page);const before=await point(page);await page.waitForTimeout(550);assert.ok(distance(before,await point(page))>8);const clocks=await page.locator('.orbit-card,.orbit-card img').evaluateAll(nodes=>nodes.flatMap(node=>node.getAnimations().map(animation=>Number(animation.currentTime))));assert.equal(clocks.length,16);assert.ok(Math.max(...clocks)-Math.min(...clocks)<2,'Frames and photographs retain the same native clock after resuming');
+});
 await check('The staircase drops left to right, reveals right to left and returns focus to the destination',async page=>{
  const links=[['/work','Selected designs.'],['/how-we-work','Good work. Clear collaboration.'],['/pricing','Built around you.']];
  for(const [href] of links){
@@ -55,12 +60,12 @@ await check('Reduced-motion navigation bypasses the curtain and still exposes al
 await check('The entrance fits generously across phones, tablets, desktop and landscape screens',async page=>{
  for(const [width,height] of [[320,568],[390,844],[768,1024],[844,390],[900,480],[1024,768],[1280,720],[1440,900],[1920,1080],[2560,1440]]){
   await page.setViewportSize({width,height});await page.goto(base);await page.evaluate(async()=>document.fonts.ready);await page.locator('.orbit-card img').first().evaluate(image=>image.decode());
-  await page.locator('.mk-orbit-hero[data-orbit-running]').waitFor();await page.emulateMedia({reducedMotion:'reduce'});await page.waitForFunction(()=>document.querySelector('.mk-orbit-hero').dataset.orbitRunning==='false');await page.waitForFunction(()=>[...document.querySelectorAll('[data-intro]')].every(node=>node.getAnimations().every(animation=>animation.playState==='finished')));
+  await page.locator('.mk-orbit-hero[data-orbit-running]').waitFor();await page.emulateMedia({reducedMotion:'reduce'});await page.evaluate(()=>document.querySelectorAll('.orbit-card,.orbit-card img').forEach(node=>node.getAnimations().forEach(animation=>animation.pause())));await page.waitForFunction(()=>[...document.querySelectorAll('[data-intro]')].every(node=>node.getAnimations().every(animation=>animation.playState==='finished')));
   const layout=await page.evaluate(()=>({width:innerWidth,height:innerHeight,scrollWidth:document.documentElement.scrollWidth,scrollHeight:document.documentElement.scrollHeight,title:document.querySelector('h1').getBoundingClientRect().toJSON(),body:document.querySelector('.mk-hero-copy .mk-body').getBoundingClientRect().toJSON()}));
   assert.ok(layout.scrollWidth<=width+1,`${width}x${height}: horizontal overflow`);assert.ok(layout.scrollHeight<=height+2,`${width}x${height}: homepage should be one screen`);assert.ok(layout.title.top>70&&layout.body.bottom<height-40,`${width}x${height}: generous copy spacing`);
   const phases=width>=900?[0,10000,20000,30000,40000,50000,60000,70000]:[0];
   for(const time of phases){
-   if(width>=900)await page.evaluate(time=>document.querySelectorAll('.orbit-card').forEach(card=>card.getAnimations().forEach(animation=>{animation.currentTime=time;})),time);
+   if(width>=900)await page.evaluate(time=>document.querySelectorAll('.orbit-card,.orbit-card img').forEach(card=>card.getAnimations().forEach(animation=>{animation.currentTime=time;})),time);
    const boxes=await page.locator('.orbit-card').evaluateAll(cards=>cards.filter(card=>getComputedStyle(card).display!=='none').map(card=>card.getBoundingClientRect().toJSON()));
    for(const box of boxes)assert.ok(box.x>=5&&box.right<=width-5&&box.y>=65&&box.bottom<=height-5,`${width}x${height}, ${time}: portfolio card must fit on the screen (${Math.round(box.x)},${Math.round(box.y)},${Math.round(box.right)},${Math.round(box.bottom)})`);
   }
