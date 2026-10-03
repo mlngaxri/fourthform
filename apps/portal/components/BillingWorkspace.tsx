@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import Dialog from "./Dialog";
 import { api } from "../lib/client";
 import type { Project } from "../lib/model";
-const paymentNames: Record<string, string> = { initial: "Website start", final: "Site remaining balance", revision: "Additional revision round", pro: "Pro subscription" };
+import {websitePackageLabels, websiteToolLabels} from "../../../shared/service-labels";
+const paymentNames: Record<string, string> = { initial: "Website start", final: "Website remaining balance", revision: "Additional revision round", pro: "Advanced tools subscription" };
 type Receipt = { id: string; kind: string; amount: number; paid_at: string };
 export default function BillingWorkspace({
   project,
@@ -51,7 +52,7 @@ export default function BillingWorkspace({
           <span className="overline">Account / Billing</span>
           <h1>Clear costs. Confirmed payments.</h1>
           <p>
-            View confirmed payments and manage your optional Pro subscription. If you have just paid, allow a moment for confirmation.
+            View confirmed payments and manage your optional advanced tools subscription. If you have just paid, allow a moment for confirmation.
           </p>
         </div>
       </header>
@@ -60,7 +61,7 @@ export default function BillingWorkspace({
       {error && <div role="alert"><p>{error}</p><button onClick={() => setAttempt((n) => n + 1)}>Reload billing</button></div>}
       <div className="connected-grid">
         <div className="connected-card">
-          <h2>Fourthform {project.package === "FIRST" ? "First" : "Site"}</h2>
+          <h2>{websitePackageLabels[project.package]}</h2>
           <p>
             {project.package === "FIRST"
               ? "A$199 once for one page and one revision round."
@@ -85,17 +86,17 @@ export default function BillingWorkspace({
           )}
         </div>
         <div className="connected-card">
-          <h2>{project.pro ? "Pro active" : "Core included"}</h2>
+          <h2>{project.pro ? `${websiteToolLabels.PRO} active` : websiteToolLabels.CORE}</h2>
           <p>
-            Core covers website editing, traffic reports, search metadata and
-            your enquiry inbox. Pro adds scheduled content, longer reports,
+            Your included tools cover website editing, traffic reports, search metadata and
+            your enquiry inbox. Advanced tools add scheduled content, longer reports,
             comparisons and guidance across published pages.
           </p>
           {subscriptions.length > 0 && (
             <p>Subscription: {subscriptions[0].status.replaceAll("_", " ")}</p>
           )}
-          <p>Pro is A$39 per month. Core remains included when Pro ends.</p>
-          {subscriptions[0]?.periodEnd && <p>{subscriptions[0].cancelAtPeriodEnd ? "Pro ends" : "Next renewal"}: {new Date(subscriptions[0].periodEnd * 1000).toLocaleDateString()}</p>}
+          <p>Advanced tools are A$39 per month. Your included tools remain available if you end the subscription.</p>
+          {subscriptions[0]?.periodEnd && <p>{subscriptions[0].cancelAtPeriodEnd ? "Subscription ends" : "Next renewal"}: {new Date(subscriptions[0].periodEnd * 1000).toLocaleDateString()}</p>}
           {!loading && !error && (subscriptions.length > 0 ? (
             <button
               disabled={busy || managing}
@@ -105,7 +106,7 @@ export default function BillingWorkspace({
             </button>
           ) : (
             project.phase === "LIVE" && (
-              <button disabled={busy} onClick={() => onPay("pro")}>Add Pro · A$39/month</button>
+              <button disabled={busy} onClick={() => onPay("pro")}>Add advanced tools · A$39/month</button>
             )
           ))}
         </div>
@@ -116,7 +117,7 @@ export default function BillingWorkspace({
           ["canceled", "incomplete_expired"].includes(s.status),
         ) &&
         project.phase === "LIVE" && (
-          <button disabled={busy} onClick={() => onPay("pro")}>Restart Pro · A$39/month</button>
+          <button disabled={busy} onClick={() => onPay("pro")}>Restart advanced tools · A$39/month</button>
         )}
       <h2>Payment history</h2>
       <table className="connected-table">

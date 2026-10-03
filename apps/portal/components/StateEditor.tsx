@@ -101,7 +101,7 @@ export default function StateEditor({
     <section className="direction-workspace">
       <header className="workspace-heading">
         <div>
-          <span className="overline">Form / States · Pro</span>
+          <span className="overline">Form / Scheduled content</span>
           <h1>Content for the right moment.</h1>
           <p>
             Save a draft, preview it, then activate your schedules when ready. Only activated schedules change your public website. Usual content returns outside their hours.
@@ -341,10 +341,10 @@ export default function StateEditor({
       ) : (
         <>
           <p>
-            Core includes your complete website. Pro adds scheduled States and
+            Your included tools cover everyday editing. Advanced tools add scheduled content and
             automatic content changes.
           </p>
-          <button onClick={onUpgrade}>Pro · A$39/month</button>
+          <button onClick={onUpgrade}>Advanced tools · A$39/month</button>
         </>
       )}
       {confirm && <Dialog title="Activate these State schedules?" onClose={() => { if (!activating) setConfirm(false); }}><p>{states.filter(s => s.enabled).length} enabled schedules will replace the currently active set. Content changes appear during each schedule’s hours. Removing all schedules restores usual content.</p><ul>{states.map(s => <li key={s.id}>{s.title}: {s.enabled ? `${s.start} to ${s.end}, ${s.timezone}` : "Paused"}</li>)}</ul><div className="connected-actions"><button disabled={activating} onClick={() => setConfirm(false)}>Keep editing</button><button className="primary" disabled={activating} onClick={async () => { if (activating) return; setActivating(true); setLoadError(""); try { const saved = await editor.save(); if (!saved) return; if (activateKey.current?.expected !== saved.version) activateKey.current = { expected: saved.version, key: crypto.randomUUID() }; const r = await api(`/api/projects/${board.project_id}/states`, { boardId: board.id, expected: saved.version, key: activateKey.current.key }); setRelease(r.release); activateKey.current = null; setConfirm(false); } catch (e) { setLoadError((e as Error).message); } finally { setActivating(false); } }}>{activating ? "Activating…" : "Activate on website"}</button></div>{loadError && <p role="alert">{loadError}</p>}</Dialog>}

@@ -393,7 +393,7 @@ export default function SiteContentEditor({
               </button>
               {insights && (
                 <div className="connected-card">
-                  <span className="overline">Pro / Search insights</span>
+                  <span className="overline">Advanced tools / Search insights</span>
                   <h2>Across your published pages</h2>
                   <ul>
                     {insights.map((i) => (

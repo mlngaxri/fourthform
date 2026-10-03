@@ -18,7 +18,7 @@ async function readable(page,selector,backgroundSelector){
 }
 await check('The landing page uses a warm editorial display with an accessible complete message',async page=>{
  await page.goto(base);await page.evaluate(()=>document.fonts.ready);await page.getByRole('heading',{name:'A website. All your own.',exact:true}).waitFor();
- const design=await page.locator('#hero-heading').evaluate(node=>({font:getComputedStyle(node).fontFamily,loaded:document.fonts.check('100px General Sans'),large:parseFloat(getComputedStyle(node.querySelector('.hero-word')).fontSize),small:parseFloat(getComputedStyle(node.querySelector('.hero-connector')).fontSize)}));assert.match(design.font,/General Sans/);assert.equal(design.loaded,true);assert.ok(design.large>design.small&&design.large<design.small*2);assert.equal(await page.getByRole('button',{name:/Start animation|Pause motion|Play motion/}).count(),0);
+ const design=await page.locator('#hero-heading').evaluate(node=>({font:getComputedStyle(node).fontFamily,loaded:document.fonts.check('100px Schibsted Grotesk'),large:parseFloat(getComputedStyle(node.querySelector('.hero-word')).fontSize),small:parseFloat(getComputedStyle(node.querySelector('.hero-connector')).fontSize)}));assert.match(design.font,/Schibsted Grotesk/);assert.equal(design.loaded,true);assert.ok(design.large>design.small*2&&design.large<design.small*3);assert.equal(await page.getByRole('button',{name:/Start animation|Pause motion|Play motion/}).count(),0);
 });
 await check('All public destinations keep the same readable dark navigation',async page=>{
  for(const route of ['/','/work','/how-we-work','/pricing','/contact']){
@@ -28,10 +28,23 @@ await check('All public destinations keep the same readable dark navigation',asy
 });
 await check('Portal navigation stays legible around an unchanged customer website',async page=>{
  await page.goto(base+'/portal-preview/index.html');await page.locator('#moriPage').waitFor();await readable(page,'.brand,#leftRail .nav button.active','#leftRail');assert.match(await page.locator('#moriPage h1').textContent(),/Dinner/);
+ for(const selector of ['#leftRail','.shell .top','.shell .stage'])assert.equal(await page.locator(selector).evaluate(node=>getComputedStyle(node).backgroundImage),'none',`${selector} should keep a flat working surface`);
+ assert.match(await page.locator('#leftRail').evaluate(node=>getComputedStyle(node).fontFamily),/Schibsted Grotesk/);
  await page.screenshot({path:'docs/preview-evidence/brand-portal-review.png'});
  await page.locator('#leftRail [data-view="overview"]').click();await page.screenshot({path:'docs/preview-evidence/brand-portal-overview.png'});
  await page.locator('#leftRail [data-view="pages"]').click();const field=page.locator('[data-field="heading"]');await field.fill('One consistent workspace');await page.locator('#leftRail [data-view="analytics"]').click();await page.locator('#leftRail [data-view="pages"]').click();assert.equal(await field.inputValue(),'One consistent workspace');await page.screenshot({path:'docs/preview-evidence/brand-portal-pages.png'});
 });
+await check('The hero changes font treatment automatically without moving its message',async page=>{
+ await page.goto(base);await page.evaluate(()=>document.fonts.ready);await page.locator('#hero-heading[data-type-running="true"]').waitFor();
+ const families=await page.locator('.hero-typeface').evaluateAll(nodes=>nodes.map(node=>getComputedStyle(node).fontFamily));assert.match(families[0],/Archivo/);assert.match(families[1],/Schibsted Grotesk/);assert.match(families[2],/Instrument Serif/);
+ const before=await page.locator('#hero-heading').boundingBox();
+ for(const [time,visible] of [[0,0],[4800,1],[9600,2]]){
+  await page.locator('.hero-typeface').evaluateAll((nodes,time)=>nodes.forEach(node=>node.getAnimations().forEach(track=>{track.pause();track.currentTime=time;})),time);
+  const opacities=await page.locator('.hero-typeface').evaluateAll(nodes=>nodes.map(node=>Number(getComputedStyle(node).opacity)));assert.ok(opacities[visible]>.99);assert.equal(opacities.filter(value=>value>.99).length,1);
+  assert.deepEqual(await page.locator('#hero-heading').boundingBox(),before);
+ }
+ await page.emulateMedia({reducedMotion:'reduce'});await page.waitForFunction(()=>document.querySelector('#hero-heading').dataset.typeRunning==='false');assert.equal(await page.locator('.hero-typeface').evaluateAll(nodes=>nodes.flatMap(node=>node.getAnimations()).length),0);assert.ok(await page.getByRole('heading',{name:'A website. All your own.',exact:true}).isVisible());
+},{reducedMotion:'no-preference'});
 await check('Motion is finite in editing surfaces and switching views preserves input focus',async page=>{
  await page.goto(base+'/portal-preview/index.html?view=pages');const field=page.locator('[data-field="heading"]');await field.fill('A stable editing surface');await page.waitForTimeout(650);assert.ok(await field.evaluate(node=>node===document.activeElement));assert.equal(await field.inputValue(),'A stable editing surface');
  const infinite=await page.locator('.shell').evaluate(node=>node.getAnimations({subtree:true}).filter(animation=>animation.effect?.getTiming().iterations===Infinity).length);assert.equal(infinite,0);

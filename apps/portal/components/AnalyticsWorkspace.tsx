@@ -133,7 +133,7 @@ export default function AnalyticsWorkspace({
           </div>
           {data.pro && (
             <div className="connected-card">
-              <span className="overline">Pro / Audience detail</span>
+              <span className="overline">Advanced tools / Audience detail</span>
               <h2>What changed?</h2>
               <table className="connected-table"><thead><tr><th>Metric</th><th>Current {days} days</th><th>Previous {days} days</th><th>Change</th></tr></thead><tbody>{([ ["Page views", "views"], ["Visitor days", "visitors"], ["Action clicks", "actions"], ["Enquiries", "forms"] ] as const).map(([label, key]) => { const current = data[key], previous = data.comparison?.[key] || 0; return <tr key={key}><td>{label}</td><td>{current}</td><td>{previous}</td><td>{previous ? `${Math.round((current - previous) / previous * 100)}%` : current ? "New activity" : "No change"}</td></tr>; })}</tbody></table>
               <h3>Countries</h3>
@@ -169,7 +169,7 @@ export default function AnalyticsWorkspace({
           )}
           {!data.pro && (
             <p>
-              Pro adds 90-day reports, comparisons, country detail and action
+              Advanced tools add 90-day reports, comparisons, country detail and action
               counts by page.
             </p>
           )}

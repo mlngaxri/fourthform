@@ -103,7 +103,7 @@ export default function ProjectWorkspace({
   const build = project.phase === "BUILDING";
   const allSections = projectSections(project.phase, operator);
   const primary = project.phase === "LIVE" ? ["overview", "pages", "analytics", "inbox"] : ["overview", "direction", "review"];
-  const sectionLabel = (s: string) => s === "states" ? "States · Pro" : s === "seo" ? "Search" : s === "build" ? "Project history" : s[0].toUpperCase() + s.slice(1);
+  const sectionLabel = (s: string) => s === "states" ? "Scheduled content" : s === "seo" ? "Search" : s === "build" ? "Project history" : s[0].toUpperCase() + s.slice(1);
   const progressIndex = ["DRAFT_ONBOARDING","AWAITING_INITIAL_PAYMENT","DIRECTION"].includes(project.phase)?0:project.phase==="BUILDING"?1:["REVIEW","REVISION_IN_PROGRESS"].includes(project.phase)?2:3;
   const navigationLink = (s: string) => <Link key={s} aria-current={s === section ? "page" : undefined} className={s === section ? "active" : ""} href={`/projects/${project.id}/${s}`}>{sectionLabel(s)}</Link>;
   return (
@@ -304,7 +304,7 @@ export default function ProjectWorkspace({
             )}
             {project.phase === "LIVE" && (
               <>
-                <p>Core is included with your Fourthform website.</p>
+                <p>Everyday editing tools are included with your Fourthform website.</p>
                 <Link href={`/projects/${project.id}/billing`}>
                   View billing and subscriptions
                 </Link>

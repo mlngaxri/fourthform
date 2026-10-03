@@ -6,6 +6,7 @@ import { useUnsavedGuard } from "./useUnsavedGuard";
 import { api } from "../lib/client";
 import { initialObjects, type Project } from "../lib/model";
 import { SaveControl } from "./useSave";
+import {websitePackageLabels} from "../../../shared/service-labels";
 export default function Onboarding({
   signedIn,
   returnTo = "/start",
@@ -148,7 +149,7 @@ export default function Onboarding({
     if (packageName === "FIRST") {
       const date = new Date(openedOn + "T12:00:00");
       const oldest = new Date(); oldest.setMonth(oldest.getMonth() - 6);
-      if (!openedOn || !Number.isFinite(date.getTime()) || date > new Date() || date < oldest) issues.openedOn = "First is for businesses opened in the last six months. Choose an eligible opening date or select Site.";
+      if (!openedOn || !Number.isFinite(date.getTime()) || date > new Date() || date < oldest) issues.openedOn = "The one-page package is for businesses opened in the last six months. Choose an eligible opening date or select Custom website.";
     }
     setFieldErrors(issues);
     if (Object.keys(issues).length) { setError("Check the highlighted business information."); document.getElementById(`brief-${Object.keys(issues)[0]}`)?.focus(); return; }
@@ -261,12 +262,12 @@ export default function Onboarding({
           <div className="start-rule">
             <strong>
               {packageName === "FIRST"
-                ? "Fourthform First costs A$199."
+                ? "A one-page website costs A$199."
                 : "A website costs A$1,500."}
             </strong>
             <p>
               {packageName === "FIRST"
-                ? "One page. One revision round. Core included."
+                ? "One page. One revision round. Everyday tools included."
                 : "A$200 to start. A$1,300 when approved."}
             </p>
             <p>
@@ -420,8 +421,8 @@ export default function Onboarding({
                       dirty();
                     }}
                   >
-                    <option value="SITE">Site · A$1,500 · Up to 5 pages</option>
-                    <option value="FIRST">First · A$199 · One page</option>
+                    <option value="SITE">{websitePackageLabels.SITE} · A$1,500 · Up to 5 pages</option>
+                    <option value="FIRST">{websitePackageLabels.FIRST} · A$199 · One page</option>
                   </select>
                 </label>
                 {packageName === "FIRST" && (
@@ -440,9 +441,9 @@ export default function Onboarding({
                         dirty();
                       }}
                     />
-                    <small id="brief-openedOn-help">{fieldErrors.openedOn || "First is available within six months of opening."}</small>
+                    <small id="brief-openedOn-help">{fieldErrors.openedOn || "The one-page package is available within six months of opening."}</small>
                     <small>
-                      First is available within six months of opening. The date
+                      The one-page package is available within six months of opening. The date
                       is checked before your brief is saved.
                     </small>
                   </label>
@@ -587,7 +588,7 @@ export default function Onboarding({
                 </div>
                 <div className="commit-card">
                   <div>
-                    <span>{packageName === "FIRST" ? "First · one custom page" : "Site · up to 5 custom pages"}</span>
+                    <span>{packageName === "FIRST" ? "One-page website · one custom page" : "Custom website · up to 5 custom pages"}</span>
                     <strong>
                       {packageName === "FIRST" ? "A$199" : "A$1,500"}
                     </strong>
@@ -612,7 +613,7 @@ export default function Onboarding({
                   Your Initial Direction does not use a revision.
                 </p>
                 <p className="muted">
-                  Core is included after launch. Domain registration and
+                  Everyday editing tools are included after launch. Domain registration and
                   renewals are paid directly to your registrar.
                 </p>
                 <button

@@ -1,7 +1,7 @@
 export const previewSpaces=[
- {id:'design',number:'01',title:'Shape the website',view:'review',copy:'Bring your ideas, follow the build and leave feedback on the working design.',features:['Direction','Build','Review'],label:'Design & feedback'},
- {id:'content',number:'02',title:'Make it your own',view:'pages',copy:'Edit a page, change an image or create content for a different moment.',features:['Pages','States'],label:'Content & States'},
- {id:'insight',number:'03',title:'Understand the audience',view:'analytics',copy:'Explore visitor patterns, search details and the connections behind the website.',features:['Analytics','Search','Connections'],label:'Audience & search'},
- {id:'launch',number:'04',title:'Bring it into the world',view:'launch',copy:'Try the final checks, explore your domain and see how the account fits together.',features:['Launch','Domains','Billing','Settings'],label:'Launch & account'},
+ {id:'design',number:'01',title:'Review the design',view:'review',copy:'Follow the build and leave feedback beside the page you want to change.',features:['Brief','Build','Review'],label:'Design & feedback'},
+ {id:'content',number:'02',title:'Update your content',view:'pages',copy:'Change words and images, then try scheduling different content for later.',features:['Pages','Scheduled content'],label:'Content updates'},
+ {id:'insight',number:'03',title:'See how visitors use it',view:'analytics',copy:'Explore sample traffic, search information and website connections.',features:['Analytics','Search','Connections'],label:'Visitors & search'},
+ {id:'launch',number:'04',title:'Prepare for launch',view:'launch',copy:'Try the launch checks, domain setup and billing with example data.',features:['Launch','Domains','Billing','Settings'],label:'Launch & account'},
 ] as const;
 export function findSpace(id:unknown){return previewSpaces.find(space=>space.id===id);}

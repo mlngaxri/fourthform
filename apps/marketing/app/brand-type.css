@@ -1,7 +1,7 @@
-/* Awwwards collection: Clash Display for identity, Geist for reading and controls. */
-:root{--mk-serif:var(--font-display)}
+/* Large Schibsted headings, Archivo identity and an editorial serif accent. */
+:root{--mk-serif:var(--font-editorial)}
 .mk-display,.work-intro h1,.work-end h2,.work-dialog-copy h2,.original-design-intro h1{font-family:var(--font-display);font-weight:500;letter-spacing:-.035em}
-.mk-display em,.work-intro h1 em,.work-end h2 em{font-family:inherit;font-style:normal;font-weight:500;letter-spacing:inherit}
+.mk-display em,.work-intro h1 em,.work-end h2 em{font-family:var(--font-editorial);font-style:italic;font-weight:400;letter-spacing:-.025em}
 .mk-wordmark,.work-wordmark,.mk-footer b{font-family:var(--font-display);font-weight:700;letter-spacing:-.025em}
 .portfolio-card-info strong,.portfolio-card-wide .portfolio-card-info strong{font-family:var(--font-display);font-weight:500;letter-spacing:-.025em}
 .mk-simple .mk-hero .mk-display{letter-spacing:-.035em;line-height:1.02}
@@ -16,3 +16,9 @@
 .work-intro-bottom{display:block;margin-top:18px;max-width:57ch}
 .work-intro-bottom>div>p{max-width:none;margin:0}
 @media(max-width:760px){.work-intro{padding-top:110px;padding-bottom:28px}.work-intro-eyebrow{margin-bottom:18px}.work-intro-star{display:none}.work-intro-bottom{margin-top:14px}.work-intro-bottom>div>p{font-size:13px;line-height:1.7}}
+
+.mk-site .mk-button,.mk-site .mk-price-primary,.mk-site .mk-price-secondary,.contact-panel{border-radius:6px}
+.mk-site .ff-section-intro h1,.mk-site .mk-pricing-head h1{font-weight:400;letter-spacing:-.05em;line-height:.98}
+.mk-site .mk-kicker{font-size:10px;letter-spacing:.1em}
+.mk-site .mk-process-step h3{font-size:24px;letter-spacing:-.04em;font-weight:400}
+.mk-site .mk-process-step{padding-top:24px}

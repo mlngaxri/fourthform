@@ -18,9 +18,11 @@
   --success: #53634d;
   --warning: #7c6039;
   --error: #994d45;
-  --font-sans: "General Sans", Arial, sans-serif;
+  --font-sans: "Schibsted Grotesk", Arial, sans-serif;
   --font-mono: "Geist Mono Variable", monospace;
-  --font-display: "General Sans", Arial, sans-serif;
+  --font-display: "Schibsted Grotesk", Arial, sans-serif;
+  --font-impact: Archivo, Arial, sans-serif;
+  --font-editorial: "Instrument Serif", Georgia, serif;
   --radius-control: 10px;
   --radius-input: 12px;
   --radius-surface: 14px;

@@ -20,3 +20,13 @@ apps/marketing/public/portal-preview/fonts/cabinet-grotesk.woff2
 # General Sans is obtained unmodified from Fontshare at build time.
 apps/*/public/fonts/general-sans.woff2
 apps/marketing/public/portal-preview/fonts/general-sans.woff2
+
+# Locally bundled OFL masters are copied from shared/fonts at build time.
+apps/*/public/fonts/schibsted-grotesk.woff2
+apps/*/public/fonts/schibsted-grotesk-LICENSE.txt
+apps/marketing/public/portal-preview/fonts/schibsted-grotesk.woff2
+apps/marketing/public/portal-preview/fonts/schibsted-grotesk-LICENSE.txt
+apps/*/public/fonts/archivo.woff2
+apps/*/public/fonts/archivo-LICENSE.txt
+apps/marketing/public/portal-preview/fonts/archivo.woff2
+apps/marketing/public/portal-preview/fonts/archivo-LICENSE.txt

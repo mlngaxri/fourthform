@@ -197,7 +197,7 @@
     ],
     billing: [
       "Ownership stays simple.",
-      "Core is included after launch for content updates, basic analytics, search details and domain management. Pro is optional at A$39 / month.",
+      "Everyday tools are included after launch for content updates, basic analytics, search details and domain management. Advanced tools are optional at A$39 / month.",
       "A considered upgrade.",
       "Explore the capabilities before deciding. This preview never collects payment information.",
     ],
@@ -353,7 +353,7 @@
     return (
       intro(
         "Schedule content for the moment.",
-        "A State is a scheduled version of selected website content. Choose the days and times; your usual content returns afterwards. States are part of Pro.",
+        "A State is a scheduled version of selected website content. Choose the days and times; your usual content returns afterwards. Scheduled content is part of Advanced tools.",
         "states",
       ) +
       `<div class="ops-grid"><div><div class="ops-box"><h3>${esc(state.stateName)} <span style="float:right" class="ops-status">${state.scheduled ? "Enabled draft" : "Disabled draft"}</span></h3>${input("State name", "stateName")}${input("Alternate heading", "stateHeading")}<div class="ops-tabs">${["S", "M", "T", "W", "T", "F", "S"].map((d, i) => `<button data-day="${i}" aria-label="${["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"][i]}" aria-pressed="${state.stateDays.includes(i)}">${d}</button>`).join("")}</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">${input("From", "stateStart", "time")}${input("Until", "stateEnd", "time")}</div><p>Australia / Brisbane · Draft only. Save before activation. End time is exclusive. Overnight schedules belong to the day they begin.</p><div class="ops-actions">${button("Save draft", "save-state", true)}${button(state.scheduled ? "Disable in draft" : "Enable in draft", "toggle-state")}${button("Review & activate", "activate-state")}</div></div><div class="ops-state-card"><h3>${state.activatedState?"Activated example schedule":"No activated schedule"}</h3><p>${state.activatedState?esc(state.activatedState.stateName)+" · "+esc(state.activatedState.stateStart)+" to "+esc(state.activatedState.stateEnd)+" · Australia/Brisbane":"Saving a draft does not activate it."}</p><h3>Your usual website</h3><p>Your usual content returns when the scheduled period ends. A State keeps the same layout and typography.</p></div></div><div>${mini(state.statePreview==="base"?siteContent().heading:state.stateHeading,siteContent())}<div class="ops-tabs" style="margin-top:18px"><button data-state-preview="base" aria-pressed="${state.statePreview==='base'}">Usual content</button><button data-state-preview="state" aria-pressed="${state.statePreview!=='base'}">${esc(state.stateName)}</button></div><p class="ops-notice">Content preview. Select either version above to compare the wording and design.</p></div></div></div>`
@@ -363,10 +363,10 @@
     return (
       intro(
         "Your plan and payments.",
-        window.ffPreviewPackage.id==='first'?"First is A$199 once for one page and one revision round. Core stays included. Pro is an optional A$39 / month.":"Site is A$1,500, with A$200 to start and A$1,300 on approval. Core stays included after launch. Pro is an optional A$39 / month.",
+        window.ffPreviewPackage.id==='first'?"A one-page website is A$199 once for one page and one revision round. Everyday tools stay included. Advanced tools are an optional A$39 / month.":"A custom website is A$1,500, with A$200 to start and A$1,300 on approval. Everyday tools stay included after launch. Advanced tools are an optional A$39 / month.",
         "billing",
       ) +
-      `<div class="ops-grid"><div class="ops-box"><h3>${state.pro ? "Fourthform Pro" : "Fourthform Core"} <span class="ops-status" style="float:right">${state.pro ? "Active" : "Included"}</span></h3><div class="ops-plan-price">${state.pro ? "A$39" : "A$0"}<small> / month</small></div><p>${state.pro ? "Scheduled States, deeper analytics and search insights. An optional upgrade to your everyday toolkit." : "Content updates, basic analytics, search details and domain management. Included after launch."}</p><div class="ops-actions">${button(state.pro ? "Manage subscription" : "Explore Pro", state.pro ? "manage-pro" : "upgrade-pro", true)}</div><div class="ops-line"><span>Payment method</span><span>Visa ending 4242</span></div><div class="ops-line"><span>Billing email</span><span>hello@morihouse.com.au</span></div>${button("Update billing details", "billing-details")}</div><div class="ops-box"><h3>Website payments</h3><table class="ops-table"><tbody><tr><td>Initial payment · 18 Sep</td><td>A$${window.ffPreviewPackage.initial} · Paid</td></tr><tr><td>Remaining balance</td><td>A$${window.ffPreviewPackage.balance} · ${state.launch[1] ? "Paid" : "After approval"}</td></tr><tr><td>Included revision rounds</td><td>${window.ffPreviewPackage.rounds}</td></tr><tr><td>Additional revision</td><td>A$150 / round</td></tr></tbody></table><div class="ops-actions">${button(state.launch[1]?"View payment summary":"View initial receipt", "receipt")}</div><p>All prices are in Australian dollars.</p></div></div></div>`
+      `<div class="ops-grid"><div class="ops-box"><h3>${state.pro ? "Advanced tools" : "Included tools"} <span class="ops-status" style="float:right">${state.pro ? "Active" : "Included"}</span></h3><div class="ops-plan-price">${state.pro ? "A$39" : "A$0"}<small> / month</small></div><p>${state.pro ? "Scheduled States, deeper analytics and search insights. An optional upgrade to your everyday toolkit." : "Content updates, basic analytics, search details and domain management. Included after launch."}</p><div class="ops-actions">${button(state.pro ? "Manage subscription" : "Explore advanced tools", state.pro ? "manage-pro" : "upgrade-pro", true)}</div><div class="ops-line"><span>Payment method</span><span>Visa ending 4242</span></div><div class="ops-line"><span>Billing email</span><span>hello@morihouse.com.au</span></div>${button("Update billing details", "billing-details")}</div><div class="ops-box"><h3>Website payments</h3><table class="ops-table"><tbody><tr><td>Initial payment · 18 Sep</td><td>A$${window.ffPreviewPackage.initial} · Paid</td></tr><tr><td>Remaining balance</td><td>A$${window.ffPreviewPackage.balance} · ${state.launch[1] ? "Paid" : "After approval"}</td></tr><tr><td>Included revision rounds</td><td>${window.ffPreviewPackage.rounds}</td></tr><tr><td>Additional revision</td><td>A$150 / round</td></tr></tbody></table><div class="ops-actions">${button(state.launch[1]?"View payment summary":"View initial receipt", "receipt")}</div><p>All prices are in Australian dollars.</p></div></div></div>`
     );
   }
   function launch() {
@@ -385,7 +385,7 @@
         ],
         [
           "Remaining balance",
-          window.ffPreviewPackage.balance?"A$1,300 · Complete your website payment.":"A$0 · First was paid in full at the start.",
+          window.ffPreviewPackage.balance?"A$1,300 · Complete your website payment.":"A$0 · The one-page website was paid in full at the start.",
           "pay-balance",
         ],
         [
@@ -555,7 +555,7 @@
     el.id = "opsModal";
     el.setAttribute("role", "dialog");
     el.setAttribute("aria-modal", "true");
-    el.innerHTML = `<div class="modal"><small>Fourthform / ${state.pro ? "Pro" : "Core"}</small><h2 id="opsModalTitle">${title}</h2><p>${copy}</p><div class="modal-actions">${button("Back", "close-dialog")}${actions || ""}</div></div>`;
+    el.innerHTML = `<div class="modal"><small>Fourthform / ${state.pro ? "Advanced tools" : "Included tools"}</small><h2 id="opsModalTitle">${title}</h2><p>${copy}</p><div class="modal-actions">${button("Back", "close-dialog")}${actions || ""}</div></div>`;
     el.setAttribute("aria-labelledby", "opsModalTitle");
     document.body.append(el);
     opsModal = el;
@@ -790,24 +790,24 @@
       case "upgrade-pro":
         dialog(
           "The same website. More possibility.",
-          "Scheduled States, deeper analytics and search insights. A$39 / month. Try the Pro concept in this preview. No payment is taken.",
-          button("Explore Pro experience", "confirm-pro", true),
+          "Scheduled States, deeper analytics and search insights. A$39 / month. Try advanced tools in this preview. No payment is taken.",
+          button("Explore advanced tools", "confirm-pro", true),
         );
         break;
       case "confirm-pro":
-        if(!commitState(()=>{state.pro=true;},"Pro preview activated"))break;
+        if(!commitState(()=>{state.pro=true;},"Advanced tools preview activated"))break;
         render("billing");
         closeOpsDialog();
         break;
       case "manage-pro":
         dialog(
-          "Your Pro subscription.",
-          "A$39 / month. Next invoice: 30 October. Your Core website remains included if you end Pro.",
-          button("End Pro preview", "cancel-pro"),
+          "Your advanced tools subscription.",
+          "A$39 / month. Next invoice: 30 October. Your everyday website tools remain included if you end the subscription.",
+          button("End advanced tools preview", "cancel-pro"),
         );
         break;
       case "cancel-pro":
-        if(!commitState(()=>{state.pro=false;},"Core preview restored"))break;
+        if(!commitState(()=>{state.pro=false;},"Included tools preview restored"))break;
         render("billing");
         closeOpsDialog();
         break;
@@ -821,7 +821,7 @@
       case "receipt":
         dialog(
           state.launch[1]?"Your website payments.":"Your initial payment.",
-          state.launch[1]?"Mori House / Site · A$200 initial payment and A$1,300 balance paid. Total: A$1,500. No remaining balance. This sample receipt is part of the product preview.":"Mori House / Site · A$200 · 18 September 2026. Remaining balance: A$1,300 after approval. This sample receipt is part of the product preview.",
+          state.launch[1]?"Mori House / Custom website · A$200 initial payment and A$1,300 balance paid. Total: A$1,500. No remaining balance. This sample receipt is part of the product preview.":"Mori House / Custom website · A$200 · 18 September 2026. Remaining balance: A$1,300 after approval. This sample receipt is part of the product preview.",
           button("Done", "close-dialog", true),
         );
         break;
