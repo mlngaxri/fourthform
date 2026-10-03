@@ -26,9 +26,9 @@
 .mk-simple .mk-orbit-copy{top:52%;width:min(740px,60vw);max-width:none}
 .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(48px,min(7.1vw,13.2svh),104px);line-height:1.03;font-weight:600;letter-spacing:-.045em}
 .mk-simple .mk-orbit-copy .mk-body{font-size:clamp(13px,1.1vw,15px);line-height:1.7;max-width:44ch;margin:25px auto 0;color:#686354}
-.orbit-depth{background:radial-gradient(ellipse at 50% 108%,#3b2e54 0%,#e7dfcf 34%,#f3efe5 76%)}
+.orbit-depth{background:radial-gradient(ellipse at 50% 108%,#d8ceb5 0%,#e7dfcf 34%,#f3efe5 76%)}
 .orbit-depth-glow{background:radial-gradient(ellipse at 14% 55%,#b0a07a29 0%,transparent 40%),radial-gradient(ellipse at 84% 30%,#c3b2861f 0%,transparent 38%)}
-.orbit-depth-floor{bottom:-1%;left:-50%;width:200%;height:145%;transform:perspective(740px) rotateX(66deg);transform-origin:center bottom;background-image:radial-gradient(ellipse at 50% 95%,#bbaa8650,transparent 70%);background-size:88px 88px;mask-image:radial-gradient(ellipse at 50% 92%,#000 15%,#0009 47%,transparent 76%)}
+.orbit-depth-floor{bottom:-1%;left:-50%;width:200%;height:145%;transform:perspective(740px) rotateX(66deg);transform-origin:center bottom;background-image:radial-gradient(ellipse at 50% 95%,#bbaa8650,transparent 70%);background-size:100% 100%;background-repeat:no-repeat;mask-image:radial-gradient(ellipse at 50% 92%,#000 15%,#0009 47%,transparent 76%)}
 .orbit-depth-horizon{top:67%;width:115%;height:55%;border-color:#75623925;transform:translate(-50%,-50%) perspective(800px) rotateX(65deg)}
 .orbit-depth:after{background:radial-gradient(ellipse at 50% 45%,#f3efe5d9 0%,#f3efe580 25%,#f3efe500 64%)}
 .mk-section-site .ff-section-intro{padding-top:160px;padding-bottom:12px}
@@ -55,7 +55,7 @@
  .mk-simple .mk-orbit-copy{top:52%;width:calc(100% - 40px);max-width:660px}
  .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(42px,min(10vw,13svh),80px)}
  .mk-simple .mk-orbit-copy .mk-body{font-size:14px;max-width:36ch;margin-top:22px}
- .orbit-depth-floor{background-size:60px 60px;opacity:.7}
+ .orbit-depth-floor{background-size:100% 100%;opacity:.7}
  .mk-section-site .ff-section-intro{padding-top:120px}
  .ff-pricing-site .mk-pricing{padding-top:115px}
 }
