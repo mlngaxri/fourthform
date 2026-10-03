@@ -47,10 +47,10 @@
  .mk-simple .mk-orbit-hero{height:100svh;padding:0}
  .mk-orbit{inset:86px 0 58px}
  .orbit-card{width:clamp(100px,min(24vw,21svh),185px)}
- .orbit-card:nth-child(1){left:19%!important;top:10%!important}
- .orbit-card:nth-child(2){left:81%!important;top:12%!important}
- .orbit-card:nth-child(3){left:18%!important;top:89%!important}
- .orbit-card:nth-child(4){left:82%!important;top:88%!important}
+ .orbit-card:nth-child(1){left:21%!important;top:10%!important}
+ .orbit-card:nth-child(2){left:79%!important;top:12%!important}
+ .orbit-card:nth-child(3){left:21%!important;top:89%!important}
+ .orbit-card:nth-child(4){left:79%!important;top:88%!important}
  .mk-simple .mk-orbit-copy{top:52%;width:calc(100% - 40px);max-width:660px}
  .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(42px,min(10vw,13svh),80px)}
  .mk-simple .mk-orbit-copy .mk-body{font-size:14px;max-width:36ch;margin-top:22px}

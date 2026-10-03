@@ -51,9 +51,10 @@ export default function PortfolioOrbit() {
     function sync() {
       setAutomatic(desktop.matches);
       const running = desktop.matches && visible && document.visibilityState === "visible" && !pausedRef.current;
+      const heldTime = Number(players.current[0]?.currentTime ?? 0);
       players.current.forEach(player => {
         if (running && player.playState !== "running") player.play();
-        else if (!running && player.playState !== "paused") player.pause();
+        else if (!running && player.playState !== "paused") { player.pause(); player.currentTime = heldTime; }
       });
       if (hero) hero.dataset.orbitRunning = String(running);
     }
