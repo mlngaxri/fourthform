@@ -78,7 +78,7 @@
 .shell .revision-summary,.production-portal .portal-project-progress{border-color:var(--ff-edge)}
 .shell .revision-summary p,.production-portal .portal-back-link{color:var(--ff-light)}
 .production-portal .progress-row{color:#756f61}
-.production-portal .progress-row.current{color:var(--ff-ochre);background:#7562391c;border-color:#75623950}
+.production-portal .progress-row.current{color:#594920;background:#7562391c;border-color:#75623950}
 .production-portal .direction-workspace{background:#f3efe5;color:#171715}
 .production-portal .portal-more-nav>summary{color:var(--ff-light)}
 .production-portal .portal-more-nav>div{background:transparent}
