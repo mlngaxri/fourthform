@@ -1,9 +1,7 @@
-# Original portfolio collection
+# Portfolio presentation
 
-The 20 studies use the original images acquired for the portfolio collection. `lib/portfolio/original-assets.json` records their dimensions and SHA-256 checksums. Local thumbnails are resized copies. Four locally saved original recordings are available for motion previews.
+All 20 original images and four recordings remain unchanged. Checksums are verified by the structural test. The cards and their dialogs retain the original artwork. `/work/[id]?view=original` shows the original media at full size.
 
-The collection, preview dialog and `/work/[id]` routes show these originals. They do not substitute new business names, invented service copy, redesigned layouts, enquiry forms or fabricated results. The existing canonical reference URLs still feed the customer brief. The portal uses the same design titles.
+`/work/[id]` opens a clearly labelled interactive study built around the original artwork. The available catalogue supplies preview media, rather than runnable original source for most entries. The local studies are reconstructions, not claims of deployed customer projects. Visitors can navigate real HTML sections, browse sector-specific offerings and complete a sample enquiry that never sends or stores their details. Every study links back to the original for comparison.
 
-Motion uses native video with inline playback, viewport observation, a pause control and reduced-motion handling. An autoplay rejection or unavailable recording leaves the original image visible. No remote video service is required for the four saved recordings.
-
-The source catalogue was read to acquire public preview media. This update changes Fourthform's showcase. It does not change the source portfolio website.
+The homepage's eight orbit cards are keyboard-accessible links to these study routes. Reference actions lead to `/brief`, the visitor's own blank brief with save, reload and plain-text download. The separate `/preview/start` route remains an explicitly labelled onboarding simulation for product exploration.

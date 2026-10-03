@@ -117,3 +117,5 @@
 .ff-home-paths p{font-size:14px;margin:14px 0 0}
 .ff-scroll-cue{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);z-index:9;font-size:11px;color:#686354;letter-spacing:.04em;padding:8px}
 @media(max-width:760px){.ff-home-continuation{padding:65px 0}.ff-home-continuation .ff-home-intro{grid-template-columns:1fr;gap:18px;margin-bottom:35px}.ff-home-continuation .ff-home-paths{grid-template-columns:1fr;gap:20px}}
+
+@media(max-width:600px){.ff-navigation>.mk-button{display:none}}

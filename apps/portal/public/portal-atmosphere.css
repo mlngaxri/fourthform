@@ -189,3 +189,7 @@ body{font-family:var(--font-sans)}
 .production-portal .customer-site{--font-sans:"Geist Variable",Arial,sans-serif;--font-display:"Instrument Serif",Georgia,serif}
 
 .shell{--sans:"General Sans",Arial,sans-serif;--font-sans:var(--sans)}
+
+.shell{--serif:"General Sans",Arial,sans-serif}
+#moriPage{--serif:"Instrument Serif",Georgia,serif}
+.mk-site .mk-display em,.work-intro h1 em,.obp-story h1 em,.start-progress h1 em{font-family:var(--font-display);font-style:normal}
