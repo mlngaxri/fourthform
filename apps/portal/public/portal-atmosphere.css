@@ -170,3 +170,8 @@ body>.mobile-dock button.active{color:var(--ff-ochre);background:#7562391c}
 .shell .top button,.shell .panel-head h1{font-family:var(--sans)}
 
 .shell .pill.active{border-color:#75623940;color:#756239;background:#7562390b}
+
+@media(min-width:900px) and (prefers-reduced-motion:reduce){
+ :is(.mk-section-site,.work-site,.contact-site) :is(.ff-section-intro,.mk-pricing-head,.work-intro,.contact-grid>div:first-child){animation:ff-arrive .8s var(--ff-lift)!important}
+ .mk-section-site .ff-section-intro:after{animation:ff-line-open 1.1s var(--ff-lift)!important}
+}

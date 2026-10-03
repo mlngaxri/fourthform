@@ -97,3 +97,5 @@
 @media(max-width:600px){.mk-simple .mk-orbit-copy .mk-display{font-size:clamp(53px,min(15vw,15svh),78px);line-height:1.09}.mk-simple .mk-orbit-copy .mk-body{margin-top:20px}}
 @media(max-height:560px) and (min-width:900px){.mk-simple .mk-orbit-copy .mk-display{font-size:min(8.2vw,16svh)}}
 @media(max-height:500px) and (max-width:899px){.mk-simple .mk-orbit-copy .mk-display{font-size:min(12vw,16svh)}}
+
+@media(min-width:900px) and (prefers-reduced-motion:reduce){.ff-staircase{display:grid}}

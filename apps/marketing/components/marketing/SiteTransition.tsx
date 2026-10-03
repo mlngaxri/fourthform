@@ -34,7 +34,7 @@ export function SiteTransition({children}: {children: ReactNode}) {
   const navigate = useCallback(async (href: string) => {
     if (busy.current) return;
     const target = href.split(/[?#]/)[0] || "/";
-    if (target === pathname || matchMedia("(prefers-reduced-motion: reduce)").matches) { router.push(href); return; }
+    if (target === pathname || (matchMedia("(prefers-reduced-motion: reduce)").matches && !matchMedia("(min-width: 900px)").matches)) { router.push(href); return; }
     busy.current = true; expected.current = target; phase.current = "covering"; setState("covering");
     router.prefetch(href);
     const closing = panels.current.flatMap((panel, index) => panel ? [panel.animate(

@@ -54,8 +54,11 @@ await check('The staircase drops left to right, reveals right to left and return
  }
  await page.getByRole('link',{name:'Fourthform home',exact:true}).click();await moving(page);await page.waitForFunction(()=>document.querySelector('.ff-staircase').dataset.state==='idle');assert.equal(await page.locator('.orbit-card').count(),8);
 });
-await check('Reduced-motion navigation bypasses the curtain and still exposes all three views',async page=>{
- for(const href of ['/work','/how-we-work','/pricing']){await page.locator(`.ff-navigation .mk-nav-links a[href="${href}"]`).click();await page.waitForURL('**'+href);assert.equal(await page.locator('.ff-staircase').getAttribute('data-state'),'idle');assert.ok(await page.locator('main h1').isVisible());}
+await check('Reduced-motion mobile navigation remains direct and readable',async page=>{
+ for(const href of ['/work','/how-we-work','/pricing']){await page.getByRole('button',{name:'Open navigation',exact:true}).click();await page.locator(`.mk-mobile-menu a[href="${href}"]`).click();await page.waitForURL('**'+href);assert.equal(await page.locator('.ff-staircase').getAttribute('data-state'),'idle');assert.ok(await page.locator('main h1').isVisible());}
+},{reducedMotion:'reduce',viewport:{width:390,height:844}});
+await check('The desktop staircase plays automatically with device reduced motion',async page=>{
+ await page.locator('.ff-navigation .mk-nav-links a[href="/work"]').click();await page.waitForFunction(()=>document.querySelector('.ff-staircase').dataset.state==='covering');await page.waitForURL('**/work');await page.waitForFunction(()=>document.querySelector('.ff-staircase').dataset.state==='idle');assert.ok(await page.locator('main h1').evaluate(node=>node===document.activeElement));assert.equal(await page.locator('.ff-staircase').evaluate(node=>getComputedStyle(node).pointerEvents),'none');
 },{reducedMotion:'reduce'});
 await check('The entrance fits generously across phones, tablets, desktop and landscape screens',async page=>{
  for(const [width,height] of [[320,568],[390,844],[768,1024],[844,390],[900,480],[1024,768],[1280,720],[1440,900],[1920,1080],[2560,1440]]){

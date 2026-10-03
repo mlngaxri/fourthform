@@ -7,6 +7,7 @@ export function usePageMotion(root: RefObject<HTMLElement | null>) {
     const element = root.current;
     if (!element || typeof IntersectionObserver === "undefined") return;
     const preference = matchMedia("(prefers-reduced-motion: reduce)");
+    const desktop = matchMedia("(min-width: 900px)");
     let observer: IntersectionObserver | undefined;
     const animations = new Set<Animation>();
     function animate(target: Element, delay = 0) {
@@ -18,14 +19,15 @@ export function usePageMotion(root: RefObject<HTMLElement | null>) {
     function stop() { observer?.disconnect(); animations.forEach(animation => animation.cancel()); animations.clear(); element?.classList.remove("mk-motion"); }
     function start() {
       stop();
-      if (preference.matches) return;
+      if (preference.matches && !desktop.matches) return;
       element?.classList.add("mk-motion");
       element?.querySelectorAll("[data-intro]").forEach((target,index) => {const box=target.getBoundingClientRect();if(box.bottom>0 && box.top<innerHeight) animate(target,index*65);});
       observer=new IntersectionObserver(entries => {for(const entry of entries) if(entry.isIntersecting) {animate(entry.target);observer?.unobserve(entry.target);}}, {threshold:.12});
       element?.querySelectorAll("[data-reveal]").forEach(target => observer?.observe(target));
     }
     preference.addEventListener("change",start);
+    desktop.addEventListener("change",start);
     start();
-    return () => { preference.removeEventListener("change",start); stop(); };
+    return () => { preference.removeEventListener("change",start); desktop.removeEventListener("change",start); stop(); };
   }, [root]);
 }
