@@ -1,12 +1,18 @@
 [
   {
     "id": "monolith-hero",
-    "title": "Monolith Hero",
+    "title": "Stratum",
     "sourceCategory": "Architecture",
     "width": 1440,
     "height": 815,
     "source": "https://fourthform-marketing.vercel.app/work/monolith-hero",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Monolith Hero",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/aaaf/ibCJ6vtSfiGj1Pto5Xn3ug.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "oyla",
@@ -15,7 +21,13 @@
     "width": 1280,
     "height": 956,
     "source": "https://fourthform-marketing.vercel.app/work/oyla",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "OYLA",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/prompts%20(i've%20added%20them%20to%20the%20motionsites)/%20bewpostArea.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "keel",
@@ -24,34 +36,58 @@
     "width": 1440,
     "height": 1076,
     "source": "https://fourthform-marketing.vercel.app/work/keel",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Keel",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/designs/keel-landing.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "playful-idea",
-    "title": "Playful Idea",
+    "title": "Character Studio",
     "sourceCategory": "Creative Agency",
     "width": 1440,
     "height": 966,
     "source": "https://fourthform-marketing.vercel.app/work/playful-idea",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Playful Idea",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/aaaf/stopfollowupArea.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "nature-ritual",
-    "title": "Nature Ritual",
+    "title": "Mossary",
     "sourceCategory": "Wellness",
     "width": 1280,
     "height": 956,
     "source": "https://fourthform-marketing.vercel.app/work/nature-ritual",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Nature Ritual",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/designs/NatureRitual_Wellness_Lifestyle.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "performance-eyewear",
-    "title": "Performance Eyewear",
+    "title": "Orven",
     "sourceCategory": "Ecommerce",
     "width": 1440,
     "height": 1075,
     "source": "https://fourthform-marketing.vercel.app/work/performance-eyewear",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Performance Eyewear",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/a/glassesstoreArea.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "velorah-hero",
@@ -60,25 +96,40 @@
     "width": 1440,
     "height": 1064,
     "source": "https://fourthform-marketing.vercel.app/work/velorah-hero",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Velorah",
+    "recording": {
+      "url": "https://motionsites.ai/assets/hero-velorah-preview-CJNTtbpd.gif",
+      "kind": "image"
+    },
+    "originalSite": null
   },
   {
     "id": "prisma-landing",
-    "title": "Prisma Creative Studio",
+    "title": "Prisma",
     "sourceCategory": "Landing Page",
     "width": 909,
     "height": 1600,
     "source": "https://fourthform-marketing.vercel.app/work/prisma-landing",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Prisma Creative Studio",
+    "recording": null,
+    "originalSite": null
   },
   {
     "id": "custom-spaces",
-    "title": "Custom Spaces",
+    "title": "Bespoke Architecture",
     "sourceCategory": "Design",
     "width": 1280,
     "height": 956,
     "source": "https://fourthform-marketing.vercel.app/work/custom-spaces",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Custom Spaces",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/Custom%20SpacesArea.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "obsidian",
@@ -87,43 +138,73 @@
     "width": 1280,
     "height": 956,
     "source": "https://fourthform-marketing.vercel.app/work/obsidian",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Obsidian",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/a/obsisidianArea.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "human-machine",
-    "title": "Human Machine",
+    "title": "NeuralKinetics",
     "sourceCategory": "AI",
     "width": 1440,
     "height": 966,
     "source": "https://fourthform-marketing.vercel.app/work/human-machine",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Human Machine",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/aaaf/humanmachine.mp4",
+      "kind": "video"
+    },
+    "originalSite": "/original-sites/neuralkinetics/index.html"
   },
   {
     "id": "veyra-electric",
     "title": "Veyra Electric",
-    "sourceCategory": "Automative",
+    "sourceCategory": "Automotive",
     "width": 1440,
     "height": 1076,
     "source": "https://fourthform-marketing.vercel.app/work/veyra-electric",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Veyra Electric",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/designs/veyra-electric.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "vintage-care",
-    "title": "Vintage Care",
+    "title": "Art.Car",
     "sourceCategory": "Creative",
     "width": 1440,
     "height": 857,
     "source": "https://fourthform-marketing.vercel.app/work/vintage-care",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Vintage Care",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/aaaf/astra1Area.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "nature-portfolio",
-    "title": "Nature Portfolio",
+    "title": "Ethan Vale",
     "sourceCategory": "Photography",
     "width": 1280,
     "height": 956,
     "source": "https://fourthform-marketing.vercel.app/work/nature-portfolio",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Nature Portfolio",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/designs/ethan-vale-portfolio.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "anchor-ai",
@@ -132,7 +213,13 @@
     "width": 1440,
     "height": 1076,
     "source": "https://fourthform-marketing.vercel.app/work/anchor-ai",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Anchor AI",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/designs/anchor-ai-landing.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "vectrus-energy",
@@ -141,16 +228,28 @@
     "width": 1280,
     "height": 956,
     "source": "https://fourthform-marketing.vercel.app/work/vectrus-energy",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Vectrus Energy",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/a/%20%20%20%20Vectrus%20Energynew.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "golden-portal",
-    "title": "Golden Portal",
+    "title": "Digital Archive",
     "sourceCategory": "Landing Page",
     "width": 640,
     "height": 470,
     "source": "https://fourthform-marketing.vercel.app/work/golden-portal",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Golden Portal",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/hero%20sections/animated%20(13).webp",
+      "kind": "image"
+    },
+    "originalSite": null
   },
   {
     "id": "digital-epoch-hero",
@@ -159,24 +258,42 @@
     "width": 1440,
     "height": 1066,
     "source": "https://fourthform-marketing.vercel.app/work/digital-epoch-hero",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Digital Epoch",
+    "recording": {
+      "url": "https://motionsites.ai/assets/hero-digital-epoch-preview-B85ezqXO.gif",
+      "kind": "image"
+    },
+    "originalSite": null
   },
   {
     "id": "peakline-redshift",
-    "title": "Peakline Redshift",
+    "title": "Apogee",
     "sourceCategory": "SaaS",
     "width": 1280,
     "height": 956,
     "source": "https://fourthform-marketing.vercel.app/work/peakline-redshift",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Peakline Redshift",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/designs/peakline_redshift_data_platfor.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   },
   {
     "id": "orla-fashion",
-    "title": "Orla Fashion",
+    "title": "Orla",
     "sourceCategory": "Fashion",
     "width": 1440,
     "height": 966,
     "source": "https://fourthform-marketing.vercel.app/work/orla-fashion",
-    "thumbnailWidth": 560
+    "thumbnailWidth": 560,
+    "sourceTitle": "Orla Fashion",
+    "recording": {
+      "url": "https://pub-86dc5b5484314368ac5436a674b0d919.r2.dev/aaaf/cooraldfashionArea.mp4",
+      "kind": "video"
+    },
+    "originalSite": null
   }
 ]

@@ -1,0 +1,48 @@
+{
+  "captured": "2026-10-04",
+  "sourceRepository": "https://github.com/vikod3/handstouch",
+  "sourceCommit": "0eeb9daea41569c0af3ac6b5e1a12773d69b1ef4",
+  "restoration": "Original compiled dist. Only absolute asset URLs were prefixed for the Fourthform public subdirectory.",
+  "assets": [
+    {
+      "path": "original-sites/neuralkinetics/assets/hand-renderer-Br7IWngq.js",
+      "bytes": 506044,
+      "sha256": "36997448c72df7743bc4fb0eb914656aa49f28bc7426a4bc036e1242ca57e762"
+    },
+    {
+      "path": "original-sites/neuralkinetics/assets/index-BeP1qwwD.js",
+      "bytes": 332056,
+      "sha256": "fb0ffc07980e8f64442796fe522b419ef8f3cee563b477e0a012a03c88ab918e"
+    },
+    {
+      "path": "original-sites/neuralkinetics/assets/index-CVK-KwoO.css",
+      "bytes": 17707,
+      "sha256": "7746210c19e0a4fbaf7e658c60017e95f7bbb497cfa3bcb9f7e2d16b2edd2e98"
+    },
+    {
+      "path": "original-sites/neuralkinetics/favicon.svg",
+      "bytes": 361,
+      "sha256": "8eb9d4e2bb29243936190a001a167f2c81963c646b3196a86539fbdc63701ac2"
+    },
+    {
+      "path": "original-sites/neuralkinetics/index.html",
+      "bytes": 679,
+      "sha256": "a583804ef35e527a3dd62084e7cb5ced4037cf9626b0702bd0db9d4dc60e4170"
+    },
+    {
+      "path": "original-sites/neuralkinetics/media/background.mp4",
+      "bytes": 255753,
+      "sha256": "92b529f02117d3cc9249f7aa9999a1d3bdca19abbdb9ab917167d22b34b4b451"
+    },
+    {
+      "path": "original-sites/neuralkinetics/media/hands-poster.webp",
+      "bytes": 30470,
+      "sha256": "9a6217dc7fd8d9e5d3cf76f815e11cff725b751d1cd12e7f9228f469daefd2c6"
+    },
+    {
+      "path": "original-sites/neuralkinetics/media/hands-rgba.mp4",
+      "bytes": 1107179,
+      "sha256": "5414059c57c139394d34630433d68f4be2529ff6d434baa4736f2b6cafdd2490"
+    }
+  ]
+}

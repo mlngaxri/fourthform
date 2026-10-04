@@ -208,3 +208,5 @@ body{font-family:var(--font-sans)}
 .mk-wordmark,.wordmark,.obp-brand,.shell .brand,.portal-v2-logo{font-family:var(--font-impact);font-weight:700;font-stretch:100%;letter-spacing:-.045em}
 
 @media(max-width:760px){.production-portal .portal-more-nav[open]>div{background:#faf9f5}}
+
+@media(min-width:1201px){.shell .top{grid-template-columns:190px minmax(0,1fr) max-content}.shell .top #saveState{flex:0 0 auto;max-width:160px}}

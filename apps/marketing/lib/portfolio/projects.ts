@@ -3,9 +3,9 @@ import selection from "./selection.json";
 export const DESIGN_FILTERS = ["All work", "Immersive", "Editorial", "Product", "Expressive"] as const;
 export type DesignGroup = Exclude<typeof DESIGN_FILTERS[number], "All work">;
 export type PortfolioProject = {
-  id: string; title: string; sourceCategory: string; width: number; height: number; thumbnailWidth: number; source: string;
+  id: string; title: string; sourceTitle: string; sourceCategory: string; width: number; height: number; thumbnailWidth: number; source: string;
   group: DesignGroup; sector: string; line: string; description: string; techniques: string[];
-  image: string; thumbnail: string; video?: string; 
+  image: string; thumbnail: string; video?: string; motionImage?: string; originalSite?: string;
 };
 
 const notes: Record<string, {group: DesignGroup; sector: string; line: string; description: string; techniques: string[]}> = {
@@ -34,7 +34,7 @@ const notes: Record<string, {group: DesignGroup; sector: string; line: string; d
 export const projects: PortfolioProject[] = selection.map(project => {
   const note = notes[project.id];
   const videoIds=["monolith-hero","keel","nature-ritual","playful-idea"];
-  return {...project, ...note, image:`/work/${project.id}.webp`, thumbnail:`/work/${project.id}-small.webp`, video:videoIds.includes(project.id)?`/work/${project.id}.mp4`:undefined};
+  return {...project, ...note, originalSite:project.originalSite??undefined, image:`/work/${project.id}.webp`, thumbnail:`/work/${project.id}-small.webp`, video:videoIds.includes(project.id)?`/work/${project.id}.mp4`:project.recording?.kind==="video"?project.recording.url:undefined, motionImage:project.recording?.kind==="image"?project.recording.url:undefined};
 });
 export const featuredProjects = ["monolith-hero", "oyla", "playful-idea", "nature-ritual"].map(id => projects.find(project=>project.id===id)!);
 export const heroProjects = ["monolith-hero", "oyla", "keel"].map(id => projects.find(project=>project.id===id)!);

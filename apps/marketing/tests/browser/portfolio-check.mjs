@@ -1,13 +1,15 @@
 import {chromium} from 'playwright';
 import assert from 'node:assert/strict';
-import {mkdir,writeFile} from 'node:fs/promises';
+import {mkdir,readFile,writeFile} from 'node:fs/promises';
 const base=process.env.PREVIEW_URL||'http://127.0.0.1:3000';
+const projects=JSON.parse(await readFile('lib/portfolio/selection.json','utf8'));
+async function briefReady(page){await page.waitForFunction(()=>document.querySelector('[name="businessName"]')?.matches(':enabled'));}
 const browser=await chromium.launch({executablePath:process.env.TEST_CHROME||undefined,args:['--no-sandbox']});
 const results=[],errors=[];await mkdir('docs/preview-evidence',{recursive:true});
 async function check(name,fn,options={}){const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce',...options}),page=await context.newPage();page.setDefaultTimeout(10000);page.on('pageerror',e=>errors.push({name,error:e.message}));try{await fn(page);results.push({name,result:'pass'});}catch(error){results.push({name,result:'fail',detail:error.message});}finally{await context.close();}}
 async function imageReady(page){await page.locator('.portfolio-card-media img').evaluateAll(async images=>{for(const image of images){image.loading='eager';await image.decode();if(!image.naturalWidth)throw new Error(image.src);}});}
 async function shot(page,name){const image=await page.screenshot({path:`docs/preview-evidence/portfolio-${name}.jpg`,type:'jpeg',quality:55});console.log(`FF_PORTFOLIO_VISUAL_${name}=${image.toString('base64')}`);}
-await check('The collection has 20 unique local previews with source and reference actions',async page=>{
+await check('The collection has20 original designs with accurate previews and reference actions',async page=>{
  await page.goto(base+'/work');assert.equal(await page.locator('.portfolio-card').count(),20);
  const ids=await page.locator('.portfolio-card').evaluateAll(cards=>cards.map(card=>card.dataset.project));assert.equal(new Set(ids).size,20);
  await imageReady(page);await page.evaluate(async()=>document.fonts.ready);await shot(page,'desktop');
@@ -17,7 +19,10 @@ await check('The collection has 20 unique local previews with source and referen
   const id=await card.getAttribute('data-project');await card.locator('button').click();
   await page.locator('.work-dialog[open]').waitFor();assert.equal(await page.locator('.work-explore').getAttribute('href'),`/work/${id}`);
   assert.equal(await page.locator('.work-reference').getAttribute('href'),`/brief?reference=${id}`);
-  await page.locator('.work-dialog-media img').evaluate(image=>image.decode());
+  const project=projects.find(project=>project.id===id);assert.equal(await page.locator('.work-explore').textContent(),(project.originalSite?'Explore original website':project.recording?'Watch original preview':'View original design')+' ↗');
+  assert.equal(await page.locator('.work-preview-label').textContent(),project.originalSite?'Interactive original':project.recording?'Original motion recording':'Original full-page image');
+  if(project.originalSite||project.recording)await page.getByRole('button',{name:'Show original image',exact:true}).click();
+  await page.locator('.work-dialog-media img').evaluate(image=>image.decode());assert.equal(await page.locator('.work-dialog-media img').getAttribute('src'),`/work/${id}.webp`);
   assert.ok((await page.locator('#work-dialog-description').textContent()).length>80);
   await page.getByRole('button',{name:'Close design preview'}).click();
  }
@@ -32,9 +37,9 @@ await check('Design filters update the collection, pressed state and announced c
  await page.getByRole('button',{name:/^All work/}).click();assert.equal(await page.locator('.portfolio-card').count(),20);
 });
 await check('Keyboard exploration closes cleanly and restores focus to its card',async page=>{
- await page.goto(base+'/work');const trigger=page.getByRole('button',{name:'Explore Monolith Hero',exact:true});await trigger.click();
- assert.equal(await page.locator('#work-dialog-title').textContent(),'Monolith Hero');await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#work-dialog-title').textContent(),'OYLA');
- await page.keyboard.press('ArrowLeft');assert.equal(await page.locator('#work-dialog-title').textContent(),'Monolith Hero');
+ await page.goto(base+'/work');const trigger=page.getByRole('button',{name:'Explore Stratum',exact:true});await trigger.click();
+ assert.equal(await page.locator('#work-dialog-title').textContent(),'Stratum');await page.keyboard.press('ArrowRight');assert.equal(await page.locator('#work-dialog-title').textContent(),'OYLA');
+ await page.keyboard.press('ArrowLeft');assert.equal(await page.locator('#work-dialog-title').textContent(),'Stratum');
  await page.keyboard.press('Escape');await page.locator('.work-dialog[open]').waitFor({state:'hidden'});assert.equal(await trigger.evaluate(element=>element===document.activeElement),true);assert.ok(!new URL(page.url()).searchParams.has('project'));assert.equal(await page.evaluate(()=>document.documentElement.style.overflow),'');
 });
 await check('Direct design links open the right preview and unknown designs remain safe',async page=>{
@@ -42,17 +47,26 @@ await check('Direct design links open the right preview and unknown designs rema
  await page.goto(base+'/work?project=unknown');assert.equal(await page.locator('.work-dialog[open]').count(),0);assert.equal(await page.locator('.portfolio-card').count(),20);
 });
 await check('Original motion previews open by request and can return to their image',async page=>{
- await page.goto(base+'/work');await page.getByRole('button',{name:'Explore Monolith Hero',exact:true}).click();await page.locator('.work-dialog-media img').evaluate(image=>image.decode());
- await page.getByRole('button',{name:'Play original animation',exact:true}).click();await page.locator('.work-dialog-media video').waitFor();await page.waitForFunction(()=>document.querySelector('.work-dialog-media video').currentTime>0);
+ await page.goto(base+'/work');await page.getByRole('button',{name:'Explore Stratum',exact:true}).click();await page.locator('.work-dialog-media video').waitFor();
+ await page.getByRole('button',{name:'Watch original recording',exact:true}).click();await page.locator('.work-dialog-media video').waitFor();await page.waitForFunction(()=>document.querySelector('.work-dialog-media video').currentTime>0);
  await page.getByRole('button',{name:'Show original image',exact:true}).click();assert.ok(await page.locator('.work-dialog-media img').isVisible());
 });
+await check('Manual recording play, pause and resume work with reduced motion enabled',async page=>{
+ await page.goto(base+'/work/keel');const video=page.locator('.original-media video');assert.equal(await video.evaluate(video=>video.paused),true);
+ await page.getByRole('button',{name:'Play original recording',exact:true}).click();await page.waitForFunction(()=>{const video=document.querySelector('.original-media video');return video&&!video.paused&&video.currentTime>.1;});
+ await page.getByRole('button',{name:'Pause original recording',exact:true}).click();assert.equal(await video.evaluate(video=>video.paused),true);
+ const paused=await video.evaluate(video=>video.currentTime);await page.getByRole('button',{name:'Play original recording',exact:true}).click();
+ await page.waitForFunction(paused=>{const video=document.querySelector('.original-media video');return video&&!video.paused&&video.currentTime>paused+.1;},paused);
+ await page.goto(base+'/work?project=keel');await page.locator('.work-dialog[open]').waitFor();assert.equal(await page.locator('.work-dialog-media video').evaluate(video=>video.paused),true);
+ await page.getByRole('button',{name:'Watch original recording',exact:true}).click();await page.waitForFunction(()=>{const video=document.querySelector('.work-dialog-media video');return video&&!video.paused&&video.currentTime>.1;});
+});
 await check('A chosen design reaches the real blank brief and survives save and reload',async page=>{
- await page.goto(base+'/work?project=oyla');await page.locator('.work-reference').click();await page.locator('[name="businessName"]').waitFor();assert.equal(await page.locator('[name="businessName"]').inputValue(),'');assert.match(await page.getByRole('textbox',{name:'Design references'}).inputValue(),/work\/oyla/);
- await page.locator('[name="businessName"]').fill('Own business');await page.locator('[name="businessDescription"]').fill('A real business brief.');await page.getByRole('button',{name:'Save brief',exact:true}).click();await page.reload();await page.waitForFunction(()=>document.querySelector('[name="businessName"]')?.matches(':enabled'));assert.equal(await page.locator('[name="businessName"]').inputValue(),'Own business');
+ await page.goto(base+'/work?project=oyla');await page.locator('.work-reference').click();await briefReady(page);assert.equal(await page.locator('[name="businessName"]').inputValue(),'');assert.match(await page.getByRole('textbox',{name:'Design references'}).inputValue(),/work\/oyla/);
+ await page.locator('[name="businessName"]').fill('Own business');await page.locator('[name="businessDescription"]').fill('A real business brief.');await page.getByRole('button',{name:'Save brief',exact:true}).click();await page.waitForFunction(()=>document.querySelector('.brief-status')?.textContent.startsWith('Saved on this device.'));await page.reload();await page.waitForFunction(()=>document.querySelector('[name="businessName"]')?.matches(':enabled'));assert.equal(await page.locator('[name="businessName"]').inputValue(),'Own business');
 });
 await check('Choosing another design preserves an existing business brief and links',async page=>{
  await page.goto(base+'/preview/start');await page.evaluate(()=>localStorage.setItem('ff-preview-onboarding-v1',JSON.stringify({name:'Existing business',description:'Existing description',links:'https://example.com',goals:['Book'],feels:['Warm'],note:'Existing note'})));
- await page.goto(base+'/preview/start?reference=keel');await page.locator('[name="businessName"]').waitFor();assert.equal(await page.getByRole('textbox',{name:'Business name',exact:true}).inputValue(),'Existing business');
+ await page.goto(base+'/preview/start?reference=keel');await briefReady(page);assert.equal(await page.getByRole('textbox',{name:'Business name',exact:true}).inputValue(),'Existing business');
  assert.equal(await page.locator('textarea').nth(1).inputValue(),'https://example.com\nhttps://fourthform-marketing.vercel.app/work/keel');await page.getByRole('button',{name:'Save & continue'}).click();
  const brief=await page.evaluate(()=>JSON.parse(localStorage.getItem('ff-preview-onboarding-v1')));assert.equal(brief.note,'Existing note');assert.deepEqual(brief.goals,['Book']);
 });
@@ -65,7 +79,7 @@ await check('Portfolio, dialog and reference brief reflow at small widths',async
  for(const width of [320,390,768,1024]){
   await page.setViewportSize({width,height:844});await page.goto(base+'/work');await page.locator('.portfolio-card').first().locator('button').click();
   assert.ok(await page.getByRole('button',{name:'Close design preview'}).isVisible());
-  if(width<=760){assert.ok(await page.locator('.work-dialog-media img').isVisible());await page.getByRole('button',{name:'About this design',exact:true}).click();}const reference=await page.locator('.work-reference').boundingBox();assert.ok(reference&&reference.y>=0&&reference.y+reference.height<=844,'The reference action stays in view');
+  if(width<=760){assert.ok(await page.locator('.work-dialog-media>video,.work-dialog-media>img,.work-dialog-media>iframe').first().isVisible());await page.getByRole('button',{name:'About this design',exact:true}).click();}const reference=await page.locator('.work-reference').boundingBox();assert.ok(reference&&reference.y>=0&&reference.y+reference.height<=844,'The reference action stays in view');
   assert.ok(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));assert.ok(await page.locator('.work-dialog').evaluate(element=>element.scrollWidth<=element.clientWidth+1));
   if(width===390)await shot(page,'phone-dialog');await page.keyboard.press('Escape');
  }

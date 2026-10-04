@@ -79,13 +79,13 @@
 
 /* Optional task prompts reveal the product through a few meaningful actions. */
 (()=>{
- const tasks={design:[['Try leaving a Direction','review'],['Add a brief reference','direction'],['Read the project history','build']],content:[['Change the home heading','pages'],['Compare a scheduled State','states']],insight:[['Compare the sample traffic','analytics'],['Preview a search result','seo']],launch:[['Check a sample domain','domains'],['Review the launch steps','launch']]};
+ const tasks={design:[['Try leaving a Direction','review'],['Add a brief reference','direction'],['Read the project history','build']],content:[['Change the home heading','pages'],['Compare scheduled content','states']],insight:[['Compare the sample traffic','analytics'],['Preview a search result','seo']],launch:[['Check a sample domain','domains'],['Review the launch steps','launch']]};
  const space=window.ffPreviewSpace,params=new URLSearchParams(location.search),from=params.get('from');
  if(from&&['design','content','insight','launch'].includes(from)&&!space){const back=document.createElement('a');back.className='preview-return';back.href='index.html?space='+from;back.textContent='← Return to your '+from+' example';qs('#leftRail').prepend(back);}
  if(space){const list=document.createElement('details');list.className='preview-tasks';const summary=document.createElement('summary');summary.textContent='A few things to try';list.append(summary);(tasks[space.id]||[]).forEach(([label,view])=>{const button=document.createElement('button');button.type='button';button.textContent=label+' →';button.onclick=()=>showView(view);list.append(button);});qs('#leftRail').prepend(list);}
  if(window.ffPreviewPackage.id==='first'){
   const previousSelect=selectPage;selectPage=function(page){return previousSelect('Home');};
   qsa('[data-page]').forEach(button=>{if(button.dataset.page!=='Home')button.hidden=true;});
-  qs('#projectMeta').textContent='First · One page · One revision';
+  qs('#projectMeta').textContent='One-page website · One revision';
  }
 })();

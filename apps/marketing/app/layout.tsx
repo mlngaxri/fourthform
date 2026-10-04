@@ -9,7 +9,6 @@ import "./globals.css";
 import "./product.css";
 import "./marketing.css";
 import "./work.css";
-import "./concepts.css";
 import "./refinements.css";
 import "./declutter.css";
 import "./brand-type.css";
