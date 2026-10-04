@@ -6,7 +6,14 @@ const projects=JSON.parse(await readFile('lib/portfolio/selection.json','utf8'))
 async function briefReady(page){await page.waitForFunction(()=>document.querySelector('[name="businessName"]')?.matches(':enabled'));}
 const browser=await chromium.launch({executablePath:process.env.TEST_CHROME||undefined,args:['--no-sandbox']});
 const results=[],errors=[];await mkdir('docs/preview-evidence',{recursive:true});
-async function check(name,fn,options={}){const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce',...options}),page=await context.newPage();page.setDefaultTimeout(10000);page.on('pageerror',e=>errors.push({name,error:e.message}));try{await fn(page);results.push({name,result:'pass'});}catch(error){results.push({name,result:'fail',detail:error.message});}finally{await context.close();}}
+async function mediaState(page){return page.evaluate(()=>{
+ const rect=element=>{const box=element.getBoundingClientRect();return {x:box.x,y:box.y,width:box.width,height:box.height};};
+ const css=element=>{const style=getComputedStyle(element);return {display:style.display,visibility:style.visibility,opacity:style.opacity,pointerEvents:style.pointerEvents};};
+ return {pathname:location.pathname,visibility:document.visibilityState,reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,
+  media:[...document.querySelectorAll('.original-media video,.work-dialog-media video')].map(video=>({label:video.getAttribute('aria-label'),paused:video.paused,currentTime:video.currentTime,duration:Number.isFinite(video.duration)?video.duration:null,readyState:video.readyState,networkState:video.networkState,error:video.error?.code??null,muted:video.muted,rect:rect(video),css:css(video)})),
+  controls:[...document.querySelectorAll('.original-motion-toggle,.work-play')].map(button=>({label:button.getAttribute('aria-label')||button.textContent.trim(),enabled:!button.disabled,rect:rect(button),css:css(button)}))};
+ }).catch(error=>({diagnosticError:error.message}));}
+async function check(name,fn,options={}){const context=await browser.newContext({viewport:{width:1440,height:1000},reducedMotion:'reduce',...options}),page=await context.newPage();page.setDefaultTimeout(10000);page.on('pageerror',e=>errors.push({name,error:e.message}));try{await fn(page);results.push({name,result:'pass'});}catch(error){const diagnostic=await mediaState(page);results.push({name,result:'fail',detail:error.message,diagnostic});console.log(JSON.stringify({name,error:error.message,diagnostic}));}finally{await context.close();}}
 async function imageReady(page){await page.locator('.portfolio-card-media img').evaluateAll(async images=>{for(const image of images){image.loading='eager';await image.decode();if(!image.naturalWidth)throw new Error(image.src);}});}
 async function shot(page,name){const image=await page.screenshot({path:`docs/preview-evidence/portfolio-${name}.jpg`,type:'jpeg',quality:55});console.log(`FF_PORTFOLIO_VISUAL_${name}=${image.toString('base64')}`);}
 await check('The collection has20 original designs with accurate previews and reference actions',async page=>{
@@ -52,13 +59,20 @@ await check('Original motion previews open by request and can return to their im
  await page.getByRole('button',{name:'Show original image',exact:true}).click();assert.ok(await page.locator('.work-dialog-media img').isVisible());
 });
 await check('Manual recording play, pause and resume work with reduced motion enabled',async page=>{
+ let phase='initial reduced-motion state on the standalone recording';try{
  await page.goto(base+'/work/keel');const video=page.locator('.original-media video');assert.equal(await video.evaluate(video=>video.paused),true);
+ phase='first explicit Play on the standalone recording';
  await page.getByRole('button',{name:'Play original recording',exact:true}).click();await page.waitForFunction(()=>{const video=document.querySelector('.original-media video');return video&&!video.paused&&video.currentTime>.1;});
+ phase='explicit Pause on the standalone recording';
  await page.getByRole('button',{name:'Pause original recording',exact:true}).click();assert.equal(await video.evaluate(video=>video.paused),true);
+ phase='explicit Resume on the standalone recording';
  const paused=await video.evaluate(video=>video.currentTime);await page.getByRole('button',{name:'Play original recording',exact:true}).click();
  await page.waitForFunction(paused=>{const video=document.querySelector('.original-media video');return video&&!video.paused&&video.currentTime>paused+.1;},paused);
+ phase='initial reduced-motion state in the gallery recording';
  await page.goto(base+'/work?project=keel');await page.locator('.work-dialog[open]').waitFor();assert.equal(await page.locator('.work-dialog-media video').evaluate(video=>video.paused),true);
+ phase='explicit Play on the existing gallery recording';
  await page.getByRole('button',{name:'Watch original recording',exact:true}).click();await page.waitForFunction(()=>{const video=document.querySelector('.work-dialog-media video');return video&&!video.paused&&video.currentTime>.1;});
+ }catch(error){throw new Error(`${phase}: ${error.message}`);}
 });
 await check('A chosen design reaches the real blank brief and survives save and reload',async page=>{
  await page.goto(base+'/work?project=oyla');await page.locator('.work-reference').click();await briefReady(page);assert.equal(await page.locator('[name="businessName"]').inputValue(),'');assert.match(await page.getByRole('textbox',{name:'Design references'}).inputValue(),/work\/oyla/);
