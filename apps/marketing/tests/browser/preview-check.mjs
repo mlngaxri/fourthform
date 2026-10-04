@@ -119,9 +119,9 @@ await check('Analytics range updates metrics and chart',async()=>{
 });
 await check('Billing preview can explore Pro and return to Core',async()=>{
  await page.locator('#leftRail [data-view="billing"]').click();await page.locator('[data-ops="upgrade-pro"]').click();
- await page.locator('[data-ops="confirm-pro"]').click();assert.ok(await page.getByRole('heading',{name:'Fourthform Pro Active'}).isVisible());
+ await page.locator('[data-ops="confirm-pro"]').click();assert.ok(await page.getByRole('heading',{name:'Advanced tools Active'}).isVisible());
  await page.locator('[data-ops="manage-pro"]').click();await page.locator('[data-ops="cancel-pro"]').click();
- assert.ok(await page.getByRole('heading',{name:'Fourthform Core Included'}).isVisible());
+ assert.ok(await page.getByRole('heading',{name:'Included tools Included'}).isVisible());
 });
 
 await check('Operational drafts recover and Reset clears all sample settings',async()=>{

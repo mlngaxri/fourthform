@@ -129,7 +129,7 @@
     seo: "Search",
     domains: "Domains",
     connections: "Connections",
-    states: "States",
+    states: "Schedules",
     billing: "Billing",
     launch: "Launch",
   };
@@ -366,7 +366,7 @@
         window.ffPreviewPackage.id==='first'?"A one-page website is A$199 once for one page and one revision round. Everyday tools stay included. Advanced tools are an optional A$39 / month.":"A custom website is A$1,500, with A$200 to start and A$1,300 on approval. Everyday tools stay included after launch. Advanced tools are an optional A$39 / month.",
         "billing",
       ) +
-      `<div class="ops-grid"><div class="ops-box"><h3>${state.pro ? "Advanced tools" : "Included tools"} <span class="ops-status" style="float:right">${state.pro ? "Active" : "Included"}</span></h3><div class="ops-plan-price">${state.pro ? "A$39" : "A$0"}<small> / month</small></div><p>${state.pro ? "Scheduled States, deeper analytics and search insights. An optional upgrade to your everyday toolkit." : "Content updates, basic analytics, search details and domain management. Included after launch."}</p><div class="ops-actions">${button(state.pro ? "Manage subscription" : "Explore advanced tools", state.pro ? "manage-pro" : "upgrade-pro", true)}</div><div class="ops-line"><span>Payment method</span><span>Visa ending 4242</span></div><div class="ops-line"><span>Billing email</span><span>hello@morihouse.com.au</span></div>${button("Update billing details", "billing-details")}</div><div class="ops-box"><h3>Website payments</h3><table class="ops-table"><tbody><tr><td>Initial payment · 18 Sep</td><td>A$${window.ffPreviewPackage.initial} · Paid</td></tr><tr><td>Remaining balance</td><td>A$${window.ffPreviewPackage.balance} · ${state.launch[1] ? "Paid" : "After approval"}</td></tr><tr><td>Included revision rounds</td><td>${window.ffPreviewPackage.rounds}</td></tr><tr><td>Additional revision</td><td>A$150 / round</td></tr></tbody></table><div class="ops-actions">${button(state.launch[1]?"View payment summary":"View initial receipt", "receipt")}</div><p>All prices are in Australian dollars.</p></div></div></div>`
+      `<div class="ops-grid"><div class="ops-box"><h3>${state.pro ? "Advanced tools" : "Included tools"} <span class="ops-status" style="float:right">${state.pro ? "Active" : "Included"}</span></h3><div class="ops-plan-price">${state.pro ? "A$39" : "A$0"}<small> / month</small></div><p>${state.pro ? "Scheduled content, deeper analytics and search insights. An optional upgrade to your everyday toolkit." : "Content updates, basic analytics, search details and domain management. Included after launch."}</p><div class="ops-actions">${button(state.pro ? "Manage subscription" : "Explore advanced tools", state.pro ? "manage-pro" : "upgrade-pro", true)}</div><div class="ops-line"><span>Payment method</span><span>Visa ending 4242</span></div><div class="ops-line"><span>Billing email</span><span>hello@morihouse.com.au</span></div>${button("Update billing details", "billing-details")}</div><div class="ops-box"><h3>Website payments</h3><table class="ops-table"><tbody><tr><td>Initial payment · 18 Sep</td><td>A$${window.ffPreviewPackage.initial} · Paid</td></tr><tr><td>Remaining balance</td><td>A$${window.ffPreviewPackage.balance} · ${state.launch[1] ? "Paid" : "After approval"}</td></tr><tr><td>Included revision rounds</td><td>${window.ffPreviewPackage.rounds}</td></tr><tr><td>Additional revision</td><td>A$150 / round</td></tr></tbody></table><div class="ops-actions">${button(state.launch[1]?"View payment summary":"View initial receipt", "receipt")}</div><p>All prices are in Australian dollars.</p></div></div></div>`
     );
   }
   function launch() {
@@ -790,7 +790,7 @@
       case "upgrade-pro":
         dialog(
           "The same website. More possibility.",
-          "Scheduled States, deeper analytics and search insights. A$39 / month. Try advanced tools in this preview. No payment is taken.",
+          "Scheduled content, deeper analytics and search insights. A$39 / month. Try advanced tools in this preview. No payment is taken.",
           button("Explore advanced tools", "confirm-pro", true),
         );
         break;

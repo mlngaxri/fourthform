@@ -8,9 +8,9 @@ export function assertCheckoutEnabled(
   )
     throw new Error("Live payments are not open yet.");
   if (input.package === "FIRST" && env.ENABLE_FIRST_BILLING !== "true")
-    throw new Error("First applications are not open for payment yet.");
+    throw new Error("One-page website payments are not open yet.");
   if (input.kind === "pro" && env.ENABLE_PRO_BILLING !== "true")
     throw new Error(
-      "Pro billing is not open until the connected-site integrations are ready.",
+      "Advanced tools billing is not open until the connected-site integrations are ready.",
     );
 }

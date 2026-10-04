@@ -3,6 +3,7 @@ import { ownedProject, checkOrigin, failure, admin } from "../../../lib/server";
 import { stripe } from "../../../lib/stripe";
 import { z } from "zod";
 import { prices } from "../../../lib/model";
+import { websitePackageLabels, websiteToolLabels } from "../../../../../shared/service-labels";
 export async function POST(req: Request) {
   try {
     checkOrigin(req);
@@ -13,6 +14,7 @@ export async function POST(req: Request) {
       })
       .parse(await req.json());
     const { project, client } = await ownedProject(projectId);
+    const packageLabel = project.package === "FIRST" ? websitePackageLabels.FIRST : websitePackageLabels.SITE;
     assertCheckoutEnabled({ package: project.package, kind }, process.env);
     const s = stripe();
     const eligible =
@@ -67,7 +69,7 @@ export async function POST(req: Request) {
             )
           )
             throw new Error(
-              "Pro billing needs attention. Open Billing and manage your existing subscription.",
+              "Advanced tools billing needs attention. Open Billing and manage your existing subscription.",
             );
         }
         if (!rotate)
@@ -122,7 +124,7 @@ export async function POST(req: Request) {
               currency: "aud",
               unit_amount: amount,
               product_data: {
-                name: `Fourthform ${kind === "pro" ? "Pro" : kind === "final" ? "Site remaining balance" : kind === "revision" ? "additional revision" : "website start"}`,
+                name: `Fourthform ${kind === "pro" ? websiteToolLabels.PRO : kind === "final" ? `${packageLabel} remaining balance` : kind === "revision" ? "additional revision round" : project.package === "FIRST" ? packageLabel : `${packageLabel} start`}`,
               },
               ...(kind === "pro"
                 ? { recurring: { interval: "month" as const } }

@@ -89,11 +89,11 @@
 .mk-simple .mk-orbit-copy .mk-display{font-family:var(--font-display);font-size:clamp(48px,min(7.3vw,12svh),108px);font-weight:400;letter-spacing:-.04em;line-height:1.02;color:#28261f}
 .mk-orbit-copy .mk-display>.hero-line{display:flex;justify-content:center;align-items:center;gap:.15em;color:#28261f;white-space:nowrap;min-height:1.28em}
 .mk-orbit-copy .mk-display .hero-connector{font-family:var(--font-sans);font-size:.42em;font-weight:400;letter-spacing:-.04em;line-height:1.15}
-.mk-orbit-copy .mk-display .hero-type-slot{position:relative;display:grid;place-items:center;width:5.05em;height:1.28em;font-size:1em;line-height:1}
+.mk-orbit-copy .mk-display .hero-type-slot{position:relative;display:grid;place-items:center;width:4.15em;height:1.28em;font-size:1em;line-height:1}
 .hero-typeface{grid-area:1/1;display:block;white-space:nowrap;opacity:0}
 .hero-typeface:first-child{opacity:1}
 .hero-type-impact{font-family:var(--font-impact);font-weight:800;font-stretch:72%;font-variation-settings:"wdth" 72;font-size:1.14em;letter-spacing:-.055em;text-transform:uppercase;line-height:.95}
-.hero-type-grotesk{font-family:var(--font-sans);font-weight:500;font-size:.96em;letter-spacing:-.065em;line-height:1.05}
+.hero-type-grotesk{font-family:var(--font-sans);font-weight:500;font-size:.96em;letter-spacing:-.055em;line-height:1.05}
 .hero-type-editorial{font-family:var(--font-editorial);font-weight:400;font-style:italic;font-size:1.36em;letter-spacing:-.025em;line-height:1.05}
 .mk-orbit-copy .mk-display .hero-line-second{margin-top:-.06em;color:#756239;gap:.18em}
 .mk-orbit-copy .mk-display .hero-line-second .hero-connector{font-size:.42em;color:#686354}
@@ -103,7 +103,7 @@
 @media(max-width:899px){
  .mk-simple .mk-orbit-copy{width:calc(100% - 32px);max-width:660px;top:52%}
  .mk-simple .mk-orbit-copy .mk-display{font-size:clamp(39px,min(10.6vw,12svh),83px)}
- .mk-orbit-copy .mk-display .hero-type-slot{width:4.9em}
+ .mk-orbit-copy .mk-display .hero-type-slot{width:4.15em}
  .mk-simple .mk-orbit-copy .mk-body{font-size:14px;max-width:36ch}
 }
 @media(max-width:400px){

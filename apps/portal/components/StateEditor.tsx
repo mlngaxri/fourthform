@@ -82,7 +82,7 @@ export default function StateEditor({
         ...states,
         {
           id,
-          title: "New State",
+          title: "New schedule",
           enabled: false,
           timezone,
           days: [1, 2, 3, 4, 5],
@@ -111,7 +111,7 @@ export default function StateEditor({
           <SaveControl
             state={editor.state}
             error={editor.error}
-            label="Save State draft"
+            label="Save schedule draft"
             onSave={() => void editor.save()}
             disabled={states.some((s) => validateState(s).length > 0)}
           />
@@ -120,7 +120,7 @@ export default function StateEditor({
       <RecoveryNotice editor={editor} />
       {loadError && <p role="alert">{loadError}</p>}
       {pro && <div className="connected-card"><span className="overline">Public schedules</span><p>{release ? `Last activated ${new Date(release.activated_at).toLocaleString()}. ${release.states.filter(s => s.enabled).length} enabled schedules.` : "No schedules are active on your website yet."}</p><button className="primary" disabled={activating || validateStates(states).length > 0 || (!!release && JSON.stringify(states) === JSON.stringify(release.states))} onClick={() => setConfirm(true)}>Review and activate schedules</button><p>Draft edits, pauses and deletions take effect on your website only after activation.</p></div>}
-      {removed && <p className="undo-notice" role="status">State removed from draft. <button onClick={() => { editor.update(d => ({ ...d, states: [...((d.states || []) as ScheduledState[]), removed] })); setRemoved(null); }}>Undo deletion</button></p>}
+      {removed && <p className="undo-notice" role="status">Schedule removed from draft. <button onClick={() => { editor.update(d => ({ ...d, states: [...((d.states || []) as ScheduledState[]), removed] })); setRemoved(null); }}>Undo deletion</button></p>}
       {pro ? (
         <>
           <div className="chips">
@@ -134,10 +134,10 @@ export default function StateEditor({
               </button>
             ))}
             <button onClick={add} disabled={!defaultField}>
-              Add State
+              Add schedule
             </button>
           </div>
-          {!states.length && <p className="connected-empty">Start with a service window, announcement or seasonal offer. Add a State to try it without changing the live site.</p>}
+          {!states.length && <p className="connected-empty">Start with a service window, announcement or seasonal offer. Add a schedule to try it without changing the live site.</p>}
           {state && (
             <fieldset className="state-fields">
               <legend>Schedule</legend>
@@ -304,7 +304,7 @@ export default function StateEditor({
                   setSelected(null);
                 }}
               >
-                Remove State
+                Remove schedule
               </button>
             </fieldset>
           )}
@@ -318,7 +318,7 @@ export default function StateEditor({
           </label>
           <p>Preview in {Intl.DateTimeFormat().resolvedOptions().timeZone}. Active schedules: {preview.activeIds.map(id => states.find(s => s.id === id)?.title).join(", ") || "None"}.</p>
           <div className="state-live-demo">
-            <span>State preview</span>
+            <span>Schedule preview</span>
             {fields
               .filter((f) => f.role !== "image-alt")
               .map((f) => (
@@ -347,7 +347,7 @@ export default function StateEditor({
           <button onClick={onUpgrade}>Advanced tools · A$39/month</button>
         </>
       )}
-      {confirm && <Dialog title="Activate these State schedules?" onClose={() => { if (!activating) setConfirm(false); }}><p>{states.filter(s => s.enabled).length} enabled schedules will replace the currently active set. Content changes appear during each schedule’s hours. Removing all schedules restores usual content.</p><ul>{states.map(s => <li key={s.id}>{s.title}: {s.enabled ? `${s.start} to ${s.end}, ${s.timezone}` : "Paused"}</li>)}</ul><div className="connected-actions"><button disabled={activating} onClick={() => setConfirm(false)}>Keep editing</button><button className="primary" disabled={activating} onClick={async () => { if (activating) return; setActivating(true); setLoadError(""); try { const saved = await editor.save(); if (!saved) return; if (activateKey.current?.expected !== saved.version) activateKey.current = { expected: saved.version, key: crypto.randomUUID() }; const r = await api(`/api/projects/${board.project_id}/states`, { boardId: board.id, expected: saved.version, key: activateKey.current.key }); setRelease(r.release); activateKey.current = null; setConfirm(false); } catch (e) { setLoadError((e as Error).message); } finally { setActivating(false); } }}>{activating ? "Activating…" : "Activate on website"}</button></div>{loadError && <p role="alert">{loadError}</p>}</Dialog>}
+      {confirm && <Dialog title="Activate these schedules?" onClose={() => { if (!activating) setConfirm(false); }}><p>{states.filter(s => s.enabled).length} enabled schedules will replace the currently active set. Content changes appear during each schedule’s hours. Removing all schedules restores usual content.</p><ul>{states.map(s => <li key={s.id}>{s.title}: {s.enabled ? `${s.start} to ${s.end}, ${s.timezone}` : "Paused"}</li>)}</ul><div className="connected-actions"><button disabled={activating} onClick={() => setConfirm(false)}>Keep editing</button><button className="primary" disabled={activating} onClick={async () => { if (activating) return; setActivating(true); setLoadError(""); try { const saved = await editor.save(); if (!saved) return; if (activateKey.current?.expected !== saved.version) activateKey.current = { expected: saved.version, key: crypto.randomUUID() }; const r = await api(`/api/projects/${board.project_id}/states`, { boardId: board.id, expected: saved.version, key: activateKey.current.key }); setRelease(r.release); activateKey.current = null; setConfirm(false); } catch (e) { setLoadError((e as Error).message); } finally { setActivating(false); } }}>{activating ? "Activating…" : "Activate on website"}</button></div>{loadError && <p role="alert">{loadError}</p>}</Dialog>}
     </section>
   );
 }

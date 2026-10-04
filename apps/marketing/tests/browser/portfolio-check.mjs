@@ -48,7 +48,7 @@ await check('Original motion previews open by request and can return to their im
 });
 await check('A chosen design reaches the real blank brief and survives save and reload',async page=>{
  await page.goto(base+'/work?project=oyla');await page.locator('.work-reference').click();await page.locator('[name="businessName"]').waitFor();assert.equal(await page.locator('[name="businessName"]').inputValue(),'');assert.match(await page.getByRole('textbox',{name:'Design references'}).inputValue(),/work\/oyla/);
- await page.locator('[name="businessName"]').fill('Own business');await page.locator('[name="businessDescription"]').fill('A real business brief.');await page.getByRole('button',{name:'Save brief',exact:true}).click();await page.reload();assert.equal(await page.locator('[name="businessName"]').inputValue(),'Own business');
+ await page.locator('[name="businessName"]').fill('Own business');await page.locator('[name="businessDescription"]').fill('A real business brief.');await page.getByRole('button',{name:'Save brief',exact:true}).click();await page.reload();await page.waitForFunction(()=>document.querySelector('[name="businessName"]')?.matches(':enabled'));assert.equal(await page.locator('[name="businessName"]').inputValue(),'Own business');
 });
 await check('Choosing another design preserves an existing business brief and links',async page=>{
  await page.goto(base+'/preview/start');await page.evaluate(()=>localStorage.setItem('ff-preview-onboarding-v1',JSON.stringify({name:'Existing business',description:'Existing description',links:'https://example.com',goals:['Book'],feels:['Warm'],note:'Existing note'})));

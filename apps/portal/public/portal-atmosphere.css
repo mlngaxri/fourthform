@@ -205,4 +205,6 @@ body{font-family:var(--font-sans)}
 .production-portal .portal-v2-sidebar{background:var(--ff-paper)}
 .production-portal .portal-v2-nav a[aria-current="page"]{background:#e4dccb;box-shadow:none;border-radius:4px}
 .production-portal .portal-project-progress .progress-row.current{background:transparent;border-color:#28261f26;color:#28261f}
-:is(.mk-site,.start-page,.obp) :is(.mk-wordmark,.wordmark,.obp-brand),.shell .brand,.production-portal .portal-v2-logo{font-family:var(--font-impact);font-weight:700;font-stretch:100%;letter-spacing:-.045em}
+.mk-wordmark,.wordmark,.obp-brand,.shell .brand,.portal-v2-logo{font-family:var(--font-impact);font-weight:700;font-stretch:100%;letter-spacing:-.045em}
+
+@media(max-width:760px){.production-portal .portal-more-nav[open]>div{background:#faf9f5}}

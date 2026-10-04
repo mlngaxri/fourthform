@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       .limit(1)
       .maybeSingle();
     if (error) throw error;
-    if (!data) throw new Error("There is no Pro subscription to manage.");
+    if (!data) throw new Error("There is no advanced tools subscription to manage.");
     const s = stripe();
     const subscription = await s.subscriptions.retrieve(data.id);
     if (subscription.metadata.projectId !== projectId)

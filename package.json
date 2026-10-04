@@ -7,7 +7,7 @@
     "dev:marketing": "npm --prefix apps/marketing run dev -- -p 3000",
     "dev:portal": "npm --prefix apps/portal run dev",
     "build": "npm --prefix apps/marketing run build && npm --prefix apps/portal run build",
-    "check:parity": "node scripts/check-preview-parity.mjs",
+    "check:parity": "cd apps/marketing && node ../../scripts/check-preview-parity.mjs",
     "test": "npm run check:parity && npm --prefix apps/marketing run test:structure && npm --prefix apps/portal test"
   }
 }
