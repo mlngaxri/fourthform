@@ -1,6 +1,6 @@
 # Portfolio presentation
 
-The 20 original full-page poster files under `public/work` are unchanged. `original-assets.json` records their dimensions and SHA256 hashes; the structural test checks those hashes against every delivered poster. The four existing local recordings are also retained unchanged.
+The 20 original full-page poster files under `public/work` are unchanged. `original-assets.json` records their dimensions and SHA256 hashes; the structural test checks those hashes against every delivered poster. Three existing local recordings are retained unchanged. Keel uses the complete captured original, remuxed into a finalized fast-start MP4 without re-encoding; its audio/video packet hashes are unchanged.
 
 `/work/[id]` shows the original website when runnable original source has been recovered. Otherwise it shows the exact original recording, or the original full-page image when no recording exists. Reconstructed `ConceptSite` pages and sample enquiry forms are no longer used by these routes. `/work/[id]?view=original` always shows the original full-page image, with an option to return to its preview.
 

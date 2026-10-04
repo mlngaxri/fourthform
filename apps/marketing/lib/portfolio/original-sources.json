@@ -44,5 +44,17 @@
       "bytes": 1107179,
       "sha256": "5414059c57c139394d34630433d68f4be2529ff6d434baa4736f2b6cafdd2490"
     }
-  ]
+  ],
+  "keelRecording": {
+    "source": "captured original keel-source.mp4",
+    "sourceSHA256": "90dceb07dfa514cd85dd04473a15ade03f4335c096a60c4730f4f43466fc50ad",
+    "deliveryPath": "work/keel.mp4",
+    "deliverySHA256": "0cede5589731d548b84709f49e5880c5fa7ad7a626dc0f6c2de0bf77ca84ffd4",
+    "bytes": 4864116,
+    "width": 1920,
+    "height": 1418,
+    "fps": 40,
+    "durationSeconds": 7,
+    "restoration": "Finalized fast-start MP4 container; unchanged demuxed audio/video packet SHA256 hashes, no re-encoding."
+  }
 }
